@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/my-sage/sage/issues"
   },
-  "homepage": "https://github.com/my-sage/sage#readme"
+  "homepage": "https://github.com/my-sage/sage#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
