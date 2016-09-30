@@ -3,12 +3,12 @@ const db = require('./_db')
 
 module.exports = db
 
-const Account = db.model('account')
-const Category = db.model('category')
-const Transaction = db.model('transaction')
-const Budget = db.model('budget')
-const Merchant = db.model('merchant')
-const Tag = db.model('tag')
+const Category = require('./models/category')
+const Account = require('./models/account')
+const Transaction = require('./models/transaction')
+const Budget = require('./models/budget')
+const Merchant = require('./models/merchant')
+const Tag = require('./models/tag')
 
 Account.hasMany(Transaction)
 Transaction.belongsTo(Account)
@@ -25,5 +25,5 @@ Transaction.belongsTo(Merchant)
 Merchant.belongsTo(Category)
 Category.hasMany(Merchant)
 
-Tag.belongsToMany(Transaction)
-Transaction.belongsToMany(Tag)
+Tag.belongsToMany(Transaction, {through: 'tag_transaction'})
+Transaction.belongsToMany(Tag, {through: 'tag_transaction'})
