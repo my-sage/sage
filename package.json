@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/my-sage/sage/issues"
   },
-  "homepage": "https://github.com/my-sage/sage#readme"
+  "homepage": "https://github.com/my-sage/sage#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.24.3"
+  }
 }
