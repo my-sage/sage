@@ -9,7 +9,7 @@ const Budget = db.model('budget')
 const Merchant = db.model('merchant')
 const Tag = db.model('tag')
 
-// ----------------------------------------------------------------------------------//
+// --------------------------------Account Seed--------------------------------------------//
 function seedAccount () {
   console.log(chalk.yellow('seeding account.'))
 
@@ -26,38 +26,55 @@ function seedAccount () {
   return Promise.all(creatingAccounts)
 }
 
-// -------------------------------------------------------------------------------------//
+// ---------------------------------Category Seed----------------------------------------------//
 function seedCategory () {
   console.log(chalk.yellow('Seeding Category'))
 
   let categoryObjs = [
     {name: 'Education'},
     {name: 'Insurance'},
-    {name: 'Travel'},
-    {name: 'Groceries'},
-    {name: 'Mortgage'},
-    {name: 'Electronics'}
+    {name: 'Auto & Transport'},
+    {name: 'Food & Dining'},
+    {name: 'Housing'},
+    {name: 'Entertainment'}
   ]
   let creatingCategory = categoryObjs.map(categoryObj => Category.create(categoryObj))
 
   return Promise.all(creatingCategory)
 }
 
-// -------------------------------------------------------------------------------------//
+// -----------------------------------Merchant Seed-----------------------------------------------//
 function seedMerchant () {
   console.log(chalk.yellow('Seeding Merchant'))
 
   let merchantObjs = [
-    {name: 'MIT'},
-    {name: 'MetLife'},
-    {name: 'Delta Air Lines'},
-    {name: 'Walmart'},
-    {name: 'American Mortgage Co'},
-    {name: 'Bestbuy'}
+    {name: 'MIT', categoryId: 1},
+    {name: 'MetLife', categoryId: 2},
+    {name: 'Delta Air Lines', categoryId: 3},
+    {name: 'Walmart', categoryId: 4},
+    {name: 'American Mortgage Co', categoryId: 5},
+    {name: 'Bestbuy', categoryId: 6}
   ]
   let creatingMerchant = merchantObjs.map((merchantObj) => Merchant.create(merchantObj))
 
   return Promise.all(creatingMerchant)
+}
+
+// ------------------------------------Budget Seed-------------------------------------------------//
+function seedBudget () {
+  console.log(chalk.yellow('Seeding Budget'))
+
+  let budgetObjs = [
+    {name: 'College Loan', type: 'spending', date: 1475346706, categoryId: 1},
+    {name: 'College textbook spending', type: 'spending', date: 1475346706, categoryId: 1},
+    {name: 'College Party', type: 'spending', date: 1475346706, categoryId: 1},
+    {name: 'Gas & Fuel', type: 'spending', date: 1475346706, categoryId: 3},
+    {name: 'Restaurants', type: 'spending', date: 1475346706, categoryId: 4},
+    {name: 'Groceries', type: 'spending', date: 1475346706, categoryId: 4}
+  ]
+  let creatingBudget = budgetObjs.map(budgetObj => Budget.create(budgetObj))
+
+  return Promise.all(creatingBudget)
 }
 
 // ----------------------------------Transaction Seed-----------------------------------------------//
@@ -95,6 +112,10 @@ db.sync({ force: true })
   .then(() => {
     console.log(chalk.green('Merchant Seeding Successful'))
     return seedTransaction()
+  })
+  .then(() => {
+    console.log(chalk.green('Transaction Seeding Successful'))
+    return seedBudget()
   })
   .then(() => {
     console.log(chalk.blue('finish seeding'))

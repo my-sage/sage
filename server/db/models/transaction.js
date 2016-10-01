@@ -25,14 +25,23 @@ fields.note = {
 
 options.hooks = {
   afterCreate: function (transaction, options) {
+    // let updatingAccount = transaction.getAccount()
+    //   .then(account => {
+    //     account.balance = account.balance + transaction.amount
+    //     return account.save()
+    //   })
+
+    // let updatingBudget = transaction.getCategory()
+    //   .then(category => {
+    //     return category.get
+    //   })
+
     return transaction.getAccount()
       .then((account) => {
         account.balance = account.balance + transaction.amount
         return account.save()
       }).then(() => {
       console.log('update account successful')
-    }).catch((err) => {
-      console.log(err)
     })
   }
 }

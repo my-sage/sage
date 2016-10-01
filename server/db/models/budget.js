@@ -7,7 +7,7 @@ const fields = {}
 const options = {}
 
 fields.name = {
-  type: Sequelize.BIGINT,
+  type: Sequelize.STRING,
   allowNull: false
 }
 
