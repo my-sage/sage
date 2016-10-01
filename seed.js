@@ -60,7 +60,7 @@ function seedMerchant () {
   return Promise.all(creatingMerchant)
 }
 
-// -------------------------------------------------------------------------------------//
+// ----------------------------------Transaction Seed-----------------------------------------------//
 function seedTransaction () {
   console.log(chalk.yellow('seeding Transaction'))
 
@@ -77,7 +77,7 @@ function seedTransaction () {
   return Promise.all(creatingTransaction)
 }
 
-// -------------------------------------------------------------------------------------//
+// ----------------------------------Datebase Sync-------------------------------------------------//
 
 db.sync({ force: true })
   .then(() => {
@@ -98,6 +98,7 @@ db.sync({ force: true })
   })
   .then(() => {
     console.log(chalk.blue('finish seeding'))
+    process.exit(0)
   })
   .catch(err => {
     console.error(err)
