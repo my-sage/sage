@@ -65,12 +65,12 @@ function seedTransaction () {
   console.log(chalk.yellow('seeding Transaction'))
 
   let transactionObjs = [
-    {amount: 100, date: 1475346706,  accountId: 1, categoryId: 1, merchantId: 1},
-    {amount: 200, date: 1475346706}, // , accountId: 2, categoryId: 2, merchantId: 2},
-    {amount: 300, date: 1475346706}, // , accountId: 3, categoryId: 3, merchantId: 3},
-    {amount: 400, date: 1475346706}, // , accountId: 4, categoryId: 4, merchantId: 4},
-    {amount: 500, date: 1475346706}, // , accountId: 5, categoryId: 5, merchantId: 5},
-    {amount: 600, date: 1475346706} // , accountId: 6, categoryId: 6, merchantId: 6}
+    {amount: 100, date: 1475346706, accountId: 1, categoryId: 1, merchantId: 1},
+    {amount: 200, date: 1475346706, accountId: 2, categoryId: 2, merchantId: 2},
+    {amount: 300, date: 1475346706, accountId: 3, categoryId: 3, merchantId: 3},
+    {amount: 400, date: 1475346706, accountId: 4, categoryId: 4, merchantId: 4},
+    {amount: 500, date: 1475346706, accountId: 5, categoryId: 5, merchantId: 5},
+    {amount: 600, date: 1475346706, accountId: 6, categoryId: 6, merchantId: 6}
   ]
   let creatingTransaction = transactionObjs.map(transactionObj => Transaction.create(transactionObj))
 
@@ -94,8 +94,10 @@ db.sync({ force: true })
   })
   .then(() => {
     console.log(chalk.green('Merchant Seeding Successful'))
-    console.log(chalk.blue('Finish Seeding'))
-    process.exit(0)
+    return seedTransaction()
+  })
+  .then(() => {
+    console.log(chalk.blue('finish seeding'))
   })
   .catch(err => {
     console.error(err)
