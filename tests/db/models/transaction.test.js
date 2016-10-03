@@ -1,3 +1,4 @@
+'use strict'
 const Promise = require('bluebird');
 const chai = require('chai');
 const _ = require('lodash');
@@ -10,11 +11,13 @@ const Category = db.model('category');
 const Merchant = db.model('merchant');
 const Account = db.model('account');
 
-let randomBalance = _.random(10, 100)
+let randomBalance;
 
 describe('Transaction Model', function() {
+
   beforeEach(function(done) {
     //sync Transcation. Drop and recreate tables
+    randomBalance = _.random(10, 100);
     db.sync({
         force: true
       })
@@ -41,7 +44,8 @@ describe('Transaction Model', function() {
       })
       .then(function() {
         return Merchant.create({
-          name: 'Harvard'
+          name: 'Harvard',
+          categoryId: 1
         })
       })
       .then(function() {
@@ -50,17 +54,16 @@ describe('Transaction Model', function() {
       .catch(done)
   });
 
-  let randomTransactionAmount = -_.random(1, 150);
-  let newTransaction = {
-    amount: randomTransactionAmount,
-    date: new Date().valueOf(),
-    accountId: 1,
-    categoryId: 1,
-  };
-
-  let createdTransaction, linkedAccount;
+  let randomTransactionAmount,
+    createdTransaction, linkedAccount, newTransaction = {
+      date: new Date().valueOf(),
+      accountId: 1,
+      categoryId: 1,
+    };
 
   beforeEach(function(done) {
+    randomTransactionAmount = -_.random(1, 150);
+    newTransaction.amount = randomTransactionAmount;
     Transaction.create(newTransaction)
       .then((transaction) => {
         createdTransaction = transaction;
@@ -83,11 +86,10 @@ describe('Transaction Model', function() {
 
   describe('Instance Methods', function() {
     let linkedBudget;
-    beforeEach(function(done) {
-      createdTransaction.getCurrentBudget()
+    beforeEach(function() {
+      return createdTransaction.getCurrentBudget()
         .then(budget => {
           linkedBudget = budget;
-          done();
         })
     })
 
@@ -117,16 +119,14 @@ describe('Transaction Model', function() {
 
     let createdTransactionWithExistingMerchant, createdTransactionWithNewMerchant;
 
-    beforeEach(function(done) {
+    beforeEach(function() {
       let creatingTransactionWithExistingMerchant = Transaction.createOrFindWithMerchant(transactionWithExistingMerchant)
       let creatingTransactionWithNewMerchant = Transaction.createOrFindWithMerchant(transactionNewMerchant);
-      Promise.all([creatingTransactionWithExistingMerchant, creatingTransactionWithNewMerchant])
-      .spread((existingMerchant, newMerchant) => {
-        createdTransactionWithExistingMerchant = existingMerchant;
-        createdTransactionWithNewMerchant = newMerchant;
-        done();
-      })
-      .catch(done)
+      return Promise.all([creatingTransactionWithExistingMerchant, creatingTransactionWithNewMerchant])
+        .spread((existingMerchant, newMerchant) => {
+          createdTransactionWithExistingMerchant = existingMerchant;
+          createdTransactionWithNewMerchant = newMerchant;
+        })
     })
 
     it('should create a merchant if it doesn\'t exist', function() {
@@ -134,9 +134,9 @@ describe('Transaction Model', function() {
     })
 
     it('should find the merchant if it already exists', function() {
-      expect(createdTransactionWithExistingMerchant.merchant.id).to.equal(1);
-    })
-
+        expect(createdTransactionWithExistingMerchant.merchant.id).to.equal(1);
+      })
+      //need to write category update hook
   })
 
 })

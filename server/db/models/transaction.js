@@ -26,18 +26,23 @@ fields.note = {
 
 options.classMethods = {
 
-  createOrFindWithMerchant: function (transactionWithExistingMerchant) {
-   let { transaction, merchant } = transactionWithExistingMerchant
+  createOrFindWithMerchant: function(transactionWithExistingMerchant) {
+    let {
+      transaction,
+      merchant
+    } = transactionWithExistingMerchant
 
-   return Merchant.findOrCreate({where:merchant})
-            .spread( createdMerchant => {
-              return this.create(transaction)
-                      .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
-                      .then((createdTransaction) => {
-                        createdTransaction.merchant = createdMerchant
-                        return createdTransaction
-                      })
-            })
+    return Merchant.findOrCreate({
+        where: merchant
+      })
+      .spread(createdMerchant => {
+        return this.create(transaction)
+          .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
+          .then((createdTransaction) => {
+            createdTransaction.merchant = createdMerchant
+            return createdTransaction
+          })
+      })
   }
 }
 
