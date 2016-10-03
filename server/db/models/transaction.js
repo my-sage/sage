@@ -66,7 +66,7 @@ options.instanceMethods = {
 
 options.hooks = {
 
-  afterCreate: function(transaction, options) {
+  afterCreate: function(transaction) {
     let updatingAccount = transaction.getAccount()
       .then(account => {
         account.balance = account.balance + transaction.amount
@@ -75,8 +75,10 @@ options.hooks = {
 
     let updatingBudget = transaction.getCurrentBudget()
       .then(budget => {
-        budget.currentAmount = budget.currentAmount - transaction.amount
-        return budget.save()
+        if (budget) {
+          budget.currentAmount = budget.currentAmount - transaction.amount
+          return budget.save()
+        }
       })
 
     return Promise.all([updatingAccount, updatingBudget])
