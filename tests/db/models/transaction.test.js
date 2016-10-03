@@ -21,7 +21,7 @@ describe('Transaction Model', function() {
     db.sync({
         force: true
       })
-      .then(function() {
+      .then(() => {
         //create account
         return Account.create({
           name: 'Chase',
@@ -29,7 +29,7 @@ describe('Transaction Model', function() {
           balance: randomBalance
         })
       })
-      .then(function() {
+      .then(() => {
         return Category.create({
           name: 'Education',
           budgets: [{
@@ -42,13 +42,13 @@ describe('Transaction Model', function() {
           include: [Budget]
         })
       })
-      .then(function() {
+      .then(() => {
         return Merchant.create({
           name: 'Harvard',
           categoryId: 1
         })
       })
-      .then(function() {
+      .then(() => {
         done();
       })
       .catch(done)
