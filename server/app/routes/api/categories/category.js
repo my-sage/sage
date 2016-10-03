@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require('../../../../db/_db');
+const db = require('../../../../db');
 const Category = db.model('category');
 const Transaction = db.model('transaction');
 
