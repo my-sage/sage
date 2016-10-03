@@ -16,6 +16,7 @@ describe('Budget Model', function() {
   let randomTransacsAmount1,
     randomTransacsAmount2,
     randomBalance,
+    createdBudget,
     createTransactions = function() {
       let currentTime = new Date(),
         currentUnixTime = currentTime.valueOf(),
@@ -44,7 +45,7 @@ describe('Budget Model', function() {
     db.sync({
         force: true
       })
-      .then(function() {
+      .then(() => {
         //create account
         return Account.create({
           name: 'Chase',
@@ -52,21 +53,30 @@ describe('Budget Model', function() {
           balance: randomBalance
         })
       })
-      .then(function() {
+      .then(() => {
         return Category.create({
           name: 'Education',
         })
       })
-      .then(function() {
+      .then(() => {
         return Merchant.create({
           name: 'Harvard',
           categoryId: 1
         })
       })
-      .then(function() {
+      .then(() => {
         return createTransactions();
       })
-      .then(function() {
+      .then(() => {
+        return Budget.create({
+          name: 'Education',
+          targetAmount: 100,
+          type: 'Spending',
+          categoryId: 1
+        })
+      })
+      .then((cb) => {
+        createdBudget = cb;
         done();
       })
       .catch(done)
@@ -74,28 +84,31 @@ describe('Budget Model', function() {
   })
 
   describe('Hooks', function() {
-    let newBudget = {
-        name: 'Education',
-        targetAmount: 100,
-        type: 'Spending'
-      },
-      createdBudget;
-
-    beforeEach(function() {
-      return Budget.create(newBudget)
-        .then(b => {
-          createdBudget = b;
-        })
-    })
-
     it('should update new budget with all of the matching transactions', function() {
       expect(createdBudget.currentAmount).to.equal(randomTransacsAmount1);
     })
   })
 
-  // describe('Class Methods', function() {
-    // it('getCurrentBudgets gets all current budgets', function(done) {
+  describe('Class Methods', function() {
 
-    // })
-  // })
+    beforeEach(function() {
+      let oldBudget = {
+        name: 'Food',
+        targetAmount: 200,
+        type: 'Spending',
+        endDate: new Date(new Date().getFullYear(), new Date().getMonth() - 3, 4).valueOf()
+      };
+      return Budget.create(oldBudget)
+    })
+
+    it('getCurrentBudgets gets all current budgets', function(done) {
+      Budget.getCurrentBudgets()
+        .then(currBudgets => {
+          expect(currBudgets[0].name).to.equal('Education');
+          expect(currBudgets).to.have.lengthOf(1);
+          done();
+        })
+        .catch(done)
+    })
+  })
 })

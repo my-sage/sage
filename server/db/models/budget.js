@@ -40,7 +40,7 @@ options.hooks = hooks;
 hooks.beforeCreate = function(budget) {
   let currentTime = new Date()
   let endOfMonth = new Date(currentTime.getFullYear(), currentTime.getMonth() + 1, 0)
-  budget.endDate = endOfMonth.valueOf()
+  if (!budget.endDate) budget.endDate = endOfMonth.valueOf()
 }
 
 hooks.afterCreate = function(budget) {
