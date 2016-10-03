@@ -133,7 +133,7 @@ describe('Transaction Model', function() {
     })
 
     it('should find the merchant if it already exists', function() {
-      expect(createdTransactionWithExistingMerchant.id).to.equal(1);
+      expect(createdTransactionWithExistingMerchant.merchant.id).to.equal(1);
     })
 
   })
