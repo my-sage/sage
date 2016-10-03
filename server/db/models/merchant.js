@@ -7,6 +7,7 @@ const options = {}
 
 fields.name = {
   type: Sequelize.STRING,
+  unique: true,
   allowNull: false
 }
 

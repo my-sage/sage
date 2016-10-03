@@ -7,7 +7,7 @@ const fields = {}
 const options = {}
 
 fields.name = {
-  type: Sequelize.BIGINT,
+  type: Sequelize.STRING,
   allowNull: false
 }
 
@@ -24,13 +24,22 @@ fields.currentAmount = {
 }
 
 fields.type = {
-  type: Sequelize.ENUM('income', 'spending'),
+  // type: Sequelize.ENUM('income', 'spending'),
+  type: Sequelize.STRING,
   allowNull: false
 }
 
-fields.date = {
-  type: Sequelize.BIGINT,
-  allowNull: false
+fields.endDate = {
+  type: Sequelize.BIGINT
+}
+
+let hooks = {}
+options.hooks = hooks;
+
+hooks.beforeCreate = function (budget) {
+  let currentTime = new Date()
+  let endOfMonth = new Date(currentTime.getFullYear(), currentTime.getMonth()+1, 0)
+  budget.endDate = endOfMonth.valueOf()
 }
 
 module.exports = db.define('budget', fields, options)
