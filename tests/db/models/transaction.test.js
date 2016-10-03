@@ -32,8 +32,11 @@ describe('Transaction Model', function() {
           budgets: [{
             name: 'Education',
             targetAmount: 100,
+            currentAmount: 50,
             type: 'spending'
           }]
+        }, {
+          include: [Budget]
         })
       })
       .then(function() {
@@ -80,14 +83,21 @@ describe('Transaction Model', function() {
   })
 
   describe('Instance Methods', function() {
-    it('should get the correct budget', function(done) {
+    let linkedBudget;
+    beforeEach(function(done){
       createdTransaction.getCurrentBudget()
-        .then(budget => {
-          console.log(budget);
-          expect(budget.name).to.equal('Education');
-          done();
-        })
-        .catch(done);
+      .then(budget => {
+        linkedBudget = budget;
+        done();
+      })
+    })
+
+    it('should get the correct budget', function() {
+      expect(linkedBudget.name).to.equal('Education');
+    })
+
+    it('update corresponding budget accurately', function() {
+      expect(linkedBudget.currentAmount).to.equal(50 - createdTransaction.amount);
     })
   })
 
