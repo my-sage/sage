@@ -117,7 +117,7 @@ describe('Transaction Model', function() {
 
     let createdTransactionWithExistingMerchant, createdTransactionWithNewMerchant;
 
-    before(function(done) {
+    beforeEach(function(done) {
       let creatingTransactionWithExistingMerchant = Transaction.createOrFindWithMerchant(transactionWithExistingMerchant)
       let creatingTransactionWithNewMerchant = Transaction.createOrFindWithMerchant(transactionNewMerchant);
       Promise.all([creatingTransactionWithExistingMerchant, creatingTransactionWithNewMerchant])
@@ -126,6 +126,7 @@ describe('Transaction Model', function() {
         createdTransactionWithNewMerchant = newMerchant;
         done();
       })
+      .catch(done)
     })
 
     it('should create a merchant if it doesn\'t exist', function() {

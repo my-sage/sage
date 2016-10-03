@@ -31,8 +31,12 @@ options.classMethods = {
 
    return Merchant.findOrCreate({where:merchant})
             .spread( createdMerchant => {
-              transaction.merchant = createdMerchant
-              return this.create(transaction,{include: [Merchant]})
+              return this.create(transaction)
+                      .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
+                      .then((createdTransaction) => {
+                        createdTransaction.merchant = createdMerchant
+                        return createdTransaction
+                      })
             })
   }
 }
