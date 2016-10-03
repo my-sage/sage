@@ -30,8 +30,10 @@ options.instanceMethods = {
     return this.getCategory()
             .then(category => {
               console.log('getting the returning category: ', category)
+              //return category.getBudgets()
               return category.getBudgets({where: {endDate: {$gt: currentUnixTime}}})
             })
+            .then(budgets => budgets[0])
   }
 }
 
