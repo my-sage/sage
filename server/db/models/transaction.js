@@ -3,6 +3,7 @@
 const Sequelize = require('Sequelize')
 const db = require('../_db')
 const Account = require('./account')
+const Merchant = require('./merchant')
 
 const fields = {}
 const options = {}
@@ -23,7 +24,21 @@ fields.note = {
   defaultValue: 'no comment'
 }
 
+options.classMethods = {
+
+  createOrFindWithMerchant: function (transactionWithExistingMerchant) {
+   let { transaction, merchant } = transactionWithExistingMerchant
+
+   return Merchant.findOrCreate({where:merchant})
+            .spread( createdMerchant => {
+              transaction.merchant = createdMerchant
+              return this.create(transaction,{include: [Merchant]})
+            })
+  }
+}
+
 options.instanceMethods = {
+
   getCurrentBudget: function() {
     let currentUnixTime = new Date().valueOf()
     return this.getCategory()
@@ -41,6 +56,7 @@ options.instanceMethods = {
 }
 
 options.hooks = {
+
   afterCreate: function(transaction, options) {
     let updatingAccount = transaction.getAccount()
       .then(account => {
