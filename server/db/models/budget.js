@@ -43,6 +43,16 @@ hooks.beforeCreate = function(budget) {
   budget.endDate = endOfMonth.valueOf()
 }
 
+hooks.afterCreate = function(budget) {
+  budget.getCurrentTransactions()
+    .then(transactions => {
+      console.log('getting the active transactions of this month', transactions)
+      let totalTransactionAmount = transactions.reduce((pre,transaction) => {return pre+transaction.amount},0)
+      budget.currentAmount = budget.currentAmount - totalTransactionAmount
+      return budget.save()
+    })
+}
+
 let classMethods = {};
 classMethods.getCurrentBudgets = function() {
   let currentUnixTime = new Date().valueOf();
@@ -55,5 +65,21 @@ classMethods.getCurrentBudgets = function() {
   })
 }
 options.classMethods = classMethods;
+
+let instanceMethods = {};
+instanceMethods.getCurrentTransactions = function () {
+  let currentTime = new Date()
+  let beginOfMonth = new Date(currentTime.getFullYear(), currentTime.getMonth(), 0).valueOf()
+
+  return this.getCategory()
+    .then(category => {
+      return category.getTransactions({
+        where: {
+          date: {$gt: beginOfMonth}
+        }
+      })
+    })
+}
+options.instanceMethods = instanceMethods
 
 module.exports = db.define('budget', fields, options)
