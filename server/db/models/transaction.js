@@ -27,8 +27,11 @@ fields.note = {
 
 options.classMethods = {
 
-  createOrFindWithMerchant: function (transactionWithExistingMerchant) {
-   let { transaction, merchant } = transactionWithExistingMerchant
+  createOrFindWithMerchant: function(transactionWithExistingMerchant) {
+    let {
+      transaction,
+      merchant
+    } = transactionWithExistingMerchant
 
    return Merchant.findOrCreate({where:merchant})
             .spread( createdMerchant => {
@@ -39,6 +42,7 @@ options.classMethods = {
                         return createdTransaction
                       })
             })
+
   }
 }
 
