@@ -118,8 +118,8 @@ describe('Transaction Model', function() {
     let createdTransactionWithExistingMerchant, createdTransactionWithNewMerchant;
 
     before(function(done) {
-      creatingTransactionWithExistingMerchant = Transaction.createOrFindWithMerchant(transactionWithExistingMerchant)
-      creatingTransactionWithNewMerchant = Transaction.createOrFindWithMerchant(transactionNewMerchant);
+      let creatingTransactionWithExistingMerchant = Transaction.createOrFindWithMerchant(transactionWithExistingMerchant)
+      let creatingTransactionWithNewMerchant = Transaction.createOrFindWithMerchant(transactionNewMerchant);
       Promise.all([creatingTransactionWithExistingMerchant, creatingTransactionWithNewMerchant])
       .spread((existingMerchant, newMerchant) => {
         createdTransactionWithExistingMerchant = existingMerchant;
@@ -133,7 +133,7 @@ describe('Transaction Model', function() {
     })
 
     it('should find the merchant if it already exists', function() {
-      expect(createdTransactionWithExistingMerchant.id).to.equal(1);
+      expect(createdTransactionWithExistingMerchant.merchant.id).to.equal(1);
     })
 
   })
