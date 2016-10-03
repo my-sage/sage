@@ -41,7 +41,7 @@ describe('Transaction Model', function() {
       })
       .then(function() {
         return Merchant.create({
-          name: 'Fullstack Academy'
+          name: 'Harvard'
         })
       })
       .then(function() {
@@ -56,7 +56,6 @@ describe('Transaction Model', function() {
     date: new Date().valueOf(),
     accountId: 1,
     categoryId: 1,
-    merchantId: 1
   };
 
   let createdTransaction, linkedAccount;
@@ -84,21 +83,59 @@ describe('Transaction Model', function() {
 
   describe('Instance Methods', function() {
     let linkedBudget;
-    beforeEach(function(done){
+    beforeEach(function(done) {
       createdTransaction.getCurrentBudget()
-      .then(budget => {
-        linkedBudget = budget;
-        done();
-      })
+        .then(budget => {
+          linkedBudget = budget;
+          done();
+        })
     })
 
     it('should get the correct budget', function() {
       expect(linkedBudget.name).to.equal('Education');
     })
 
-    it('update corresponding budget accurately', function() {
+    it('corrsponding hook should update corresponding budget accurately', function() {
       expect(linkedBudget.currentAmount).to.equal(50 - createdTransaction.amount);
     })
+  })
+
+  describe('Class Methods', function() {
+    let transactionWithExistingMerchant = {
+      transaction: newTransaction,
+      merchant: {
+        name: 'Harvard'
+      }
+    }
+
+    let transactionNewMerchant = {
+      transaction: newTransaction,
+      merchant: {
+        name: 'Yale'
+      }
+    }
+
+    let createdTransactionWithExistingMerchant, createdTransactionWithNewMerchant;
+
+    before(function(done) {
+      creatingTransactionWithExistingMerchant = Transaction.createOrFindWithMerchant(transactionWithExistingMerchant)
+      creatingTransactionWithNewMerchant = Transaction.createOrFindWithMerchant(transactionNewMerchant);
+      Promise.all([creatingTransactionWithExistingMerchant, creatingTransactionWithNewMerchant])
+      .spread((existingMerchant, newMerchant) => {
+        createdTransactionWithExistingMerchant = existingMerchant;
+        createdTransactionWithNewMerchant = newMerchant;
+        done();
+      })
+    })
+
+    it('should create a merchant if it doesn\'t exist', function() {
+      expect(createdTransactionWithNewMerchant.merchant.name).to.equal('Yale');
+    })
+
+    it('should find the merchant if it already exists', function() {
+      expect(createdTransactionWithExistingMerchant.id).to.equal(1);
+    })
+
   })
 
 })
