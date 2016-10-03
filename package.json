@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch server -e js,html server/start.js"
+    "start": "nodemon --watch server -e js,html server/start.js",
+		"postinstall": "npm run db-init",
+		"db-init": "./db-init.sh",
+		"seed": "node ./seed.js"
   },
   "repository": {
     "type": "git",

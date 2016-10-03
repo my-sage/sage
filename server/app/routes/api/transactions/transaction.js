@@ -6,15 +6,24 @@ const Transaction = db.model('transaction');
 
 router.get('/', (req, res, next) => {
 	//startDate, endDate, merchantId, categoryId
-	let date = {};
-	if (req.query.startDate && req.query.endDate) date = {$between: [req.query.startDate, req.query.endDate]};
-	const {merchantId, categoryId} = req.query;
-	const filter = {merchantId, categoryId, date};
+	const filter = {};
+	const {merchantId, categoryId, startDate, endDate} = req.query;
+	if (startDate && endDate) filter.date = {$between: [startDate, endDate]};
+	if(merchantId) filter.merchantId = merchantId;
+	if(categoryId) filter.categoryId = categoryId;
 	Transaction.findAll({
 		where: filter
 	}).then(transactions => {
 		res.status(200).json(transactions);
 	})
+		.catch(next);
+});
+
+router.get('/:transactionId', (req, res, next) => {
+	Transaction.findById(req.params.transactionId)
+		.then(transaction => {
+			res.status(200).json(transaction);
+		})
 		.catch(next);
 });
 
@@ -43,8 +52,8 @@ router.delete('/:transactionId', (req, res, next) => {
 			id: req.params.transactionId
 		}
 	})
-		.then(deletedBudget => {
-			res.status(202).json(deletedBudget)
+		.then(numberOfDeletedBudgets => {
+			res.status(202).json(numberOfDeletedBudgets)
 		})
 		.catch(next)
 });

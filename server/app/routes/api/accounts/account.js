@@ -37,8 +37,8 @@ router.delete('/:accountId', (req, res, next) => {
 				id: req.params.accountId
 			}
 		})
-		.then(deletedAccount => {
-			res.status(202).json(deletedAccount)
+		.then(numberOfRowsDeleted => {
+			res.status(202).json(numberOfRowsDeleted)
 		})
 		.catch(next)
 });

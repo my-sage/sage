@@ -6,11 +6,11 @@ const Budget = db.model('budget');
 const Transaction = db.model('transaction');
 
 router.get('/', (req, res, next) => {
-	// //startDate, endDate, merchantId, categoryId
-	// let date = {};
-	// if (req.query.startDate && req.query.endDate) date = {$between: [req.query.startDate, req.query.endDate]};
-	// const {merchantId, categoryId} = req.query;
-	// const filter = {merchantId, categoryId, date};
+	//startDate, endDate, categoryId
+	const filter = {};
+	const {categoryId, startDate, endDate} = req.query;
+	if (startDate && endDate) filter.date = {$between: [startDate, endDate]};
+	if(categoryId) filter.categoryId = categoryId;
 	Budget.findAll({
 		where: filter
 	}).then(budgets => {
@@ -30,6 +30,14 @@ router.get('/:budgetId', (req, res, next) => {
 	})
 		.then(budget => {
 			res.status(200).json(budget);
+		})
+		.catch(next);
+});
+
+router.get('/current', (req, res, next) => {
+	Budget.getCurrentBudgets()
+		.then(budgets => {
+			res.status(200).json(budgets);
 		})
 		.catch(next);
 });

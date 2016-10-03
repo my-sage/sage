@@ -56,7 +56,7 @@ describe('Merchants API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.merchants.length).to.equal(2);
+					expect(response.body.length).to.equal(2);
 					done();
 				});
 		});
@@ -68,8 +68,8 @@ describe('Merchants API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.id).to.equal(1);
-					expect(response.body.transactions.length).to.equal(2);
+					expect(response.body[0].id).to.equal(1);
+					expect(response.body[0].transactions.length).to.equal(2);
 					done();
 				});
 		})

@@ -37,7 +37,7 @@ describe('Accounts API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.accounts.length).to.equal(2);
+					expect(response.body.length).to.equal(2);
 					done();
 				});
 		});
@@ -49,7 +49,9 @@ describe('Accounts API Routes', () => {
 				.expect(201)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body).to.equal(account3);
+					expect(response.body.name).to.equal(account3.name);
+					expect(response.body.holder).to.equal(account3.holder);
+					expect(response.body.balance).to.equal(account3.balance);
 					done();
 				});
 		});
@@ -73,7 +75,7 @@ describe('Accounts API Routes', () => {
 				.expect(202)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body).to.equal(account1);
+					expect(response.body).to.equal(1);
 					done();
 				});
 		});

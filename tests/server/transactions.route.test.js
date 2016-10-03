@@ -56,7 +56,7 @@ describe('Transactions API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.transactions.length).to.equal(3);
+					expect(response.body.length).to.equal(3);
 					done();
 				});
 		});
@@ -66,7 +66,7 @@ describe('Transactions API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.transactions.length).to.equal(2);
+					expect(response.body.length).to.equal(2);
 					done();
 				});
 		});
@@ -76,7 +76,7 @@ describe('Transactions API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.transactions.length).to.equal(1);
+					expect(response.body.length).to.equal(1);
 					done();
 				});
 		});
@@ -86,7 +86,7 @@ describe('Transactions API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.transactions.length).to.equal(2);
+					expect(response.body.length).to.equal(2);
 					done();
 				});
 		});
@@ -96,7 +96,22 @@ describe('Transactions API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body.transactions.length).to.equal(1);
+					expect(response.body.length).to.equal(1);
+					done();
+				});
+		});
+	});
+
+	describe('Get a Single Transaction', () => {
+		it('gets a transaction by id', done => {
+			agent.get('/api/transactions/1')
+				.expect(200)
+				.end((err, response) => {
+					if (err) return done(err);
+					expect(response.body.amount).to.equal(transaction1.amount);
+					//date is coming back as a string not an integer
+					expect(+response.body.date).to.equal(transaction1.date);
+					expect(response.body.note).to.equal(transaction1.note);
 					done();
 				});
 		});
