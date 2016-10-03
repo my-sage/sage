@@ -14,7 +14,7 @@ module.exports = function (db) {
     
 
     //WAITING ON ROUTES FOLDER
-    // app.use('/api', require('./routes'));
+    app.use('/api', require('./routes'));
 
 
     /*
