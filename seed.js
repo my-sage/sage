@@ -65,12 +65,12 @@ function seedBudget () {
   console.log(chalk.yellow('Seeding Budget'))
 
   let budgetObjs = [
-    {name: 'College Loan', type: 'spending', date: 1475346706, categoryId: 1},
-    {name: 'College textbook spending', type: 'spending', date: 1475346706, categoryId: 1},
-    {name: 'College Party', type: 'spending', date: 1475346706, categoryId: 1},
-    {name: 'Gas & Fuel', type: 'spending', date: 1475346706, categoryId: 3},
-    {name: 'Restaurants', type: 'spending', date: 1475346706, categoryId: 4},
-    {name: 'Groceries', type: 'spending', date: 1475346706, categoryId: 4}
+    {name: 'College Loan', type: 'spending', categoryId: 1},
+    {name: 'College textbook spending', type: 'spending', categoryId: 1},
+    {name: 'College Party', type: 'spending', categoryId: 1},
+    {name: 'Gas & Fuel', type: 'spending', categoryId: 3},
+    {name: 'Restaurants', type: 'spending', categoryId: 4},
+    {name: 'Groceries', type: 'spending', categoryId: 4}
   ]
   let creatingBudget = budgetObjs.map(budgetObj => Budget.create(budgetObj))
 

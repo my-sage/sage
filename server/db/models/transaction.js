@@ -23,6 +23,14 @@ fields.note = {
   defaultValue: 'no comment'
 }
 
+options.instanceMethods = {
+  getCurrentBudget: function () {
+    let currentUnixTime = new Date().valueOf()
+    return this.getCategory()
+            .then(category => category.getBudgets({where: {endDate: {$gt: currentUnixTime}}}))
+  }
+}
+
 options.hooks = {
   afterCreate: function (transaction, options) {
     // let updatingAccount = transaction.getAccount()
