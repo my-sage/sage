@@ -17,9 +17,13 @@
   },
   "homepage": "https://github.com/my-sage/sage#readme",
   "dependencies": {
+    "chai": "^3.5.0",
+    "chai-things": "^0.2.0",
     "chalk": "^1.1.3",
+    "express": "^4.14.0",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.24.3"
+    "sequelize": "^3.24.3",
+    "supertest": "^2.0.0"
   }
 }

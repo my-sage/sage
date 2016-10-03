@@ -24,7 +24,8 @@ fields.currentAmount = {
 }
 
 fields.type = {
-  type: Sequelize.ENUM('income', 'spending'),
+  // type: Sequelize.ENUM('income', 'spending'),
+  type: Sequelize.STRING,
   allowNull: false
 }
 
