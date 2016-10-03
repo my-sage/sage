@@ -42,22 +42,19 @@ options.instanceMethods = {
 
 options.hooks = {
   afterCreate: function(transaction, options) {
-    // let updatingAccount = transaction.getAccount()
-    //   .then(account => {
-    //     account.balance = account.balance + transaction.amount
-    //     return account.save()
-    //   })
-
-    // let updatingBudget = transaction.getCategory()
-    //   .then(category => {
-    //     return category.get
-    //   })
-
-    return transaction.getAccount()
-      .then((account) => {
+    let updatingAccount = transaction.getAccount()
+      .then(account => {
         account.balance = account.balance + transaction.amount
         return account.save()
       })
+
+    let updatingBudget = transaction.getCurrentBudget()
+      .then(budget => {
+        budget.currentAmount = budget.currentAmount - transaction.amount
+        return budget.save()
+      })
+
+    return Promise.all([updatingAccount, updatingBudget])
   }
 }
 
