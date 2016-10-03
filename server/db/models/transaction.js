@@ -28,7 +28,10 @@ options.instanceMethods = {
     console.log('trying to get active budget')
     let currentUnixTime = new Date().valueOf()
     return this.getCategory()
-            .then(category => category.getBudgets({where: {endDate: {$gt: currentUnixTime}}}))
+            .then(category => {
+              console.log('getting the returning category: ', category)
+              return category.getBudgets({where: {endDate: {$gt: currentUnixTime}}})
+            })
   }
 }
 
