@@ -18,6 +18,7 @@ fields.date = {
   allowNull: false
 }
 
+
 fields.note = {
   type: Sequelize.STRING,
   allowNull: false,
@@ -33,13 +34,17 @@ options.classMethods = {
             .spread( createdMerchant => {
               return this.create(transaction)
                       .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
+                      .then(ct => ct.reload())
                       .then((createdTransaction) => {
-                        createdTransaction.merchant = createdMerchant
                         return createdTransaction
                       })
             })
   }
 }
+
+options.defaultScope = {
+    include: [Merchant]
+};
 
 options.instanceMethods = {
 
