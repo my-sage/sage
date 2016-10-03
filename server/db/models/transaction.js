@@ -25,6 +25,7 @@ fields.note = {
 
 options.instanceMethods = {
   getCurrentBudget: function () {
+    console.log('trying to get active budget')
     let currentUnixTime = new Date().valueOf()
     return this.getCategory()
             .then(category => category.getBudgets({where: {endDate: {$gt: currentUnixTime}}}))
