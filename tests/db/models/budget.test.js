@@ -56,7 +56,7 @@ describe('Budget Model', function() {
       })
       .then(() => {
         let creatingCategories = [{
-          name: 'CHeese'
+          name: 'Education'
         }, {
           name: 'Clothing'
         }]
