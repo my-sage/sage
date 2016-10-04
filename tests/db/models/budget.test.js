@@ -99,6 +99,7 @@ describe('Budget Model', function() {
         name: 'Food',
         targetAmount: 200,
         type: 'Spending',
+        categoryId: 1,
         endDate: new Date(new Date().getFullYear(), new Date().getMonth() - 3, 4).valueOf()
       };
       return Budget.create(oldBudget)
