@@ -1,15 +1,16 @@
-'use strict';
+'use strict'
 
-const Sequelize = require('sequelize');
-const db = require('../_db');
+const Sequelize = require('sequelize')
+const db = require('../_db')
 
-const fields = {};
-const options = {};
+const fields = {}
+const options = {}
 
 fields.name = {
   type: Sequelize.STRING,
+  unique: true,
   allowNull: false
-};
+}
 
 fields.type = {
   type: Sequelize.STRING,
@@ -18,12 +19,12 @@ fields.type = {
 
 fields.balance = {
   type: Sequelize.DOUBLE,
-  defautValue: 0
+  defaultValue: 0
 }
 
 fields.holder = {
   type: Sequelize.STRING,
-  defautValue: 'self'
+  defaultValue: 'self'
 }
 
-module.exports = db.define('account', fields, options);
+module.exports = db.define('account', fields, options)
