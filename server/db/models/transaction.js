@@ -33,21 +33,23 @@ options.classMethods = {
       merchant
     } = transactionWithExistingMerchant
 
-   return Merchant.findOrCreate({where:merchant})
-            .spread( createdMerchant => {
-              return this.create(transaction)
-                      .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
-                      .then(ct => ct.reload())
-                      .then((createdTransaction) => {
-                        return createdTransaction
-                      })
-            })
+    return Merchant.findOrCreate({
+        where: merchant
+      })
+      .spread(createdMerchant => {
+        return this.create(transaction)
+          .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
+          .then(ct => ct.reload())
+          .then((createdTransaction) => {
+            return createdTransaction
+          })
+      })
 
   }
 }
 
 options.defaultScope = {
-    include: [Merchant]
+  include: [Merchant]
 };
 
 options.instanceMethods = {
