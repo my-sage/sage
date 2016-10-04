@@ -63,7 +63,6 @@ describe('Budgets API Routes', () => {
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-					console.log(response.body);
 					expect(response.body.length).to.equal(2);
 					expect(response.body[0].name).to.equal(budget1.name);
 					expect(response.body[0].targetAmount).to.equal(budget1.targetAmount);
