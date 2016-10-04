@@ -1,3 +1,4 @@
+'use strict'
 const Promise = require('bluebird');
 const chai = require('chai');
 const _ = require('lodash');
@@ -10,15 +11,17 @@ const Category = db.model('category');
 const Merchant = db.model('merchant');
 const Account = db.model('account');
 
-let randomBalance = _.random(10, 100)
+let randomBalance;
 
 describe('Transaction Model', function() {
+
   beforeEach(function(done) {
     //sync Transcation. Drop and recreate tables
+    randomBalance = _.random(10, 100);
     db.sync({
         force: true
       })
-      .then(function() {
+      .then(() => {
         //create account
         return Account.create({
           name: 'Chase',
@@ -26,7 +29,7 @@ describe('Transaction Model', function() {
           balance: randomBalance
         })
       })
-      .then(function() {
+      .then(() => {
         return Category.create({
           name: 'Education',
           budgets: [{
@@ -39,29 +42,28 @@ describe('Transaction Model', function() {
           include: [Budget]
         })
       })
-      .then(function() {
+      .then(() => {
         return Merchant.create({
-          name: 'Fullstack Academy'
+          name: 'Harvard',
+          categoryId: 1
         })
       })
-      .then(function() {
+      .then(() => {
         done();
       })
       .catch(done)
   });
 
-  let randomTransactionAmount = -_.random(1, 150);
-  let newTransaction = {
-    amount: randomTransactionAmount,
-    date: new Date().valueOf(),
-    accountId: 1,
-    categoryId: 1,
-    merchantId: 1
-  };
-
-  let createdTransaction, linkedAccount;
+  let randomTransactionAmount,
+    createdTransaction, linkedAccount, newTransaction = {
+      date: new Date().valueOf(),
+      accountId: 1,
+      categoryId: 1,
+    };
 
   beforeEach(function(done) {
+    randomTransactionAmount = -_.random(1, 150);
+    newTransaction.amount = randomTransactionAmount;
     Transaction.create(newTransaction)
       .then((transaction) => {
         createdTransaction = transaction;
@@ -84,21 +86,57 @@ describe('Transaction Model', function() {
 
   describe('Instance Methods', function() {
     let linkedBudget;
-    beforeEach(function(done){
-      createdTransaction.getCurrentBudget()
-      .then(budget => {
-        linkedBudget = budget;
-        done();
-      })
+    beforeEach(function() {
+      return createdTransaction.getCurrentBudget()
+        .then(budget => {
+          linkedBudget = budget;
+        })
     })
 
     it('should get the correct budget', function() {
       expect(linkedBudget.name).to.equal('Education');
     })
 
-    it('update corresponding budget accurately', function() {
+    it('corrsponding hook should update corresponding budget accurately', function() {
       expect(linkedBudget.currentAmount).to.equal(50 - createdTransaction.amount);
     })
+  })
+
+  describe('Class Methods', function() {
+    let transactionWithExistingMerchant = {
+      transaction: newTransaction,
+      merchant: {
+        name: 'Harvard'
+      }
+    }
+
+    let transactionNewMerchant = {
+      transaction: newTransaction,
+      merchant: {
+        name: 'Yale'
+      }
+    }
+
+    let createdTransactionWithExistingMerchant, createdTransactionWithNewMerchant;
+
+    beforeEach(function() {
+      let creatingTransactionWithExistingMerchant = Transaction.createOrFindWithMerchant(transactionWithExistingMerchant)
+      let creatingTransactionWithNewMerchant = Transaction.createOrFindWithMerchant(transactionNewMerchant);
+      return Promise.all([creatingTransactionWithExistingMerchant, creatingTransactionWithNewMerchant])
+        .spread((existingMerchant, newMerchant) => {
+          createdTransactionWithExistingMerchant = existingMerchant;
+          createdTransactionWithNewMerchant = newMerchant;
+        })
+    })
+
+    it('should create a merchant if it doesn\'t exist', function() {
+      expect(createdTransactionWithNewMerchant.merchant.name).to.equal('Yale');
+    })
+
+    it('should find the merchant if it already exists', function() {
+        expect(createdTransactionWithExistingMerchant.merchant.id).to.equal(1);
+      })
+      //need to write category update hook
   })
 
 })
