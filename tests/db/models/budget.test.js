@@ -55,9 +55,12 @@ describe('Budget Model', function() {
         })
       })
       .then(() => {
-        return Category.create({
-          name: 'Education',
-        })
+        let creatingCategories = [{
+          name: 'CHeese'
+        }, {
+          name: 'Clothing'
+        }]
+        return Promise.all(creatingCategories.map(Category.create.bind(Category)))
       })
       .then(() => {
         return Merchant.create({
@@ -102,14 +105,48 @@ describe('Budget Model', function() {
       return Budget.create(oldBudget)
     })
 
-    it('getCurrentBudgets gets all current budgets', function(done) {
-      Budget.getCurrentBudgets()
+    it('getCurrentBudgets gets only the current budgets', function() {
+      return Budget.getCurrentBudgets()
         .then(currBudgets => {
           expect(currBudgets[0].name).to.equal('Education');
           expect(currBudgets).to.have.lengthOf(1);
-          done();
         })
-        .catch(done)
+    })
+  })
+
+  describe('Instance Methods', function() {
+    let randomUnixTimeGen = (monthsAway) => {
+        let currentUnixTime = new Date(),
+          randMonths = _.random(-monthsAway, monthsAway);
+        return new Date(currentUnixTime.getFullYear(), currentUnixTime.getMonth() + randMonths, 5).valueOf();
+      },
+      randomTransacGen = (categoryId) => {
+        return {
+          amount: _.random(1, 100),
+          date: randomUnixTimeGen(2),
+          accountId: 1,
+          categoryId
+        }
+      },
+      randomTransacsGen = (n, categoryId) => {
+        return new Array(n).fill(0).map(() => randomTransacGen(categoryId));
+      };
+
+    beforeEach(function() {
+      let newTransacs = randomTransacsGen(5, 1);
+      newTransacs = newTransacs.concat(randomTransacsGen(1, 2))
+      return Promise.all(newTransacs.map(t => Transaction.create(t)));
+    })
+
+    it('getTransactions returns all the transactions tied to a budget', function() {
+      let budgetEndDate = new Date(+createdBudget.endDate + 1000 * 3600),
+        budgetStartUnixTime = new Date(budgetEndDate.getFullYear(), budgetEndDate.getMonth() - 1, 0).valueOf();
+      return createdBudget.getTransactions()
+        .then(transactions => {
+          expect(transactions.every(t => t.categoryId === createdBudget.categoryId))
+          let transactionTimes = transactions.map(t => t.date)
+          expect(transactionTimes.every(time => time > budgetStartUnixTime && time < createdBudget.endDate))
+        })
     })
   })
 })
