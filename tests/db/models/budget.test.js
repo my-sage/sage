@@ -40,6 +40,7 @@ describe('Budget Model', function() {
   beforeEach(function(done) {
     //sync Transcation. Drop and recreate tables
     randomTransacsAmount1 = _.random(1, 150);
+    console.log('the desire transaction amount ',randomTransacsAmount1)
     randomTransacsAmount2 = _.random(1, 150);
     randomBalance = _.random(1, 200);
     db.sync({
