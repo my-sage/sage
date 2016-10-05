@@ -1,11 +1,6 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
-// const accountRouter = require('./api/accounts/account.js');
-// const accountRouter = require('./api/accounts/account.js');
-// const accountRouter = require('./api/accounts/account.js');
-// const accountRouter = require('./api/accounts/account.js');
-
 
 router.use('/accounts', require('./api/accounts/account.js'));
 router.use('/budgets', require('./api/budgets/budget.js'));
