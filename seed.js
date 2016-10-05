@@ -1,8 +1,10 @@
+'use strict'
 const chalk = require('chalk');
 const db = require('./server/db');
 const Promise = require('sequelize').Promise;
 const _ = require('lodash');
-const curry = _.curry;
+const R = require('Ramda');
+const curry = R.curry;
 const Account = db.model('account');
 const Category = db.model('category');
 const Transaction = db.model('transaction');
@@ -22,22 +24,22 @@ function seedAccount() {
   console.log(chalk.yellow('seeding account.'));
 
   const accountObjs = [{
-    name: 'Visa',
-    type: 'Debit'
+    name: '',
+    type: 'Checking'
   }, {
-    name: 'American Express',
+    name: 'American Express Centurion Card',
     type: 'Credit'
   }, {
     name: 'Chase',
-    type: 'Credit'
+    type: 'Checking'
   }, {
     name: 'PNC',
     type: 'Debit'
   }, {
     name: 'Bank of America',
-    type: 'Credit'
+    type: 'Savings'
   }, {
-    name: 'Citigroup',
+    name: 'Chase Visa',
     type: 'Credit'
   }];
   const creatingAccounts = accountObjs.map(accountObj => Account.create(accountObj))
@@ -133,6 +135,7 @@ function seedBudget() {
 
 // ----------------------------------Transaction Seed-----------------------------------------------//
 
+<<<<<<< HEAD
 let randomNote = [
 	'general spending',
 	'short term loan',
@@ -147,14 +150,28 @@ let randomDateGen = (monthsAway) => {
     randomNum = _.random(-monthsAway, monthsAway);
   return new Date(currentDate.getFullYear(), currentDate.getMonth() + randomNum, _.random(1, 27)).valueOf();
 }
+=======
+let randomDateGen = (monthsAway) =>
+  () => {
+    let currentDate = new Date(),
+      randomNum = _.random(-monthsAway, monthsAway);
+    return new Date(currentDate.getFullYear(), currentDate.getMonth() + randomNum, _.random(1, 27)).valueOf();
+  }
 
-let randomAmount = () => _.round(_.random(10, 1500, true), 2);
+let randomDate2MonthsAway = randomDateGen(2);
+>>>>>>> 771fe3d4caf5cd9211a054f8cf03d9e38ee18991
+
+let randomAmount = () => _.round(_.random(-1000, 2500, true), 2);
 
 let randomTransaction = () => {
   return {
     amount: randomAmount(),
+<<<<<<< HEAD
     date: randomDateGen(2),
     note: _.sample(randomNote),
+=======
+    date: randomDate2MonthsAway(),
+>>>>>>> 771fe3d4caf5cd9211a054f8cf03d9e38ee18991
     accountId: _.random(1, numAccounts),
     categoryId: _.random(1, numCategories),
     merchantId: _.random(1, numMerchants)
