@@ -14,6 +14,9 @@ const numAccounts = 6;
 const numMerchants = 6;
 const numCategories = 6;
 
+
+
+
 // --------------------------------Account Seed--------------------------------------------//
 function seedAccount() {
   console.log(chalk.yellow('seeding account.'));
@@ -130,6 +133,15 @@ function seedBudget() {
 
 // ----------------------------------Transaction Seed-----------------------------------------------//
 
+let randomNote = [
+	'general spending',
+	'short term loan',
+	'long term loan',
+	'family spending',
+	'basic spending',
+	'Miscellaneous expense'
+];
+
 let randomDateGen = (monthsAway) => {
   let currentDate = new Date(),
     randomNum = _.random(-monthsAway, monthsAway);
@@ -142,6 +154,7 @@ let randomTransaction = () => {
   return {
     amount: randomAmount(),
     date: randomDateGen(2),
+    note: _.sample(randomNote),
     accountId: _.random(1, numAccounts),
     categoryId: _.random(1, numCategories),
     merchantId: _.random(1, numMerchants)
