@@ -135,7 +135,6 @@ function seedBudget() {
 
 // ----------------------------------Transaction Seed-----------------------------------------------//
 
-<<<<<<< HEAD
 let randomNote = [
 	'general spending',
 	'short term loan',
@@ -145,12 +144,6 @@ let randomNote = [
 	'Miscellaneous expense'
 ];
 
-let randomDateGen = (monthsAway) => {
-  let currentDate = new Date(),
-    randomNum = _.random(-monthsAway, monthsAway);
-  return new Date(currentDate.getFullYear(), currentDate.getMonth() + randomNum, _.random(1, 27)).valueOf();
-}
-=======
 let randomDateGen = (monthsAway) =>
   () => {
     let currentDate = new Date(),
@@ -159,19 +152,14 @@ let randomDateGen = (monthsAway) =>
   }
 
 let randomDate2MonthsAway = randomDateGen(2);
->>>>>>> 771fe3d4caf5cd9211a054f8cf03d9e38ee18991
 
 let randomAmount = () => _.round(_.random(-1000, 2500, true), 2);
 
 let randomTransaction = () => {
   return {
     amount: randomAmount(),
-<<<<<<< HEAD
-    date: randomDateGen(2),
     note: _.sample(randomNote),
-=======
     date: randomDate2MonthsAway(),
->>>>>>> 771fe3d4caf5cd9211a054f8cf03d9e38ee18991
     accountId: _.random(1, numAccounts),
     categoryId: _.random(1, numCategories),
     merchantId: _.random(1, numMerchants)
