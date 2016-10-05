@@ -11,10 +11,14 @@ const Transaction = db.model('transaction');
 const Budget = db.model('budget');
 const Merchant = db.model('merchant');
 const Tag = db.model('tag');
+const bluebird = require('bluebird');
 
 const numAccounts = 6;
 const numMerchants = 6;
 const numCategories = 6;
+const CreditAccountId = [2,6];
+const NonCreditAccountId = [1,3,4,5];
+const numberOfTransaction = 50;
 
 
 
@@ -24,7 +28,7 @@ function seedAccount() {
   console.log(chalk.yellow('seeding account.'));
 
   const accountObjs = [{
-    name: '',
+    name: 'HSBC Simple',
     type: 'Checking'
   }, {
     name: 'American Express Centurion Card',
@@ -154,29 +158,58 @@ let randomDateGen = (monthsAway) =>
 let randomDate2MonthsAway = randomDateGen(2);
 
 let randomAmount = () => _.round(_.random(-1000, 2500, true), 2);
+let randomAmountSpending = () => _.round(_.random(-100,-10, true),2) 
+let randomAmountSaving = () => _.round(_.random(100,300, true),2)
 
-let randomTransaction = () => {
-  return {
-    amount: randomAmount(),
-    note: _.sample(randomNote),
-    date: randomDate2MonthsAway(),
-    accountId: _.random(1, numAccounts),
-    categoryId: _.random(1, numCategories),
-    merchantId: _.random(1, numMerchants)
-  }
+let randomTransaction = (accountId,status) => {
+	let amount;
+	if(status==="spending") amount = randomAmountSpending();  //it is negative amount for spending
+	if(status==="saving") amount = randomAmountSaving();
+	
+	return {
+		amount: amount,
+		date: randomDate2MonthsAway(),
+		note: _.sample(randomNote),
+		accountId: accountId,
+		categoryId: _.random(1, numCategories),
+		merchantId: _.random(1, numMerchants)
+	}
 }
 
-let randomTransactions = (num) => {
-  let transactions = [];
-  let range = new Array(num).fill(0);
-  return range.map(randomTransaction)
+let randomTransactions = (numOfTransaction,savingDays,accountIdArray) => {
+	return accountIdArray.map(accountId => {
+
+		let range = new Array(numOfTransaction).fill(0);
+		let transactions = [];
+
+		for(let i=1;i<=numOfTransaction;i++) transactions.push(i);
+		let randomSavingDay = _.sampleSize(transactions, savingDays);
+
+		return transactions.map(day => {
+			if(randomSavingDay.indexOf(day)!==-1) return randomTransaction(accountId,'saving');
+			else return randomTransaction(accountId,'spending');
+		})
+	})
 }
+
+function promiseNester(promisifiedFunc, argsArray) {
+  if (argsArray.length === 1) 
+  	return promisifiedFunc(argsArray[0]).then(function(resolvedContent) {});
+  return promisifiedFunc(argsArray[0])
+    .then(function(resolvedContent) {
+      return promiseNester(promisifiedFunc, argsArray.slice(1))
+    });
+}
+
 
 function seedTransaction() {
   console.log(chalk.yellow('seeding Transaction'));
-  const transactionObjs = randomTransactions(100);
-  const creatingTransaction = transactionObjs.map(transactionObj => Transaction.create(transactionObj));
-  return Promise.all(creatingTransaction)
+  let creatingTransactionCredit = randomTransactions(30,1,CreditAccountId);
+  let creatingTransactionNonCredit = randomTransactions(10,5,NonCreditAccountId);
+  let transactionObjs = creatingTransactionCredit.concat(creatingTransactionNonCredit);
+
+  transactionObjs = _.flatten(transactionObjs)
+  return promiseNester(Transaction.create.bind(Transaction),transactionObjs)
 }
 
 // ----------------------------------Datebase Sync-------------------------------------------------//

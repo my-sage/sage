@@ -87,7 +87,7 @@ options.hooks = {
         }
       })
 
-    return Promise.all([updatingAccount, updatingBudget])
+    return Promise.all([updatingAccount,updatingBudget])
   }
 }
 
