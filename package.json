@@ -45,6 +45,7 @@
     "passport-twitter": "^1.0.2",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
+    "ramda": "^0.22.1",
     "sequelize": "^3.24.3",
     "supertest": "^2.0.0"
   }
