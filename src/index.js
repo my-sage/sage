@@ -10,7 +10,7 @@ const store = configureStore();
 
 render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />,
+    <Router history={browserHistory} routes={routes} />
   </Provider>,
-    document.getElementById('app');
+    document.getElementById('app')
 )
