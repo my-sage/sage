@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
 import TopHNavBar from './TopHNavBar'
-import Overview from './overview/OverviewPage.js'
+import Overview from './overview/OverviewPage'
 
-export default React.createClass({
+class App extends React.Component {
   render() {
     return (
       <div>
@@ -19,4 +19,6 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+export default App;
