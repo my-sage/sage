@@ -20,9 +20,6 @@ const CreditAccountId = [2,6];
 const NonCreditAccountId = [1,3,4,5];
 const numberOfTransaction = 50;
 
-
-
-
 // --------------------------------Account Seed--------------------------------------------//
 function seedAccount() {
   console.log(chalk.yellow('seeding account.'));
