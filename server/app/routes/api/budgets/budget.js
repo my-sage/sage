@@ -3,34 +3,18 @@ const router = express.Router();
 
 const db = require('../../../../db');
 const Budget = db.model('budget');
-const Transaction = db.model('transaction');
 
 router.get('/', (req, res, next) => {
 	//startDate, endDate, categoryId
 	const filter = {};
 	const {categoryId, startDate, endDate} = req.query;
-	if (startDate && endDate) filter.date = {$between: [startDate, endDate]};
+	if (startDate && endDate) filter.endDate = {$between: [startDate, endDate]};
 	if(categoryId) filter.categoryId = categoryId;
 	Budget.findAll({
 		where: filter
 	}).then(budgets => {
 		res.status(200).json(budgets);
 	})
-		.catch(next);
-});
-
-router.get('/:budgetId', (req, res, next) => {
-	Budget.findAll({
-		where: {
-			id: req.params.budgetId
-		},
-		include: [
-			{model: Transaction}
-		]
-	})
-		.then(budget => {
-			res.status(200).json(budget);
-		})
 		.catch(next);
 });
 
@@ -42,6 +26,19 @@ router.get('/current', (req, res, next) => {
 		.catch(next);
 });
 
+router.get('/:budgetId', (req, res, next) => {
+	const response = {};
+	Budget.findById(req.params.budgetId)
+		.then(budget => {
+			response.budget = budget;
+			return budget.getTransactions()
+		})
+		.then(transactions => {
+			response.transactions = transactions;
+			res.status(200).json(response);
+		})
+		.catch(next);
+});
 
 router.post('/', (req, res, next) => {
 	Budget.create(req.body)

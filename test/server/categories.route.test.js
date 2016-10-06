@@ -13,6 +13,8 @@ describe('Categories API Routes', () => {
 
 	const category2 = {name: 'Food', description: 'Sustenance'};
 
+	const category3 = {name: 'Movies', description: 'Films'};
+
 	const merchant1 = {name: 'Amazon', categoryId: 1};
 
 	const merchant2 = {name: 'Open Market', categoryId: 2};
@@ -74,4 +76,19 @@ describe('Categories API Routes', () => {
 				});
 		});
 	});
+
+	describe('Post a New Category', () => {
+		it('posts a new category', done => {
+			agent.post('/api/categories').send(category3)
+				.expect(201)
+				.end((err, response) => {
+					if (err) return done(err);
+					expect(response.body.name).to.equal(category3.name);
+					expect(response.body.description).to.equal(category3.description);
+					done();
+				});
+		});
+	});
+
+
 });
