@@ -6,7 +6,6 @@
   "scripts": {
     "test": "NODE_ENV=test mocha --recursive test",
     "start": "NODE_ENV=dev webpack-dashboard --  babel-node server/main.js",
-    "postinstall": "npm run db-init",
     "db-init": "./db-init.sh",
     "seed": "node ./seed.js"
   },
