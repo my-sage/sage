@@ -58,6 +58,14 @@ const genMerchants = (n) => {
   }
 };
 
+const genUser = (n) => {
+  return {
+    userName: faker.internet.userName(),
+    password: faker.internet.password(),
+    avatar: faker.internet.avatar()
+  }
+}
+
 const repeat = (func, n) => {
   let result = [];
   for(let i=0; i<n; i++){
