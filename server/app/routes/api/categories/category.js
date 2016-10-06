@@ -28,4 +28,13 @@ router.get('/:categoryId', (req, res, next) => {
 		.catch(next);
 });
 
+router.post('/', (req, res, next) => {
+	Category.create(req.body)
+		.then(category => {
+			res.status(201).json(category);
+		})
+		.catch(next);
+});
+
+
 module.exports = router;

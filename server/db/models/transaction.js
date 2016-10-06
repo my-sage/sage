@@ -1,29 +1,29 @@
 'use strict'
 
-const Sequelize = require('Sequelize')
-const db = require('../_db')
-const Account = require('./account')
-const Merchant = require('./merchant')
+const Sequelize = require('Sequelize');
+const db = require('../_db');
+const Account = require('./account');
+const Merchant = require('./merchant');
 
-const fields = {}
-const options = {}
+const fields = {};
+const options = {};
 
 fields.amount = {
   type: Sequelize.DOUBLE,
   allowNull: false
-}
+};
 
 fields.date = {
   type: Sequelize.BIGINT, // Unix time
   allowNull: false
-}
+};
 
 
 fields.note = {
   type: Sequelize.STRING,
   allowNull: false,
   defaultValue: 'no comment'
-}
+};
 
 options.classMethods = {
 
@@ -31,7 +31,7 @@ options.classMethods = {
     let {
       transaction,
       merchant
-    } = transactionWithExistingMerchant
+    } = transactionWithExistingMerchant;
 
     return Merchant.findOrCreate({
         where: merchant
@@ -46,7 +46,7 @@ options.classMethods = {
       })
 
   }
-}
+};
 
 options.defaultScope = {
   include: [Merchant]
@@ -55,7 +55,7 @@ options.defaultScope = {
 options.instanceMethods = {
 
   getCurrentBudget: function() {
-    let currentUnixTime = new Date().valueOf()
+    let currentUnixTime = new Date().valueOf();
     return this.getCategory()
       .then(category => {
         return category.getBudgets({
@@ -68,16 +68,16 @@ options.instanceMethods = {
       })
       .then(budgets => budgets[0])
   }
-}
+};
 
 options.hooks = {
 
   afterCreate: function(transaction) {
     let updatingAccount = transaction.getAccount()
       .then(account => {
-        account.balance = account.balance + transaction.amount
+        account.balance = account.balance + transaction.amount;
         return account.save()
-      })
+      });
 
     let updatingBudget = transaction.getCurrentBudget()
       .then(budget => {
@@ -85,10 +85,10 @@ options.hooks = {
           budget.currentAmount = budget.currentAmount - transaction.amount
           return budget.save()
         }
-      })
+      });
 
     return Promise.all([updatingAccount,updatingBudget])
   }
-}
+};
 
-module.exports = db.define('transaction', fields, options)
+module.exports = db.define('transaction', fields, options);

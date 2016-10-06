@@ -17,15 +17,17 @@ describe('Budgets API Routes', () => {
 
 	const merchant2 = {name: 'Open Market', categoryId: 2};
 
-	const transaction1 = {amount: -100.00, date: 1475510400, note: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction1 = {amount: -100.00, date: Date.now().valueOf(), note: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction2 = {amount: -40, date: 1473609600, note: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction2 = {amount: -40, date: Date.now().valueOf(), note: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction3 = {amount: -10, date: 1473696000, note: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
+	const transaction3 = {amount: -10, date: Date.now().valueOf(), note: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
 
 	const budget1 = {name: 'MyBudget', targetAmount: 200, type: 'Spending', categoryId: 1};
 
 	const budget2 = {name: 'MyOtherBudget', targetAmount: 100, type: 'Spending', categoryId: 2};
+
+	const budget3 = {name: 'MyOtherOther', targetAmount: 1000, type: 'Spending', categoryId: 2};
 
 	beforeEach('Sync DB', () => db.sync({force: true}));
 
@@ -44,9 +46,9 @@ describe('Budgets API Routes', () => {
 			.then(()=>Category.create(category2))
 			.then(()=>Merchant.create(merchant1))
 			.then(()=>Merchant.create(merchant2))
-			.then(()=>Transaction.create(transaction1))
-			.then(()=>Transaction.create(transaction2))
-			.then(()=>Transaction.create(transaction3))
+			.then(()=>Transaction.createOrFindWithMerchant({transaction: transaction1, merchant: merchant1}))
+			.then(()=>Transaction.createOrFindWithMerchant({transaction: transaction2, merchant: merchant1}))
+			.then(()=>Transaction.createOrFindWithMerchant({transaction: transaction3, merchant: merchant2}))
 			.then(()=>Budget.create(budget1))
 			.then(()=>Budget.create(budget2))
 			.then(()=>done())
@@ -87,8 +89,8 @@ describe('Budgets API Routes', () => {
 				});
 		});
 
-		xit('filters by date', done => {
-			agent.get('/api/budgets?startDate=1472745600&endDate=1475337600')
+		it('filters by date', done => {
+			agent.get(`/api/budgets?startDate=0&endDate=${Date.now().valueOf()+3000000000}`)
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
@@ -97,8 +99,8 @@ describe('Budgets API Routes', () => {
 				});
 		});
 
-		xit('combines filters', done => {
-			agent.get('/api/budgets?startDate=1472745600&endDate=1475337600&categoryId=1')
+		it('combines filters', done => {
+			agent.get(`/api/budgets?startDate=0&endDate=${Date.now().valueOf()+3000000000}&categoryId=2`)
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
@@ -108,15 +110,65 @@ describe('Budgets API Routes', () => {
 		});
 	});
 
-	xdescribe('Get a Single Budget', ()=>{
+	describe('Get a Single Budget', ()=>{
 		it('gets an existing budget by id and its transactions', done => {
 			agent.get('/api/budgets/1')
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
-
+					expect(response.body.transactions.length).to.equal(2);
 					done();
 				})
 		})
+	});
+
+	describe('Get Current Budgets', () => {
+		it('gets all current budgets', done => {
+			agent.get('/api/budgets/current')
+				.expect(200)
+				.end((err, response) => {
+					if (err) return done(err);
+					expect(response.body.length).to.equal(2);
+					done();
+				});
+		})
+	});
+
+	describe('Post a New Budget', () => {
+		it('posts a new budget', done => {
+			agent.post('/api/budgets').send(budget3)
+				.expect(201)
+				.end((err, response) => {
+					if (err) return done(err);
+					expect(response.body.name).to.equal(budget3.name);
+					expect(response.body.targetAmount).to.equal(budget3.targetAmount);
+					expect(response.body.type).to.equal(budget3.type);
+					done();
+				});
+		});
+	});
+
+	describe('Update an Existing Budget', () => {
+		it('updates an existing budget', done => {
+			agent.put('/api/budgets/1').send({name: 'MyRevisedBudget'})
+				.expect(200)
+				.end((err, response) => {
+					if (err) return done(err);
+					expect(response.body.name).to.equal('MyRevisedBudget');
+					done();
+				});
+		});
+	});
+
+	describe('Delete an Existing Budget', () => {
+		it('deletes an existing budget', done => {
+			agent.delete('/api/budgets/1')
+				.expect(202)
+				.end((err, response) => {
+					if (err) return done(err);
+					expect(response.body).to.equal(1);
+					done();
+				});
+		});
 	});
 });
