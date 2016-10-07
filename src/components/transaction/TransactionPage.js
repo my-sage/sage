@@ -1,13 +1,10 @@
+'use strict';
 import React from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
 class TransactionPage extends React.Component {
-
-  constructor(){
-   super();
-  }
 
   render(){
     return (
@@ -18,7 +15,6 @@ class TransactionPage extends React.Component {
           <li><Link activeClassName="active" to="/transactions/accounts">Accounts</Link></li>
           <li><Link activeClassName="active" to="/transactions/tags">Tags</Link></li>
         </ul>
-        {this.props.children}
       </div>
     )
   }
@@ -29,7 +25,7 @@ class TransactionPage extends React.Component {
 TransactionPage.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
-  return {}
+  return { transactions: state.transactions }
 }
 
 function mapDispatchToProps(dispatch) {
