@@ -6,13 +6,9 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import stateGen from './static-state-generator';
 import routes from './routes';
+import R from 'ramda';
 
-let dummyState = stateGen();
-
-let state = {
-  budgets: dummyState.budgets,
-  transactions: dummyState.transactions
-}
+const state = R.pick(['budgets', 'transactions'], stateGen())
 
 const store = configureStore(state);
 
