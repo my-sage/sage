@@ -1,6 +1,6 @@
 'use strict'
 
-const Sequelize = require('Sequelize');
+const Sequelize = require('sequelize');
 const db = require('../_db');
 const Account = require('./account');
 const Merchant = require('./merchant');
