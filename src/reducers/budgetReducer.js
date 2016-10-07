@@ -1,6 +1,6 @@
 'use strict';
 
-export default function transactionReducer(state = [], action) {
+export default function budgetReducer(state = [], action) {
   switch(action.type) {
     default: 
       return state;
