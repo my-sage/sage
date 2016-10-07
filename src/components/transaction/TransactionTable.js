@@ -6,7 +6,6 @@ const TransactionTable = ({transactions}) => {
 	return (
 		<table>
 			{transactions.map(transaction=>TransactionSingle(transaction))}
-			{/*<TransactionSingle {...transactions[0]}/>*/}
 		</table>
 	)
 };
