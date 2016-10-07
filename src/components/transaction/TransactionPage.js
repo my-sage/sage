@@ -26,7 +26,7 @@ class TransactionPage extends React.Component {
 
 //need to put things to validate in this object ex. courses: PropTypes.array.isRequired
 //this provides proptype validation
-TransactionPage.propTypes = {}
+TransactionPage.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
   return {}
