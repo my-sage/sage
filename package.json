@@ -8,7 +8,9 @@
     "start": "NODE_ENV=dev webpack-dashboard --  babel-node server/main.js",
     "postinstall": "npm run db-init",
     "db-init": "./db-init.sh",
-    "seed": "node ./seed.js"
+    "seed": "node ./seed.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -96,6 +98,7 @@
     "webpack-dashboard": "^0.2.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-dev-middleware": "1.6.1",
-    "webpack-hot-middleware": "2.10.0"
+    "webpack-hot-middleware": "2.10.0",
+    "@kadira/storybook": "^2.21.0"
   }
 }

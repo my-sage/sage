@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 const db = require('../_db');
 const Account = require('./account');
 const Merchant = require('./merchant');
+const Category = require('./category');
 
 const fields = {};
 const options = {};
@@ -49,7 +50,7 @@ options.classMethods = {
 };
 
 options.defaultScope = {
-  include: [Merchant]
+  include: [Merchant, Category]
 };
 
 options.instanceMethods = {
