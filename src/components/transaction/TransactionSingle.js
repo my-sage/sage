@@ -2,11 +2,11 @@
 
 import React, {Component} from 'react';
 
-const TransactionSingle = ({date, merchant, category, amount, onChange, id}) => {
+const TransactionSingle = ({date, merchant, category, amount, id}) => {
 	return (
 		<tr key={id}>
-			<td style={styles.dataStyle} contentEditable='true'>{date}</td>
-			<td style={styles.dataStyle} contentEditable='true'>{merchant}</td>
+			<td style={styles.dataStyle}>{date}</td>
+			<td style={styles.dataStyle}>{merchant}</td>
 			<td style={styles.dataStyle}>{category}</td>
 			<td style={styles.dataStyle}>$ {amount}</td>
 		</tr>
