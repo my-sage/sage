@@ -191,7 +191,7 @@ let randomTransactions = (numOfTransaction,savingDays,accountIdArray) => {
 
 function promiseNester(promisifiedFunc, argsArray) {
   if (argsArray.length === 1) 
-  	return promisifiedFunc(argsArray[0]).then(function(resolvedContent) {});
+  	return promisifiedFunc(argsArray[0]).then(function(resolvedContent) {console.log(resolvedContent)});
   return promisifiedFunc(argsArray[0])
     .then(function(resolvedContent) {
       return promiseNester(promisifiedFunc, argsArray.slice(1))
