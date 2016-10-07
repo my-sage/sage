@@ -9,7 +9,11 @@ class BudgetPage extends Component {
 
    render(){
     return (
-      <BudgetBlock budgets={this.props.budgets}/>
+    	<div>
+	    	<h1>Budgets</h1>
+	    	
+	      	<BudgetBlock budgets={this.props.budgets}/>
+      	</div>
     )
   }
 }
