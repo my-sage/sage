@@ -1,13 +1,26 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {Modal, Button} from "react-bootstrap"
+import {Modal, Button} from "react-bootstrap";
+import TransactionEditForm from "./TransactionEditForm";
 
 class TransactionModal extends Component {
 
 	constructor (props) {
 		super(props);
-		this.state = {show: false};
+		this.state = {
+			show: false,
+			transaction: Object.assign({}, this.props),
+			errors: {}
+		};
+		this.updateTransactionState = this.updateTransactionState.bind(this);
+	}
+
+	updateTransactionState(event) {
+		const field = event.target.name;
+		let transaction = this.state.transaction;
+		transaction[field] = event.target.value;
+		return this.setState(transaction: transaction);
 	}
 
   render () {
@@ -23,15 +36,15 @@ class TransactionModal extends Component {
 	  		<Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
 	  			
 	  			<Modal.Header closeButton>
-	  				<Modal.Title id="Contained-modal-title">Transaction Detail</Modal.Title>
+	  				<Modal.Title id="Contained-modal-title">Transaction Management</Modal.Title>
 	  			</Modal.Header>
 
 	  			<Modal.Body>
-	  				this is the main Modal Content
-	  				<p>{this.props.merchant}</p>
-	  				<p>{this.props.category}</p>
-	  				<p>{this.props.date}</p>
-	  				<p>{this.props.amount}</p>
+	  				<TransactionEditForm
+	  					onChange={this.updateTransactionState}
+	  					transaction={this.state.transaction}
+	  					errors={this.state.errors}
+	  				/>
 	  			</Modal.Body>
 
 	  			<Modal.Footer>

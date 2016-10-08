@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import R from 'ramda';
 import TransactionNav from './TransactionNav';
+import TransactionTable from './TransactionTable';
 
 class TransactionPage extends React.Component {
 
@@ -13,6 +14,7 @@ class TransactionPage extends React.Component {
       <div>
         <h1>Transactions</h1>
 	      <TransactionNav></TransactionNav>
+        <TransactionTable transactions={this.props.transactions}/>
       </div>
     )
   }

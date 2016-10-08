@@ -11,7 +11,7 @@ const TransactionSingle = ({date, merchant, category, amount, id}) => {
 			<td style={styles.dataStyle}>{category}</td>
 			<td style={styles.dataStyle}>$ {amount}</td>
 			<td style={styles.dataStyle}>
-				<TransactionModal merchant={merchant} category={category} date={date} amount={amount}/>
+				<TransactionModal merchant={merchant} category={category} date={date} amount={amount} id={id}/>
 			</td>
 		</tr>
 	)
