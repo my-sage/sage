@@ -7,6 +7,9 @@ import { Router, browserHistory } from 'react-router';
 import stateGen from './static-state-generator';
 import routes from './routes';
 import R from 'ramda';
+import 'jquery';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.min.js';
 
 const state = R.pick(['budgets', 'transactions'], stateGen())
 
