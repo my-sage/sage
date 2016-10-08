@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/my-sage/sage#readme",
   "dependencies": {
+    "axios": "^0.14.0",
     "babel-polyfill": "6.8.0",
     "bluebird": "^3.3.3",
     "body-parser": "^1.12.0",
