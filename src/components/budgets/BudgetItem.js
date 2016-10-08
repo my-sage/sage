@@ -1,5 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
+import BudgetBar from './BudgetBar'
 
 class BudgetItem extends Component {
   render(){
@@ -12,7 +13,17 @@ class BudgetItem extends Component {
     //  });
     // {console.log(this.props.budgets)}
 
-    return <li>Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {endDate}</li>
+    return (
+        
+        <li>
+        Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {endDate}
+        <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
+        </li>
+        
+            
+        
+        
+            )
   }
 }
 
