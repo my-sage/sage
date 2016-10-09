@@ -1,6 +1,8 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
 import {Modal, Button} from "react-bootstrap";
 import TransactionEditForm from "./TransactionEditForm";
 
@@ -11,7 +13,7 @@ class TransactionModal extends Component {
 
 		this.state = {
 			show: false,
-			transaction: Object.assign({}, this.props),
+			transaction: Object.assign({}, this.props.transaction),
 			errors: {}
 		};
 		this.updateTransactionState = this.updateTransactionState.bind(this);
@@ -26,7 +28,6 @@ class TransactionModal extends Component {
 
   render () {
   	let close = () => this.setState({show: false});
-  	console.log('trying to get the props',this.props)
   	return (
 	  	<div className="modal-container" style={{height: 50}}>
 
@@ -44,6 +45,8 @@ class TransactionModal extends Component {
 	  				<TransactionEditForm
 	  					onChange={this.updateTransactionState}
 	  					transaction={this.state.transaction}
+	  					merchants={this.props.merchants}
+	  					categories={this.props.categories}
 	  					errors={this.state.errors}
 	  				/>
 	  			</Modal.Body>
@@ -57,7 +60,41 @@ class TransactionModal extends Component {
   	)
 
   }
-
 };
 
-export default TransactionModal
+TransactionModal.propTypes = {
+  transaction: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+  merchants: PropTypes.array.isRequired
+};
+
+
+function mapStateToProps(state, ownProps) {
+
+	const CategoriesFormattedForDropdown = state.categories.map(category => {
+		return {
+			value: category.id,
+			text: category.name
+		};
+	});
+
+	const MerchantsFormattedForDropdown = state.merchants.map(merchant => {
+		return {
+			value: merchant.id,
+			text: merchant.name
+		};
+	});  
+
+  return { 
+  	categories: CategoriesFormattedForDropdown,
+  	merchants: MerchantsFormattedForDropdown
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({}, dispatch)
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TransactionModal)
