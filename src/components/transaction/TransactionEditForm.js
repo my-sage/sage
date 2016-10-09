@@ -1,25 +1,27 @@
 import React from 'react';
 import TextInput from './TextInput';
+import SelectInput from './SelectInput';
 
-const TransactionEditForm = ({transaction,onChange,loading,errors}) => {
-	console.log('getting the transaction detail',transaction)
+
+const TransactionEditForm = ({transaction,categories,merchants,onChange,loading,errors}) => {
 	return (
 		<form>
-			<h3>Transaction Form</h3>
-			<TextInput
+
+			<SelectInput
 				name="merchantId"
-				label="MerchantId"
+				label="Merchant"
 				value={transaction.merchantId}
-				onChange={onChange}
-				error={errors.title} />
+				defaultOption="Select the correct Merchant"
+				options={merchants}
+				onChange={onChange} error={errors.merchantId}/>
 
-			<TextInput
+			<SelectInput
 				name="categoryId"
-				label="CategoryId"
+				label="Category"
 				value={transaction.categoryId}
-				onChange={onChange}
-				error={errors.title} />
-
+				defaultOption="Select the correct Category"
+				options={categories}
+				onChange={onChange} error={errors.categoryId}/>
 
 			<TextInput
 				name="amount"
@@ -34,6 +36,8 @@ const TransactionEditForm = ({transaction,onChange,loading,errors}) => {
 
 TransactionEditForm.propTypes = {
 	transaction: React.PropTypes.object.isRequired,
+ 	categories: React.PropTypes.array.isRequired,
+  merchants: React.PropTypes.array.isRequired,
 	onChange: React.PropTypes.func.isRequired
 }
 

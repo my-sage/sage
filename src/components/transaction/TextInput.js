@@ -9,7 +9,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) => {
 		<div className={wrapperClass}>
 			<label htmlFor={name}>{label}</label>
 			<div className="field">
-				<input
+				<input style={{width: 300}}
 					type="text"
 					name={name}
 					className="form-control"
@@ -27,7 +27,7 @@ TextInput.propTypes = {
 	label: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	placeholder: PropTypes.string,
-	value: PropTypes.string,
+	value: PropTypes.number,
 	error: PropTypes.string
 };
 
