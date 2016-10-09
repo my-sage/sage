@@ -13,13 +13,3 @@ export const fetchBudgetsFail = makeActionCreator(actions.FETCH_BUDGETS_FAIL, 'e
 
 //thunk actions
 export const loadBudgets = makeThunkCreator(budgetApi.getAllBudgets, fetchBudgets, fetchBudgetsSuccess, fetchBudgetsFail);
-// export function loadBudgets() {
-  // return function(dispatch) {
-    // dispatch(fetchBudgets())
-    // return budgetApi.getAllBudgets()
-    // .then(budgets => {
-      // dispatch(fetchBudgetsSuccess(budgets));
-    // })
-    // .catch(dispatchFail(dispatch, fetchBudgetsFail))
-  // }
-// }
