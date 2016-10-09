@@ -25,6 +25,7 @@ class TransactionPage extends React.Component {
 TransactionPage.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
+  console.log('getting all transactions',state.transactions)
   return { transactions: state.transactions }
 }
 
