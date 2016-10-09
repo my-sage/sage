@@ -15,6 +15,6 @@ const handlers = {
     console.log(action.budgets);
     return action.budgets;
   }
-}
+};
 
 export default createReducer([], handlers);
