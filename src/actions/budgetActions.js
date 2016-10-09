@@ -7,17 +7,18 @@ import { makeActionCreator, dispatchFail } from '../utils';
 export const createBudget = makeActionCreator(actions.CREATE_BUDGET, 'budget');
 export const deleteBudget = makeActionCreator(actions.DELETE_BUDGET, 'id');
 export const updateBudget = makeActionCreator(actions.UPDATE_BUDGET, 'id', 'budget');
-export const loadBudgetsSuccess = makeActionCreator(actions.LOAD_BUDGETS_SUCCESS, 'budgets');
-export const loadBudgetsFail = makeActionCreator(actions.LOAD_BUDGETS_FAIL, 'error');
-
+export const fetchBudgets = makeActionCreator(actions.FETCH_BUDGETS_REQUEST);
+export const fetchBudgetsSuccess = makeActionCreator(actions.FETCH_BUDGETS_SUCCESS, 'budgets');
+export const fetchBudgetsFail = makeActionCreator(actions.FETCH_BUDGETS_FAIL, 'error');
 
 //thunk actions
 export function loadBudgets() {
   return function(dispatch) {
+    dispatch(fetchBudgets())
     return budgetApi.getAllBudgets()
     .then(budgets => {
-      dispatch(loadBudgetsSuccess(budgets));
+      dispatch(fetchBudgetsSuccess(budgets));
     })
-    .catch(dispatchFail(dispatch, loadBudgetsFail))
+    .catch(dispatchFail(dispatch, fetchBudgetsFail))
   }
 }
