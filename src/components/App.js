@@ -34,11 +34,11 @@ class App extends React.Component {
     return (
       <div>
           <div style={divStyle}>
-                <button style={button}><Link to="/" activeClassName="active" onlyActiveOnIndex={true}><span className="glyphicon glyphicon-th"></span>  Overview</Link></button>
-                <button style={button}><Link to="/transactions" activeClassName="active"><span className="glyphicon glyphicon-th-list"></span>  Transactions</Link></button>
-                <button style={button}><Link to="/budgets" activeClassName="active"><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</Link></button>
-                <button style={button}><Link to="/trends" activeClassName="active"><span className="glyphicon glyphicon-stats"></span>  Trends</Link></button>
-                <button style={button}><Link to="/settings" activeClassName="active"><span className="glyphicon glyphicon-leaf"></span>  Settings</Link></button>\
+                <button style={button}><Link to="/" activeClassName="activeButton" onlyActiveOnIndex={true}><span className="glyphicon glyphicon-th"></span>  Overview</Link></button>
+                <button style={button}><Link to="/transactions" activeClassName="activeButton"><span className="glyphicon glyphicon-th-list"></span>  Transactions</Link></button>
+                <button style={button}><Link to="/budgets" activeClassName="activeButton"><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</Link></button>
+                <button style={button}><Link to="/trends" activeClassName="activeButton"><span className="glyphicon glyphicon-stats"></span>  Trends</Link></button>
+                <button style={button}><Link to="/settings" activeClassName="activeButton"><span className="glyphicon glyphicon-leaf"></span>  Settings</Link></button>\
           </div>
           <div className="main">
             {this.props.children || <Overview/>}

@@ -29,7 +29,7 @@ const button = {
 
 const LeftNav = (
 	  <div style={divStyle}>
-          <button style={button}><Link to="/" activeClassName="active" onlyActiveOnIndex={true}><span className="glyphicon glyphicon-th"></span>  Overview</Link></button>
+          <Link to="/" activeClassName="active" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
           <button style={button}><Link to="/transactions" activeClassName="active"><span className="glyphicon glyphicon-th-list"></span>  Transactions</Link></button>
           <button style={button}><Link to="/budgets" activeClassName="active"><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</Link></button>
           <button style={button}><Link to="/trends" activeClassName="active"><span className="glyphicon glyphicon-stats"></span>  Trends</Link></button>

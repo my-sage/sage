@@ -8,16 +8,19 @@ const divStyle = {
 	marginLeft: "250px"
 }
 
+const float = {
+	float: 'right'
+}
 
 
 const TopNavbar = (
 	  <Navbar style={divStyle} fluid inverse fixedTop>
 	    <Navbar.Header>
 	      <Navbar.Brand>
-	        <a href="#">React-Bootstrap</a>
+	        <a>My Sage</a>
 	      </Navbar.Brand>
 	    </Navbar.Header>
-	    <Nav>
+	    <Nav style={float}>
 	      <NavItem eventKey={1} href="#">Link</NavItem>
 	      <NavItem eventKey={2} href="#">Link</NavItem>
 	      <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">

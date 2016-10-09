@@ -6,22 +6,22 @@ import { render } from 'react-dom';
 
 const divStyle = {
 	marginLeft: "250px",
-	textAlign: 'center'
+	position: 'relative'
 }
 
-const papaDiv = {
-	display: 'block'
+const middle = {
+	psotion: 'absolute',
+	margin: 'auto'
 }
 
 const BottomNavbar = (
-	<div style={papaDiv}>
 	  <Navbar style={divStyle} fixedBottom inverse fluid>
 	    <Navbar.Header>
 	      <Navbar.Brand>
 	        <a href="#">React-Bootstrap</a>
 	      </Navbar.Brand>
 	    </Navbar.Header>
-	    <Nav>
+	    <Nav style={middle}>
 	      <NavItem eventKey={1} href="#">Link</NavItem>
 	      <NavItem eventKey={2} href="#">Link</NavItem>
 	      <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
@@ -33,7 +33,6 @@ const BottomNavbar = (
 	      </NavDropdown>
 	    </Nav>
 	  </Navbar>
-	  </div>
 );
 
 render(BottomNavbar, document.getElementById('bottomNavbar'));

@@ -1,17 +1,19 @@
 import React from 'react';
 import {Link} from 'react-router'
+import {Tabs, Tab, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
+import SettingsTabs from './SettingsTabs'
 
 export default React.createClass({
 	render(){
 		return (
 			<div>
+			<div>
 			<h1>Settings</h1>
-				<ul>
-					<li><Link activeClassName="active" to="/settings/profile">Profile</Link></li>
-					<li><Link activeClassName="active" to="/settings/youraccounts">Your Accounts</Link></li>
-				</ul>
-				{this.props.children}
 			</div>
+				<div>
+					  <SettingsTabs/>
+			    </div>
+		    </div>
 		)
 	}
 })

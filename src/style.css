@@ -3,13 +3,13 @@ body {
 }
 
 .main {
-	padding: 42px 16px;
+	padding: 42px 36px;
 }
 
 .topNav {
 	background-color: black;
 }
 
-.active {
+.activeButton {
 	color:white;
 }
