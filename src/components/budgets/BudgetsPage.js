@@ -10,7 +10,6 @@ class BudgetPage extends Component {
     return (
     	<div>
 	    	<h1>Budgets</h1>
-	    	
 	      	<BudgetBlock budgets={this.props.budgets}/>
       	</div>
     )

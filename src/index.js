@@ -15,7 +15,6 @@ const state = R.pick(['budgets', 'transactions'], stateGen())
 state.budgets = [];
 
 const store = configureStore();
-console.log('initial store', store.getState())
 store.dispatch(loadBudgets());
 
 render(
