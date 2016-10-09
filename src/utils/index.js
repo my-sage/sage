@@ -29,3 +29,14 @@ export function createReducer(initialState, handlers) {
 export function dispatchFail(dispatch, action) {
   return  (err) => dispatch(action(err));
 }
+
+export function makeThunkCreator(asyncCall, fetchAction, successAction, failureAction) {
+  return () => (dispatch) => {
+    dispatch(fetchAction())
+    return asyncCall()
+    .then(data => {
+      dispatch(successAction(data))
+    })
+    .catch(dispatchFail(dispatch, failureAction))
+  }
+}
