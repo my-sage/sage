@@ -8,6 +8,7 @@ class TransactionModal extends Component {
 
 	constructor (props) {
 		super(props);
+
 		this.state = {
 			show: false,
 			transaction: Object.assign({}, this.props),
