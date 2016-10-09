@@ -9,14 +9,18 @@ class BudgetPage extends Component {
 
    render(){
     return (
-      <BudgetBlock budgets={this.props.budgets}/>
+    	<div>
+	    	<h1>Budgets</h1>
+	    	
+	      	<BudgetBlock budgets={this.props.budgets}/>
+      	</div>
     )
   }
 }
 
 //need to put things to validate in this object ex. courses: PropTypes.array.isRequired
 //this provides proptype validation
-BudgetPage.propTypes = {}
+BudgetPage.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
   return { budgets: state.budgets }
