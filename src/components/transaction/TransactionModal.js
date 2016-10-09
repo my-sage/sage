@@ -28,7 +28,7 @@ class TransactionModal extends Component {
   	let close = () => this.setState({show: false});
   	console.log('trying to get the props',this.props)
   	return (
-	  	<div className="modal-container" style={{height: 200}}>
+	  	<div className="modal-container" style={{height: 50}}>
 
 	  		<Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
 	  			Edit Panel

@@ -6,10 +6,10 @@ import TransactionModal from './TransactionModal'
 const TransactionSingle = ({date, merchantId, categoryId, amount, id}) => {
 	return (
 		<tr key={id}>
-			<td style={styles.dataStyle}>{date}</td>
-			<td style={styles.dataStyle}>{merchantId}</td>
-			<td style={styles.dataStyle}>{categoryId}</td>
-			<td style={styles.dataStyle}>$ {amount}</td>
+			<td style={styles.dataStyle}>Date: {date} |</td>
+			<td style={styles.dataStyle}>Merchant {merchantId} |</td>
+			<td style={styles.dataStyle}>Category {categoryId} |</td>
+			<td style={styles.dataStyle}>Amount ${amount} |</td>
 			<td style={styles.dataStyle}>
 				<TransactionModal merchantId={merchantId} categoryId={categoryId} date={date} amount={amount} id={id}/>
 			</td>
