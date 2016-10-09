@@ -1,20 +1,18 @@
 'use strict';
 import React, { Component } from 'react';
+import BudgetItem from './BudgetItem'
 
 class BudgetBlock extends Component {
   render(){
     const { data, isFetching } = this.props.budgets;
-
-    let budgets = data.map((budget, i) => {
-        return (
-          <li key={i}>{budget.name}</li>
-        )
-     });
+    let budgets = data.map((budget) => <BudgetItem key={budget.id} budget={budget}/>);
 
     return (
       <div>
-        <h1>Budgets</h1>
-        <ul>{ budgets }</ul>
+        <ul>
+          {budgets}
+        </ul>
+        {/*<BudgetItem budgets={budgets}/>*/}
       </div>
     )
   }
