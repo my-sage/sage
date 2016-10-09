@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 
 class BudgetBlock extends Component {
   render(){
+    const { data, isFetching } = this.props.budgets;
 
-    let budgets = this.props.budgets.map((budget, i) => {
+    let budgets = data.map((budget, i) => {
         return (
           <li key={i}>{budget.name}</li>
         )

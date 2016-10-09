@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import BudgetBlock from './BudgetBlock';
 
 class BudgetPage extends Component {
-
    render(){
     return (
       <BudgetBlock budgets={this.props.budgets}/>
