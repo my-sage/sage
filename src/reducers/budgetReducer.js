@@ -38,6 +38,6 @@ const isFetchingHandlers = {
 const isFetching= createReducer(budgets.isFetching, isFetchingHandlers)
 
 export default combineReducers({
-  data,
+  data, 
   isFetching
 });
