@@ -8,6 +8,8 @@ const divStyle = {
 	marginLeft: "250px"
 }
 
+
+
 const TopNavbar = (
 	  <Navbar style={divStyle} fluid inverse fixedTop>
 	    <Navbar.Header>

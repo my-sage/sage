@@ -3,24 +3,47 @@ import { Link, IndexLink } from 'react-router'
 import Overview from './overview/OverviewPage'
 import TopNavbar from './topNavbar/TopNavBar'
 import BottomNavBar from './bottomNavBar/BottomNavBar'
-import LeftNav from './leftNav/LeftNav'
+// import LeftNav from './leftNav/LeftNav'
 import Style from '../style.css'
+
+const divStyle = {
+    height: '100%',
+    width: '250px',
+    position: 'fixed',
+    zIndex: 1,
+    top: 0,
+    left: 0,
+    backgroundColor: '#34495C',
+    overflowX: 'hidden',
+    transition: '0.5s',
+    paddingTop: '60px'
+}
+
+const button = {
+  width: '100%',
+  padding: '35px 0px',
+  background: "transparent",
+  border: '2px solid white',
+  borderLeft: 'transparent',
+  color: 'white'
+
+}
 
 class App extends React.Component {
   render() {
     return (
-      
-      <div className="main">
-        <h1>My Sage</h1>
-        <ul role="nav">
-          <li><Link to="/" activeClassName="active" onlyActiveOnIndex={true}>Overview</Link></li>
-          <li><Link to="/transactions" activeClassName="active">Transactions</Link></li>
-          <li><Link to="/budgets" activeClassName="active">Budgets</Link></li>
-          <li><Link to="/trends" activeClassName="active">Trends</Link></li>
-          <li><Link to="/settings" activeClassName="active">Settings</Link></li>
-        </ul>
-        {this.props.children || <Overview/>}
-        </div>
+      <div>
+          <div style={divStyle}>
+                <button style={button}><Link to="/" activeClassName="active" onlyActiveOnIndex={true}><span className="glyphicon glyphicon-th"></span>  Overview</Link></button>
+                <button style={button}><Link to="/transactions" activeClassName="active"><span className="glyphicon glyphicon-th-list"></span>  Transactions</Link></button>
+                <button style={button}><Link to="/budgets" activeClassName="active"><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</Link></button>
+                <button style={button}><Link to="/trends" activeClassName="active"><span className="glyphicon glyphicon-stats"></span>  Trends</Link></button>
+                <button style={button}><Link to="/settings" activeClassName="active"><span className="glyphicon glyphicon-leaf"></span>  Settings</Link></button>\
+          </div>
+          <div className="main">
+            {this.props.children || <Overview/>}
+          </div>
+      </div>
     )
   }
 }
