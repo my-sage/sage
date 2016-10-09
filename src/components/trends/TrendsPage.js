@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router'
-import NavLink from './../TopHNavBar'
 
 export default React.createClass({
 	render(){

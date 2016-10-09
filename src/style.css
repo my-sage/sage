@@ -1,0 +1,16 @@
+body {
+	margin-left: 245px;
+}
+
+.main {
+	padding: 42px 16px;
+}
+
+.topNav {
+	background-color: black;
+}
+
+.active {
+	background-color: white;
+	color:black;
+}
