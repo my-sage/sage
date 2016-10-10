@@ -6,11 +6,11 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import stateGen from './static-state-generator';
 import routes from './routes';
-import R from 'ramda';
+import { getCurrentBudgets, updateBudget, deleteBudget } from './actions/budgetActions';
+import '../node_modules/toastr/build/toastr.min.css'
 
-const state = R.pick(['budgets', 'transactions'], stateGen())
-
-const store = configureStore(state);
+const store = configureStore();
+store.dispatch(getCurrentBudgets());
 
 render(
   <Provider store={store}>
