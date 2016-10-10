@@ -4,7 +4,7 @@ import {Tabs, Tab, Nav, NavItem} from 'react-bootstrap'
 export default React.createClass({
 	render(){
 		return (
-			<Tabs bsStyle="pills" justified activeKey={1}>
+			<Tabs justified defaultActiveKey={1}>
 			  <Tab eventKey={1} title="Cash & Credit">
 			  	<h3>Cash & Credit</h3>
 			  </Tab>
