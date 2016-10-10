@@ -23,7 +23,8 @@ const button = {
   padding: '35px 0px',
   background: "transparent",
   border: '2px solid white',
-  borderLeft: 'transparent'
+  borderLeft: 'transparent',
+  outline: 0
 }
 
 const logo = {
