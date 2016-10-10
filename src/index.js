@@ -24,6 +24,7 @@ console.log('STATE', state);
 
 const store = configureStore(state);
 store.dispatch(getCurrentBudgets());
+store.dispatch(updateBudget(7, { targetAmount: 450 }));
 
 render(
   <Provider store={store}>
