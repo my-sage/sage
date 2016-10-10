@@ -7,8 +7,8 @@ const Transaction = db.model('transaction');
 
 router.get('/', (req, res, next) => {
 	Merchant.findAll()
-		.then(categories => {
-			res.status(200).json(categories);
+		.then(merchants => {
+			res.status(200).json(merchants);
 		})
 		.catch(next);
 });
