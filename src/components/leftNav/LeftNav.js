@@ -23,20 +23,19 @@ const button = {
   background: "transparent",
   border: '2px solid white',
   borderLeft: 'transparent',
-  color: 'white'
-
 }
 
-const LeftNav = (
-	  <div style={divStyle}>
-          <Link to="/" activeClassName="active" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
-          <button style={button}><Link to="/transactions" activeClassName="active"><span className="glyphicon glyphicon-th-list"></span>  Transactions</Link></button>
-          <button style={button}><Link to="/budgets" activeClassName="active"><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</Link></button>
-          <button style={button}><Link to="/trends" activeClassName="active"><span className="glyphicon glyphicon-stats"></span>  Trends</Link></button>
-          <button style={button}><Link to="/settings" activeClassName="active"><span className="glyphicon glyphicon-leaf"></span>  Settings</Link></button>
-	  </div>
-);
+export default React.createClass ({
+     render(){
+          return (
+            <div style={divStyle}>
+               <Link to="/" activeClassName="active" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
+               <button style={button}><Link to="/transactions" activeClassName="active"><span className="glyphicon glyphicon-th-list"></span>  Transactions</Link></button>
+               <button style={button}><Link to="/budgets" activeClassName="active"><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</Link></button>
+               <button style={button}><Link to="/trends" activeClassName="active"><span className="glyphicon glyphicon-stats"></span>  Trends</Link></button>
+               <button style={button}><Link to="/settings" activeClassName="active"><span className="glyphicon glyphicon-leaf"></span>  Settings</Link></button>
+        </div>
+        )
+     }
 
-render(LeftNav, document.getElementById('leftNav'));
-
-export default LeftNav;
+})

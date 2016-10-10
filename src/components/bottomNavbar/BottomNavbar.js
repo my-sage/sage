@@ -5,20 +5,28 @@ import Bootstrap, {Navbar, NavItem, Nav, NavDropdown, MenuItem} from 'react-boot
 import { render } from 'react-dom';
 
 const divStyle = {
-	marginLeft: "250px",
-	textAlign: 'center'
+	paddingLeft: '44%',
+	// height: '1px'
 }
 
-const BottomNavbar = (
-	  <Navbar style={divStyle} fixedBottom inverse fluid>
-	    <Nav>
-	      <NavItem eventKey={1} href="#"> About Us </NavItem>
-	      <NavItem eventKey={2} href="#"> Help </NavItem>
-	      <NavItem eventKey={3} href="#"> Contact Us </NavItem>
-	    </Nav>
-	  </Navbar>
-);
+const navItem = {
+	padding: '0px'
+}
 
-render(BottomNavbar, document.getElementById('bottomNavbar'));
 
-export default BottomNavbar;
+export default React.createClass ({
+	render(){
+		return (
+			<Navbar style={divStyle} fixedBottom inverse fluid>
+			  <Nav>
+			    <NavItem style={navItem} eventKey={1} href="#"> About Us </NavItem>
+			    <NavItem style={navItem} eventKey={2} href="#"> Help </NavItem>
+			    <NavItem style={navItem} eventKey={3} href="#"> Contact Us </NavItem>
+			  </Nav>
+			</Navbar>
+		)
+	}
+})
+
+
+
