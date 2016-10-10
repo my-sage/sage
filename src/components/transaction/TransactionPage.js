@@ -1,20 +1,29 @@
 'use strict';
-import React ,{PropTypes} from 'react';
+import React ,{ Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import R from 'ramda';
-import TransactionNav from './TransactionNav';
-import TransactionTable from './TransactionTable';
+import TransactionTabs from './TransactionTabs'
+import TransactionHeader from './TransactionHeader'
 
-class TransactionPage extends React.Component {
+const TransactionHeaderStyle = {
+  float: "right"
+}
+
+class TransactionPage extends Component {
 
   render(){
     return (
       <div>
-        <h1>Transactions</h1>
-	      <TransactionNav></TransactionNav>
-        <TransactionTable transactions={this.props.transactions}/>
+        {/* <TransactionNav></TransactionNav> */}
+      <TransactionHeader/>
+        <div>
+          <h1>Transactions</h1>
+        </div>
+        <div>
+          <TransactionTabs transactions={this.props.transactions}/>
+        </div>
       </div>
     )
   }
