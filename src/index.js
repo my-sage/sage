@@ -18,6 +18,7 @@ state = R.merge(data, state)
 const store = configureStore(state);
 store.dispatch(getCurrentBudgets());
 store.dispatch(getAllTransactions());
+store.dispatch(updateBudget(1, {targetAmount: 500}));
 
 render(
   <Provider store={store}>

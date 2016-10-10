@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import {Modal, Button} from "react-bootstrap";
 import TransactionEditForm from "./TransactionEditForm";
+import * as TransactionActions from '../../actions/transactionActions';
 
 class TransactionModal extends Component {
 
@@ -17,6 +18,7 @@ class TransactionModal extends Component {
 			errors: {}
 		};
 		this.updateTransactionState = this.updateTransactionState.bind(this);
+    this.update = this.update.bind(this);
 	}
 
 	updateTransactionState(event) {
@@ -26,8 +28,15 @@ class TransactionModal extends Component {
 		return this.setState(transaction: transaction);
 	}
 
-  render () {
+  update() {
   	let close = () => this.setState({show: false});
+    const id = this.state.transaction.id, transaction = this.state.transaction;
+    console.log(this.props.actions.updateTransaction.toString());
+    this.props.actions.updateTransaction(id, transaction);
+    close();
+  }
+
+  render () {
   	return (
 	  	<div className="modal-container" style={{height: 40}}>
 
@@ -52,7 +61,7 @@ class TransactionModal extends Component {
 	  			</Modal.Body>
 
 	  			<Modal.Footer>
-	  				<Button onClick={close}>Save and Close</Button>
+	  				<Button onClick={this.update}>Save and Close</Button>
 	  			</Modal.Footer>
 
 	  		</Modal>
@@ -93,7 +102,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({}, dispatch)
+    actions: bindActionCreators(TransactionActions, dispatch)
   }
 }
 
