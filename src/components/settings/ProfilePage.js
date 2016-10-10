@@ -8,7 +8,6 @@ export default React.createClass({
 		return (
 			<div>
 				<h3>Profile</h3>
-				<p>OKOKOKOK</p>
 		    </div>
 		)
 	}
