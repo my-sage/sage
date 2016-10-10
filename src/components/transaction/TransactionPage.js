@@ -27,7 +27,7 @@ TransactionPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  return { transactions: state.transactions }
+  return { transactions: state.transactions.data }
 }
 
 function mapDispatchToProps(dispatch) {

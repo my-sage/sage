@@ -3,10 +3,12 @@
 export default {
   budgets: {
     data: [],
-    isFetching: false
+    isFetching: false,
+    errorMessage: null
   },
   transactions: {
     data: [],
-    isFetching: false
+    isFetching: false,
+    errorMessage: null
   }
 }
