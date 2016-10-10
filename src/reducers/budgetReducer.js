@@ -3,22 +3,26 @@
 import { combineReducers } from 'redux';
 import * as actions from '../actions/constants/budgetActionTypes';
 import { createReducer } from '../utils';
-import { evolve, map, filter } from 'ramda';
+import { evolve, map, curry } from 'ramda';
 import initialState from './initialState';
 
 const { budgets } = initialState;
 
 const dataHandlers = {
-  [actions.CREATE_BUDGET](state, action) {
-    return state;
-  },
-  [actions.DELETE_BUDGET](state, action) {
-    return state.filter(budget => budget);
-  },
   [actions.FETCH_BUDGETS_SUCCESS](state, action) {
-    console.log(action.budgets);
     return action.budgets;
-  }
+  },
+  [actions.CREATE_BUDGET_SUCCESS](state, action) {
+    return [...state, action.budget];
+  },
+  [actions.DELETE_BUDGET_SUCCESS](state, action) {
+    return state.filter(budget => budget.id !== action.budget.id);
+  },
+  [actions.UPDATE_BUDGET_SUCCESS](state, action) {
+    const update = curry((updatedBudget, oldBudget) => 
+      oldBudget.id === updatedBudget.id ? updatedBudget : oldBudget)
+    return map(update(action.budget), state)
+  },
 };
 
 const data = createReducer(budgets.data, dataHandlers);
@@ -30,14 +34,29 @@ const isFetchingHandlers = {
   [actions.FETCH_BUDGETS_SUCCESS](state, action) {
     return false;
   },
-  [actions.FETCH_BUDGETS_FAIL](state, action) {
+  [actions.API_FAIL](state, action) {
     return false;
   }
-}
+};
 
-const isFetching= createReducer(budgets.isFetching, isFetchingHandlers)
+const isFetching= createReducer(budgets.isFetching, isFetchingHandlers);
+
+const errorMessageHandlers = {
+  [actions.FETCH_BUDGETS_REQUEST](state, action) {
+    return null;
+  },
+  [actions.FETCH_BUDGETS_SUCCESS](state, action) {
+    return null;
+  },
+  [actions.API_FAIL](state, action) {
+    return action.message;
+  }
+};
+
+const errorMessage = createReducer(budgets.errorMessage, errorMessageHandlers);
 
 export default combineReducers({
   data, 
-  isFetching
+  isFetching,
+  errorMessage
 });

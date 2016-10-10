@@ -4,12 +4,37 @@ import * as budgetApi from '../api/budget';
 import * as actions from './constants/budgetActionTypes';
 import { makeActionCreator, makeThunkCreator } from '../utils';
 
-export const createBudget = makeActionCreator(actions.CREATE_BUDGET, 'budget');
 export const deleteBudget = makeActionCreator(actions.DELETE_BUDGET, 'id');
-export const updateBudget = makeActionCreator(actions.UPDATE_BUDGET, 'id', 'budget');
 export const fetchBudgets = makeActionCreator(actions.FETCH_BUDGETS_REQUEST);
 export const fetchBudgetsSuccess = makeActionCreator(actions.FETCH_BUDGETS_SUCCESS, 'budgets');
-export const fetchBudgetsFail = makeActionCreator(actions.FETCH_BUDGETS_FAIL, 'error');
+export const createBudgetSuccess = makeActionCreator(actions.CREATE_BUDGET_SUCCESS, 'budget');
+export const deleteBudgetSuccess = makeActionCreator(actions.DELETE_BUDGET_SUCCESS, 'budget');
+export const updateBudgetSuccess = makeActionCreator(actions.UPDATE_BUDGET_SUCCESS, 'id', 'budget');
+export const apiFail = makeActionCreator(actions.API_FAIL, 'error');
 
 //thunk actions
-export const loadBudgets = makeThunkCreator(budgetApi.getAllBudgets, fetchBudgets, fetchBudgetsSuccess, fetchBudgetsFail);
+export const getCurrentBudgets = makeThunkCreator(budgetApi.getCurrentBudgets
+, fetchBudgets
+, fetchBudgetsSuccess
+, apiFail);
+
+export const createBudget = makeThunkCreator(budgetApi.createBudget
+, false
+, createBudgetSuccess
+, apiFail);
+
+export const deleteBudget = makeThunkCreator(budgetApi.deleteBudget
+, false
+, deleteBudgetSuccess
+, apiFail);
+
+// updateBudget :: (budgetId, budget) 
+export const updateBudget = makeThunkCreator(budgetApi.updateBudget
+, false
+, updateBudgetSuccess
+, apiFail);
+
+//helper functions
+export const getBudgets = (state) => state.data;
+export const getIsFetching = (state) => state.isFetching;
+export const getErrorMessage = (state) => state.errorMessage;

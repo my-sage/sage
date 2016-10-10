@@ -31,9 +31,9 @@ export function dispatchFail(dispatch, action) {
 }
 
 export function makeThunkCreator(asyncCall, fetchAction, successAction, failureAction) {
-  return () => (dispatch) => {
-    dispatch(fetchAction())
-    return asyncCall()
+  return (asyncArg) => (dispatch) => {
+    if(fetchAction) dispatch(fetchAction())
+    return asyncCall(asyncArg)
     .then(data => {
       dispatch(successAction(data))
     })
