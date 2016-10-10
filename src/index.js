@@ -12,10 +12,10 @@ import $ from 'jquery';
 import R from 'ramda';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const state = R.pick(['budgets', 'transactions','merchants','categories'], stateGen())
+const state = R.pick(['budgets', 'transactions', 'categories', 'merchants'], stateGen())
 state.budgets = [];
-
-const store = configureStore();
+console.log(state);
+const store = configureStore(state);
 console.log('initial store', store.getState())
 store.dispatch(loadBudgets());
 

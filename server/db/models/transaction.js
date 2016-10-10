@@ -73,6 +73,26 @@ options.instanceMethods = {
 
 options.hooks = {
 
+  beforeUpdate: function(transaction) {
+    return transaction.getCurrentBudget()
+      .then(budget => {
+        if(budget) {
+          budget.currentAmount = budget.currentAmount + transaction.amount;
+          return budget.save();
+        }
+      });
+  },
+
+  afterUpdate: function(transaction) {
+    return transaction.getCurrentBudget()
+     .then(budget => {
+        if(budget) {
+          budget.currentAmount = budget.currentAmount - transaction.amount;
+          return budget.save();
+        }
+     });
+  },
+
   afterCreate: function(transaction) {
     let updatingAccount = transaction.getAccount()
       .then(account => {
