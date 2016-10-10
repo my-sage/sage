@@ -1,14 +1,19 @@
 'use strict';
 
 import React, {Component} from 'react';
+import TransactionModal from './TransactionModal'
 
-const TransactionSingle = ({date, merchant, category, amount, onChange, id}) => {
+const TransactionSingle = ({date, merchantId, categoryId, amount, id}) => {
+	const transaction = {date,merchantId,categoryId,amount,id}
 	return (
 		<tr key={id}>
-			<td style={styles.dataStyle} contentEditable='true'>{date}</td>
-			<td style={styles.dataStyle} contentEditable='true'>{merchant}</td>
-			<td style={styles.dataStyle}>{category}</td>
-			<td style={styles.dataStyle}>$ {amount}</td>
+			<td style={styles.dataStyle}>Date: {date} |</td>
+			<td style={styles.dataStyle}>Merchant {merchantId} |</td>
+			<td style={styles.dataStyle}>Category {categoryId} |</td>
+			<td style={styles.dataStyle}>Amount ${amount} |</td>
+			<td style={styles.dataStyle}>
+				<TransactionModal transaction={transaction}/>
+			</td>
 		</tr>
 	)
 };

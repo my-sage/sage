@@ -1,20 +1,29 @@
 'use strict';
-import React from 'react';
+import React ,{ Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
+import R from 'ramda';
+import TransactionTabs from './TransactionTabs'
+import TransactionHeader from './TransactionHeader'
 
-class TransactionPage extends React.Component {
+const TransactionHeaderStyle = {
+  float: "right"
+}
+
+class TransactionPage extends Component {
 
   render(){
     return (
       <div>
-        <h1>Transactions</h1>
-        <ul>
-          <li><Link activeClassName="active" to="/transactions/type">Type</Link></li>
-          <li><Link activeClassName="active" to="/transactions/accounts">Accounts</Link></li>
-          <li><Link activeClassName="active" to="/transactions/tags">Tags</Link></li>
-        </ul>
+        {/* <TransactionNav></TransactionNav> */}
+      <TransactionHeader/>
+        <div>
+          <h1>Transactions</h1>
+        </div>
+        <div>
+          <TransactionTabs transactions={this.props.transactions}/>
+        </div>
       </div>
     )
   }
@@ -22,10 +31,12 @@ class TransactionPage extends React.Component {
 
 //need to put things to validate in this object ex. courses: PropTypes.array.isRequired
 //this provides proptype validation
-TransactionPage.propTypes = {};
+TransactionPage.propTypes = {
+  transactions: PropTypes.array.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
-  return { transactions: state.transactions }
+  return { transactions: state.transactions.data }
 }
 
 function mapDispatchToProps(dispatch) {

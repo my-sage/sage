@@ -5,8 +5,9 @@ import TransactionSingle from './TransactionSingle';
 const TransactionTable = ({transactions}) => {
 	return (
 		<table>
+			<tbody>
 			{transactions.map(transaction=>TransactionSingle(transaction))}
-			{/*<TransactionSingle {...transactions[0]}/>*/}
+			</tbody>
 		</table>
 	)
 };

@@ -8,8 +8,21 @@ import stateGen from './static-state-generator';
 import routes from './routes';
 import { getCurrentBudgets, updateBudget, deleteBudget } from './actions/budgetActions';
 import '../node_modules/toastr/build/toastr.min.css'
+import R from 'ramda';
 
-const store = configureStore();
+const data = R.pick(['budgets', 'transactions', 'categories', 'merchants'], stateGen())
+let state = {};
+state.budgets = {};
+state.transactions = {
+	data: data.transactions,
+	isFetching: false,
+}
+state = R.merge(data, state)
+
+console.log('STATE', state);
+
+
+const store = configureStore(state);
 store.dispatch(getCurrentBudgets());
 
 render(
