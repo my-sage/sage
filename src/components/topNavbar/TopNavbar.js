@@ -16,11 +16,6 @@ export default React.createClass ({
 	render(){
 		return (
 			<Navbar style={divStyle} fluid inverse fixedTop>
-			  <Navbar.Header>
-			    <Navbar.Brand>
-			      <a>My Sage</a>
-			    </Navbar.Brand>
-			  </Navbar.Header>
 			  <Nav style={float}>
 			    <NavItem eventKey={1} href="#">Link</NavItem>
 			    <NavItem eventKey={2} href="#">Link</NavItem>
