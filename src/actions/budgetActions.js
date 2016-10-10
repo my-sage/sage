@@ -7,8 +7,8 @@ import { makeActionCreator, makeThunkCreator } from '../utils';
 export const fetchBudgets = makeActionCreator(actions.FETCH_BUDGETS_REQUEST);
 export const fetchBudgetsSuccess = makeActionCreator(actions.FETCH_BUDGETS_SUCCESS, 'budgets');
 export const createBudgetSuccess = makeActionCreator(actions.CREATE_BUDGET_SUCCESS, 'budget');
-export const deleteBudgetSuccess = makeActionCreator(actions.DELETE_BUDGET_SUCCESS, 'budget');
-export const updateBudgetSuccess = makeActionCreator(actions.UPDATE_BUDGET_SUCCESS, 'id', 'budget');
+export const deleteBudgetSuccess = makeActionCreator(actions.DELETE_BUDGET_SUCCESS, 'deletedBudgetId');
+export const updateBudgetSuccess = makeActionCreator(actions.UPDATE_BUDGET_SUCCESS, 'budget');
 export const apiFail = makeActionCreator(actions.API_FAIL, 'error');
 
 //thunk actions
@@ -33,7 +33,3 @@ export const updateBudget = makeThunkCreator(budgetApi.updateBudget
 , updateBudgetSuccess
 , apiFail);
 
-//helper functions
-export const getBudgets = (state) => state.data;
-export const getIsFetching = (state) => state.isFetching;
-export const getErrorMessage = (state) => state.errorMessage;

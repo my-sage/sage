@@ -60,13 +60,14 @@ router.put('/:budgetId', (req, res, next) => {
 });
 
 router.delete('/:budgetId', (req, res, next) => {
+  const budgetId = req.params.budgetId;
 	Budget.destroy({
 		where: {
-			id: req.params.budgetId
+			id: budgetId
 		}
 	})
-		.then(deletedBudget => {
-			res.status(202).json(deletedBudget)
+		.then(() => {
+			res.status(202).json(budgetId)
 		})
 		.catch(next)
 });
