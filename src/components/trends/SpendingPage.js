@@ -5,7 +5,7 @@ export default React.createClass({
 	render(){
 		return (
 			<div>
-				<h1>Spending</h1>
+				<h3>Spending</h3>
 		    </div>
 		)
 	}
