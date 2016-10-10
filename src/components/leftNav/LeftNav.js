@@ -22,19 +22,21 @@ const button = {
   padding: '35px 0px',
   background: "transparent",
   border: '2px solid white',
-  borderLeft: 'transparent',
+  borderLeft: 'transparent'
 }
 
 export default React.createClass ({
      render(){
           return (
-            <div style={divStyle}>
-               <Link to="/" activeClassName="active" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
-               <button style={button}><Link to="/transactions" activeClassName="active"><span className="glyphicon glyphicon-th-list"></span>  Transactions</Link></button>
-               <button style={button}><Link to="/budgets" activeClassName="active"><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</Link></button>
-               <button style={button}><Link to="/trends" activeClassName="active"><span className="glyphicon glyphicon-stats"></span>  Trends</Link></button>
-               <button style={button}><Link to="/settings" activeClassName="active"><span className="glyphicon glyphicon-leaf"></span>  Settings</Link></button>
-        </div>
+            <div>
+              <div style={divStyle}>
+                 <Link to="/" activeClassName="active" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
+                 <Link to="/transactions" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-th-list"></span>  Transactions</button></Link>
+                 <Link to="/budgets" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</button></Link>
+                 <Link to="/trends" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-stats"></span>  Trends</button></Link>
+                 <Link to="/settings" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-leaf"></span>  Settings</button></Link>
+               </div>
+            </div>
         )
      }
 
