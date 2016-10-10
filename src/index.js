@@ -19,9 +19,6 @@ state.transactions = {
 }
 state = R.merge(data, state)
 
-console.log('STATE', state);
-
-
 const store = configureStore(state);
 store.dispatch(getCurrentBudgets());
 

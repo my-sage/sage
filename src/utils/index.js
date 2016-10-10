@@ -32,7 +32,8 @@ const createBinaryHandlers = curry((truthyFn, falseyFn, handlers) => {
     makeFalseHandler = (type) => [type, (state, action) => falseyFn()],
     trueHandlers = fromPairs(map(makeTrueHandler, handlers.truthy)),
     falseHandlers = fromPairs(map(makeFalseHandler, handlers.falsey));
-  return merge(trueHandlers, falseHandlers);
+  let res = merge(trueHandlers, falseHandlers);
+  return res;
 });
 
 export const createFetchingHandlers = createBinaryHandlers(T, F)
