@@ -3,6 +3,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Link, IndexLink } from 'react-router'
+import Logo from '../../images/logo.png'
 
 const divStyle = {
     height: '100%',
@@ -14,7 +15,7 @@ const divStyle = {
     backgroundColor: '#34495C',
     overflowX: 'hidden',
     transition: '0.5s',
-    paddingTop: '60px'
+    paddingTop: '20px'
 }
 
 const button = {
@@ -25,11 +26,13 @@ const button = {
   borderLeft: 'transparent'
 }
 
+
 export default React.createClass ({
      render(){
           return (
             <div>
               <div style={divStyle}>
+              <img src={Logo} style={{marginLeft: "10px", marginBottom:"20px", maxWidth: "230px"}}/>
                  <Link to="/" activeClassName="active" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
                  <Link to="/transactions" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-th-list"></span>  Transactions</button></Link>
                  <Link to="/budgets" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</button></Link>

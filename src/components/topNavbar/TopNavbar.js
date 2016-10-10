@@ -16,11 +16,6 @@ export default React.createClass ({
 	render(){
 		return (
 			<Navbar style={divStyle} fluid inverse fixedTop>
-			  <Navbar.Header>
-			    <Navbar.Brand>
-			      <a>My Sage</a>
-			    </Navbar.Brand>
-			  </Navbar.Header>
 			  <Nav style={float}>
 			    <NavItem eventKey={1} href="#">Link</NavItem>
 			    <NavItem eventKey={2} href="#">Link</NavItem>
@@ -37,3 +32,26 @@ export default React.createClass ({
 		)
 	}
 })
+
+
+
+// <div className="navbar navbar-default navbar-fixed-top inverse" role="navigation">
+//       <div className="container">
+//         <div className="navbar-header">
+//           <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+//             <span className="sr-only">Toggle navigation</span>
+//             <span className="icon-bar"></span>
+//             <span className="icon-bar"></span>
+//             <span className="icon-bar"></span>
+//           </button>
+//           <a className="navbar-brand" href="#">Project name</a>
+//         </div>
+//         <div className="navbar-collapse collapse">
+//           <ul className="nav navbar-nav">
+//             <li className="active"><a href="#">Home</a></li>
+//             <li><a href="#about">About</a></li>
+//             <li><a href="#contact">Contact</a></li>
+//           </ul>
+//         </div>
+//       </div>
+//   </div>
