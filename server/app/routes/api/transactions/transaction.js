@@ -3,6 +3,8 @@ const router = express.Router();
 
 const db = require('../../../../db');
 const Transaction = db.model('transaction');
+const Merchant =  db.model('merchant');
+const Category = db.model('category');
 
 router.get('/', (req, res, next) => {
 	//startDate, endDate, merchantId, categoryId
@@ -12,8 +14,10 @@ router.get('/', (req, res, next) => {
 	if(merchantId) filter.merchantId = merchantId;
 	if(categoryId) filter.categoryId = categoryId;
 	Transaction.findAll({
-		where: filter
+		where: filter,
+		include: [Category, Merchant]
 	}).then(transactions => {
+		console.log('getting all transactions',transactions)
 		res.status(200).json(transactions);
 	})
 		.catch(next);

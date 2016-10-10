@@ -29,7 +29,7 @@ class TransactionModal extends Component {
   render () {
   	let close = () => this.setState({show: false});
   	return (
-	  	<div className="modal-container" style={{height: 50}}>
+	  	<div className="modal-container" style={{height: 40}}>
 
 	  		<Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
 	  			Edit Panel
