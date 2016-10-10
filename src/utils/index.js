@@ -31,12 +31,14 @@ export function dispatchFail(dispatch, action) {
 }
 
 export function makeThunkCreator(asyncCall, fetchAction, successAction, failureAction) {
-  return (asyncArg) => (dispatch) => {
-    if(fetchAction) dispatch(fetchAction())
-    return asyncCall(asyncArg)
-    .then(data => {
-      dispatch(successAction(data))
-    })
-    .catch(dispatchFail(dispatch, failureAction))
-  }
-}
+  return (asyncArg1, asyncArg2) => {
+    let asyncArgs = [].slice.call(arguments);
+    return (dispatch) => {
+      if(fetchAction) dispatch(fetchAction())
+      return asyncCall(asyncArg1, asyncArg2)
+      .then(data => {
+        dispatch(successAction(data))
+      })
+      .catch(dispatchFail(dispatch, failureAction))
+    }
+}}

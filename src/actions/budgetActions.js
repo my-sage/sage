@@ -4,7 +4,6 @@ import * as budgetApi from '../api/budget';
 import * as actions from './constants/budgetActionTypes';
 import { makeActionCreator, makeThunkCreator } from '../utils';
 
-export const deleteBudget = makeActionCreator(actions.DELETE_BUDGET, 'id');
 export const fetchBudgets = makeActionCreator(actions.FETCH_BUDGETS_REQUEST);
 export const fetchBudgetsSuccess = makeActionCreator(actions.FETCH_BUDGETS_SUCCESS, 'budgets');
 export const createBudgetSuccess = makeActionCreator(actions.CREATE_BUDGET_SUCCESS, 'budget');

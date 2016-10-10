@@ -6,7 +6,7 @@ import { parseJSON, getData } from '../../utils';
 const BASE_URL = process.env.URL || 'http://localhost:1337';
 
 export const createBudget = 
-  (budget) => axios.post(`${BASE_URL}/api/budgets`).then(getData);
+  (budget) => axios.post(`${BASE_URL}/api/budgets`, budget).then(getData);
 
 export const getTransactionsByBudgetId = 
   (id) => axios.get(`${BASE_URL}/api/budgets/${id}`).then(getData);

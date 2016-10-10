@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import stateGen from './static-state-generator';
 import routes from './routes';
-import { getCurrentBudgets } from './actions/budgetActions';
+import { getCurrentBudgets, updateBudget } from './actions/budgetActions';
 import '../node_modules/toastr/build/toastr.min.css'
 import $ from 'jquery';
 import R from 'ramda';
@@ -16,6 +16,9 @@ state.budgets = [];
 
 const store = configureStore();
 store.dispatch(getCurrentBudgets());
+store.dispatch(updateBudget(1, {
+  targetAmount: 100,
+}));
 
 render(
   <Provider store={store}>
