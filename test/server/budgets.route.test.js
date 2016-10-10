@@ -166,7 +166,7 @@ describe('Budgets API Routes', () => {
 				.expect(202)
 				.end((err, response) => {
 					if (err) return done(err);
-					expect(response.body).to.equal(1);
+					expect(+response.body).to.equal(1);
 					done();
 				});
 		});
