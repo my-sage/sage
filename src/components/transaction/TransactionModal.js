@@ -92,7 +92,28 @@ const formatForDropdown = (data) => ({
   text: data.name
 })
 
-const mapStateToProps = compose(map(map(formatForDropdown)), pick(['categories', 'merchants']))
+// const mapStateToProps = compose(map(map(formatForDropdown)), pick(['categories', 'merchants']))
+function mapStateToProps(state, ownProps) {
+
+	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
+		return {
+			value: category.id,
+			text: category.name
+		};
+	});
+
+	const MerchantsFormattedForDropdown = state.merchants.map(merchant => {
+		return {
+			value: merchant.id,
+			text: merchant.name
+		};
+	});  
+
+  return { 
+  	categories: CategoriesFormattedForDropdown,
+  	merchants: MerchantsFormattedForDropdown
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return {

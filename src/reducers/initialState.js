@@ -10,5 +10,10 @@ export default {
     data: [],
     isFetching: false,
     errorMessage: null
+  },
+  categories: {
+    data: [],
+    isFetching: false,
+    errorMessage: null
   }
 }
