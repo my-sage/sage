@@ -13,7 +13,7 @@ class TrendsPage extends Component {
 				<div>
 					<h1>Trends</h1>
 				</div>
-				{/*<TrendsTabs/>*/}
+				<TrendsTabs/>
 				{/*SPENDING // INCOME OVER TIME*/}
 				<VerticalBarGraph data={this.props.transactions} groupBy="fullDate"/>
 				<VerticalBarGraph data={this.props.transactions} groupBy="month" />
