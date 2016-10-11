@@ -9,7 +9,7 @@ import TransactionHeader from './TransactionHeader'
 
 const TransactionHeaderStyle = {
   float: "right"
-}
+};
 
 class TransactionPage extends Component {
 

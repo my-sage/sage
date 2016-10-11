@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router'
 import {Tabs, Tab} from 'react-bootstrap'
-import Spending from './SpendingPage'
 
 export default React.createClass({
 	render(){
@@ -9,7 +8,6 @@ export default React.createClass({
 
 				  <Tabs defaultActiveKey={1}>
 				    <Tab eventKey={1} title="Spending">
-				    	<Spending/>
 				    </Tab>
 				    <Tab eventKey={2} title="Income">
 				    </Tab>
