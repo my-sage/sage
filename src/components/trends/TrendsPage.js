@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import TrendsTabs from './TrendsTabs'
 import VerticalBarGraph from './VerticalBarGraph';
+import PieChart from './PieChart';
 
 class TrendsPage extends Component {
 	render() {
@@ -17,6 +18,7 @@ class TrendsPage extends Component {
 				<VerticalBarGraph data={this.props.transactions} groupBy="fullDate"/>
 				<VerticalBarGraph data={this.props.transactions} groupBy="month" />
 				<VerticalBarGraph data={this.props.transactions} groupBy="year"/>
+				<PieChart data={this.props.transactions} groupBy="month"/>
 				{/*SPENDING BY MERCHANT*/}
 				{/*<HorizontalBarGraph data={this.props.transactions} groupBy="merchant"/>*/}
 				{/*SPENDING BY CATEGORY*/}
