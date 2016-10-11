@@ -19,8 +19,7 @@ fields.date = {
   allowNull: false
 };
 
-
-fields.note = {
+fields.type = {
   type: Sequelize.STRING,
   allowNull: false,
   defaultValue: 'no comment'
@@ -45,7 +44,6 @@ options.classMethods = {
             return createdTransaction
           })
       })
-
   }
 };
 
