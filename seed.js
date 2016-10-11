@@ -136,7 +136,7 @@ function seedBudget() {
 
 // ----------------------------------Transaction Seed-----------------------------------------------//
 
-let randomNote = [
+let randomType = [
 	'general spending',
 	'short term loan',
 	'long term loan',
@@ -166,7 +166,7 @@ let randomTransaction = (accountId,status) => {
 	return {
 		amount: amount,
 		date: randomDate2MonthsAway(),
-		note: _.sample(randomNote),
+		type: _.sample(randomType),
 		accountId: accountId,
 		categoryId: _.random(1, numCategories),
 		merchantId: _.random(1, numMerchants)
