@@ -18,7 +18,7 @@ class TransactionPage extends Component {
     return (
       <div>
         {/* <TransactionNav></TransactionNav> */}
-      <TransactionHeader/>
+      {/*<TransactionHeader/>*/}
         <div>
           <h1>Transactions</h1>
         </div>
