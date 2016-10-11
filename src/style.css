@@ -17,3 +17,7 @@ body {
 /*.active {
 	color:white;
 }*/
+
+.selected {
+	color: white;
+}

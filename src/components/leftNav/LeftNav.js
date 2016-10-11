@@ -3,6 +3,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Link, IndexLink } from 'react-router'
+import Logo from '../../images/logo.png'
 
 const divStyle = {
     height: '100%',
@@ -14,7 +15,7 @@ const divStyle = {
     backgroundColor: '#34495C',
     overflowX: 'hidden',
     transition: '0.5s',
-    paddingTop: '60px'
+    paddingTop: '20px'
 }
 
 const button = {
@@ -22,7 +23,14 @@ const button = {
   padding: '35px 0px',
   background: "transparent",
   border: '2px solid white',
-  borderLeft: 'transparent'
+  borderLeft: 'transparent',
+  outline: 0
+}
+
+const logo = {
+  marginLeft: "10px", 
+  marginBottom:"20px", 
+  maxWidth: "230px"
 }
 
 export default React.createClass ({
@@ -30,11 +38,12 @@ export default React.createClass ({
           return (
             <div>
               <div style={divStyle}>
-                 <Link to="/" activeClassName="active" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
-                 <Link to="/transactions" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-th-list"></span>  Transactions</button></Link>
-                 <Link to="/budgets" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</button></Link>
-                 <Link to="/trends" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-stats"></span>  Trends</button></Link>
-                 <Link to="/settings" activeClassName="active"><button style={button}><span className="glyphicon glyphicon-leaf"></span>  Settings</button></Link>
+              <img src={Logo} style={logo}/>
+                 <Link to="/" activeClassName="selected" onlyActiveOnIndex={true}><button style={button}><span className="glyphicon glyphicon-th"></span>  Overview</button></Link>
+                 <Link to="/transactions" activeClassName="selected"><button style={button}><span className="glyphicon glyphicon-th-list"></span>  Transactions</button></Link>
+                 <Link to="/budgets" activeClassName="selected"><button style={button}><span className="glyphicon glyphicon-exclamation-sign"></span>  Budgets</button></Link>
+                 <Link to="/trends" activeClassName="selected"><button style={button}><span className="glyphicon glyphicon-stats"></span>  Trends</button></Link>
+                 <Link to="/settings" activeClassName="selected"><button style={button}><span className="glyphicon glyphicon-leaf"></span>  Settings</button></Link>
                </div>
             </div>
         )
