@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Modal, Button} from "react-bootstrap";
 import TransactionEditForm from "./TransactionEditForm";
 import * as TransactionActions from '../../actions/transactionActions';
+import { pick, compose, map } from 'ramda';
 
 class TransactionModal extends Component {
 
@@ -19,6 +20,8 @@ class TransactionModal extends Component {
 		};
 		this.updateTransactionState = this.updateTransactionState.bind(this);
     this.update = this.update.bind(this);
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
 	}
 
 	updateTransactionState(event) {
@@ -29,22 +32,29 @@ class TransactionModal extends Component {
 	}
 
   update() {
-  	let close = () => this.setState({show: false});
     const id = this.state.transaction.id, transaction = this.state.transaction;
     console.log(this.props.actions.updateTransaction.toString());
     this.props.actions.updateTransaction(id, transaction);
-    close();
+    this.close();
+  }
+
+  close() {
+    this.setState({show: false});
+  }
+
+  open() {
+    this.setState({show: true});
   }
 
   render () {
   	return (
 	  	<div className="modal-container" style={{height: 40}}>
 
-	  		<Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
+	  		<Button bsStyle="primary" bsSize="large" onClick={this.open}>
 	  			Edit Panel
 	  		</Button>
 
-	  		<Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
+	  		<Modal show={this.state.show} onHide={this.close} container={this} aria-labelledby="contained-modal-title">
 	  			
 	  			<Modal.Header closeButton>
 	  				<Modal.Title id="Contained-modal-title">Transaction Management</Modal.Title>
@@ -77,28 +87,12 @@ TransactionModal.propTypes = {
   merchants: PropTypes.array.isRequired
 };
 
+const formatForDropdown = (data) => ({
+  value: data.id,
+  text: data.name
+})
 
-function mapStateToProps(state, ownProps) {
-
-	const CategoriesFormattedForDropdown = state.categories.map(category => {
-		return {
-			value: category.id,
-			text: category.name
-		};
-	});
-
-	const MerchantsFormattedForDropdown = state.merchants.map(merchant => {
-		return {
-			value: merchant.id,
-			text: merchant.name
-		};
-	});  
-
-  return { 
-  	categories: CategoriesFormattedForDropdown,
-  	merchants: MerchantsFormattedForDropdown
-  }
-}
+const mapStateToProps = compose(map(map(formatForDropdown)), pick(['categories', 'merchants']))
 
 function mapDispatchToProps(dispatch) {
   return {
