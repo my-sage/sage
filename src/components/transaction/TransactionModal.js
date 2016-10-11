@@ -25,9 +25,10 @@ class TransactionModal extends Component {
 	}
 
 	updateTransactionState(event) {
+    const coerceToInt = (maybeInt) => isNaN(+maybeInt) ? maybeInt : +maybeInt;
 		const field = event.target.name;
 		let transaction = this.state.transaction;
-		transaction[field] = event.target.value;
+		transaction[field] = coerceToInt(event.target.value);
 		return this.setState(transaction: transaction);
 	}
 
@@ -102,7 +103,7 @@ function mapStateToProps(state, ownProps) {
 		};
 	});
 
-	const MerchantsFormattedForDropdown = state.merchants.map(merchant => {
+	const MerchantsFormattedForDropdown = state.merchants.data.map(merchant => {
 		return {
 			value: merchant.id,
 			text: merchant.name

@@ -46,7 +46,6 @@ const errorMessageHandlers = createErrorHandlers({
 
 const errorMessage = createReducer(categories.errorMessage, errorMessageHandlers);
 
-
 export default combineReducers({
   data, 
   isFetching,

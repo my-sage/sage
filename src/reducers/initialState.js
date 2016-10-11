@@ -15,5 +15,10 @@ export default {
     data: [],
     isFetching: false,
     errorMessage: null
+  },
+  merchants: {
+    data: [],
+    isFetching: false,
+    errorMessage: null
   }
 }
