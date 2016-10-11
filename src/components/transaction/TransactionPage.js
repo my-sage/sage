@@ -3,9 +3,10 @@ import React ,{ Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import R from 'ramda';
+import { compose, pick, prop } from 'ramda';
 import TransactionTabs from './TransactionTabs'
 import TransactionHeader from './TransactionHeader'
+import * as TransactionActions from '../../actions/transactionActions';
 
 const TransactionHeaderStyle = {
   float: "right"
@@ -17,7 +18,7 @@ class TransactionPage extends Component {
     return (
       <div>
         {/* <TransactionNav></TransactionNav> */}
-      <TransactionHeader/>
+      {/*<TransactionHeader/>*/}
         <div>
           <h1>Transactions</h1>
         </div>
@@ -35,14 +36,8 @@ TransactionPage.propTypes = {
   transactions: PropTypes.array.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
-  return { transactions: state.transactions.data }
-}
+const mapStateToProps = (state) => ({ transactions: state.transactions.data })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({}, dispatch)
-  }
-}
+const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(TransactionActions, dispatch)});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionPage);

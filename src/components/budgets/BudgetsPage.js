@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import BudgetBlock from './BudgetBlock';
+import { pick } from 'ramda';
 
 class BudgetPage extends Component {
    render(){
@@ -20,9 +21,7 @@ class BudgetPage extends Component {
 //this provides proptype validation
 BudgetPage.propTypes = {};
 
-function mapStateToProps(state, ownProps) {
-  return { budgets: state.budgets }
-}
+const mapStateToProps = pick(['budgets']);
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -32,4 +32,3 @@ export const updateBudget = makeThunkCreator(budgetApi.updateBudget
 , false
 , updateBudgetSuccess
 , apiFail);
-

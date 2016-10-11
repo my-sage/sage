@@ -22,8 +22,9 @@ const button = {
   width: '100%',
   padding: '35px 0px',
   background: "transparent",
-  border: '2px solid white',
+  border: '1px solid white',
   borderLeft: 'transparent',
+  borderRight: 'transparent',
   outline: 0
 }
 
