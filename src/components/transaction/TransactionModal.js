@@ -34,7 +34,6 @@ class TransactionModal extends Component {
 
   update() {
     const id = this.state.transaction.id, transaction = this.state.transaction;
-    console.log(this.props.actions.updateTransaction.toString());
     this.props.actions.updateTransaction(id, transaction);
     this.close();
   }
