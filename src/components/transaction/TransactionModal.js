@@ -71,7 +71,7 @@ TransactionModal.propTypes = {
 
 function mapStateToProps(state, ownProps) {
 
-	const CategoriesFormattedForDropdown = state.categories.map(category => {
+	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
 		return {
 			value: category.id,
 			text: category.name
