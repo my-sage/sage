@@ -2,6 +2,7 @@ import React from 'react';
 import {Tabs, Tab, NavDropdown, MenuItem, Row, Col, NavItem, Nav} from 'react-bootstrap'
 import TypeTabs from './TypeTabs'
 import TransactionTable from './TransactionTable'
+import Filter from '../shared/FilterContainer'
 
 
 export default React.createClass({
@@ -32,6 +33,7 @@ export default React.createClass({
 					            </NavDropdown>
 					          </Nav>
 					        </Col>
+					        <Filter/>
 					        <Col sm={12}>
 					          <Tab.Content animation>
 
