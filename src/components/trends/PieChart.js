@@ -7,7 +7,14 @@ import {composeData} from '../../utils/graphUtils';
 const PieChart = ({data, groupBy}) => {
 	const composedData = composeData(groupBy)(data);
 	return (
-			<VictoryPie data={composedData} colorScale={"qualitative"} innerRadius={140} height={300} width={700}/>
+		<div className="col-md-offset-4 col-md-6">
+			<VictoryPie
+				data={composedData}
+				colorScale={"qualitative"}
+				labelComponent={<VictoryTooltip pointerLength={0}/>}
+				labelRadius={10}
+			/>
+		</div>
 	)
 };
 

@@ -9,8 +9,10 @@ const SpendingPage = ({transactions, categories, merchants}) => {
 	const enhancedTransactions = enhanceTransactions(spendingData);
 	return (
 		<div>
-			{/*<PieChart data={enhancedTransactions} groupBy="month"/>*/}
+			<h1>Spending By Day</h1>
 			<VerticalBarGraph data={enhancedTransactions} groupBy="fullDate"/>
+			<h1>Spending By Merchant</h1>
+			<PieChart data={enhancedTransactions} groupBy="merchantName" />
 		</div>
 	)
 };

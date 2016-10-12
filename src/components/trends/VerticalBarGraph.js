@@ -11,7 +11,7 @@ const VerticalBarGraph = ({data, groupBy}) => {
 		<VictoryChart theme={VictoryTheme.material} width={600} domainPadding={25}>
 			<VictoryAxis fixLabelOverlap={true}/>
 			<VictoryAxis dependentAxis={true} tickFormat={(y) => `$${y}`}/>
-			<VictoryBar data={composedData} labelComponent={<VictoryTooltip/>} style={{data: {width: barWidth(composedData)}}}/>
+			<VictoryBar data={composedData} labelComponent={<VictoryTooltip/>} style={{data: {width: barWidth(composedData), fill: '#2ecc71'}}}/>
 		</VictoryChart>
 	)
 };

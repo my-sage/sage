@@ -9,7 +9,10 @@ const IncomePage = ({transactions, categories, merchants}) => {
 	const enhancedTransactions = enhanceTransactions(incomeData);
 	return (
 		<div>
+			<h1>Income by Day</h1>
 			<VerticalBarGraph data={enhancedTransactions} groupBy="fullDate"/>
+			<h1>Income By Source</h1>
+			<PieChart data={enhancedTransactions} groupBy="merchantName" />
 		</div>
 	)
 };
