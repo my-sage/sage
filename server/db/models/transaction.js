@@ -2,6 +2,7 @@
 
 const Sequelize = require('sequelize');
 const db = require('../_db');
+const { map } = require('ramda');
 const Account = require('./account');
 const Merchant = require('./merchant');
 const Category = require('./category');
@@ -44,6 +45,10 @@ options.classMethods = {
             return createdTransaction
           })
       })
+  },
+  bulkCreateWithMerchant: function(transactions) {
+    console.log(transactions);
+    return Promise.all(map(this.createOrFindWithMerchant.bind(this), transactions))
   }
 };
 
@@ -57,15 +62,15 @@ options.instanceMethods = {
     let currentUnixTime = new Date().valueOf();
     return this.getCategory()
       .then(category => {
-        return category.getBudgets({
+        return category ? category.getBudgets({
           where: {
             endDate: {
               $gt: currentUnixTime
             }
           }
-        })
+        }) : [false]
       })
-      .then(budgets => budgets[0])
+      .get(0)
   }
 };
 
@@ -74,7 +79,7 @@ options.hooks = {
   beforeUpdate: function(transaction) {
     return transaction.getCurrentBudget()
       .then(budget => {
-        if(budget) {
+        if (budget) {
           budget.currentAmount = budget.currentAmount + transaction.amount;
           return budget.save();
         }
@@ -83,12 +88,12 @@ options.hooks = {
 
   afterUpdate: function(transaction) {
     return transaction.getCurrentBudget()
-     .then(budget => {
-        if(budget) {
+      .then(budget => {
+        if (budget) {
           budget.currentAmount = budget.currentAmount - transaction.amount;
           return budget.save();
         }
-     });
+      });
   },
 
   afterCreate: function(transaction) {
@@ -106,7 +111,7 @@ options.hooks = {
         }
       });
 
-    return Promise.all([updatingAccount,updatingBudget])
+    return Promise.all([updatingAccount, updatingBudget])
   }
 };
 
