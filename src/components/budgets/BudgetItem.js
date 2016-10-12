@@ -14,10 +14,13 @@ class BudgetItem extends Component {
     //  });
     // {console.log(this.props.budgets)}
 
+    let dt = new Date(endDate*1000);
+    let formattedDate = ('0' + dt.getDate()).slice(-2) + '/' + ('0' + (dt.getMonth() + 1)).slice(-2) + '/' + dt.getFullYear() + ' ' + ('0' + dt.getHours()).slice(-2) + ':' + ('0' + dt.getMinutes()).slice(-2);
+
     return (
         
         <li>
-        <p>Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {endDate} | Category: {category.name}
+        <p>Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {formattedDate} | Category: {category.name}
         <BudgetUpdateModal budget={this.props.budget} style={{display: "inline-block"}}/></p>
         <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
         </li>
