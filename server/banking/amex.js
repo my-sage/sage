@@ -83,10 +83,9 @@ let getAmex = (user, accId, password, start, end) => {
   })
 }
 
+// const start = 20160101,
+  // end = 20161005;
 
-const start = 20160101,
-  end = 20161005;
-
-getAmex('', '', '', start, end);
+// getAmex('', '', '', start, end);
 
 module.exports = getAmex;

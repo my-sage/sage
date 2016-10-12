@@ -137,12 +137,10 @@ function seedBudget() {
 // ----------------------------------Transaction Seed-----------------------------------------------//
 
 let randomType = [
-	'general spending',
-	'short term loan',
-	'long term loan',
-	'family spending',
-	'basic spending',
-	'Miscellaneous expense'
+	'DEBIT',
+	'CREDIT',
+	'TRANSFER',
+	'DEPOSIT'
 ];
 
 let randomDateGen = (monthsAway) =>
@@ -169,7 +167,8 @@ let randomTransaction = (accountId,status) => {
 		type: _.sample(randomType),
 		accountId: accountId,
 		categoryId: _.random(1, numCategories),
-		merchantId: _.random(1, numMerchants)
+    merchantId: _.random(1, numMerchants),
+    fitid: _.sample(['1', '2', '3', '4'])
 	}
 }
 
@@ -206,7 +205,7 @@ function seedTransaction() {
   let transactionObjs = creatingTransactionCredit.concat(creatingTransactionNonCredit);
 
   transactionObjs = _.flatten(transactionObjs)
-  return promiseNester(Transaction.create.bind(Transaction),transactionObjs)
+  return promiseNester(Transaction.upsert.bind(Transaction),transactionObjs)
 }
 
 // ----------------------------------Datebase Sync-------------------------------------------------//

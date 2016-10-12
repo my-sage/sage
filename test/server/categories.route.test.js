@@ -19,11 +19,11 @@ describe('Categories API Routes', () => {
 
 	const merchant2 = {name: 'Open Market', categoryId: 2};
 
-	const transaction1 = {amount: -100.00, date: Date.now(), note: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction1 = {amount: -100.00, fitid: '1234', date: Date.now(), note: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction2 = {amount: -40, date: Date.now() - 1000, note: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction2 = {amount: -40, fitid: '92834', date: Date.now() - 1000, note: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction3 = {amount: -10, date: Date.now() - 2000, note: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
+	const transaction3 = {amount: -10, fitid: '98341', date: Date.now() - 2000, note: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
 
 	beforeEach('Sync DB', () => db.sync({force: true}));
 
