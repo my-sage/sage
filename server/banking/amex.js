@@ -41,7 +41,7 @@ const parseBankRes = curry((startDate, endDate, accountId, res) => {
   , getDate = compose(parseAmexDate, prop('DTPOSTED'))
   , getBal = compose(prop('BALAMT'), prop('LEDGERBAL'), getUsefulData)
   , rawTransactions = getTransacs(res)
-    parseTransaction = (raw) => ({
+  , parseTransaction = (raw) => ({
       transaction: {
         date: getDate(raw),
         fitid: getId(raw),
@@ -62,25 +62,21 @@ const parseBankRes = curry((startDate, endDate, accountId, res) => {
 });
 
 const postRes = (res) => {
+  console.log(res);
   return Transaction.bulkCreateWithMerchant(res.transactions)
 };
 
 const parseAndPostRes = (start, end, accountId) => 
   compose(postRes, parseBankRes(start, end, accountId));
 
-let getAmex = (user, accId, password, start, end) => {
+let getAmex = (user, accId, password, start, end, accountInstance) => {
   const amexInstance = amexBank(user, accId, password);
   amexInstance.getStatement = promisify(amexInstance.getStatement.bind(amexInstance));
-  Account.find({
-    where: {
-      name
-    }
-  }).then(account => {
-    amexInstance
+  console.log('LALA');
+  return amexInstance
     .getStatement({start, end})
-        .then(res => parseAndPostRes(start, end, account.id)(res))
-        .catch(handleBankError)
-  })
+        .then(res => parseAndPostRes(start, end, accountInstance.id)(res))
+        .catch(console.log)
 }
 
 // const start = 20160101,
