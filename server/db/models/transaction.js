@@ -20,6 +20,11 @@ fields.date = {
   allowNull: false
 };
 
+fields.fitid = {
+  type: Sequelize.STRING,
+  allowNull: false
+};
+
 fields.type = {
   type: Sequelize.STRING,
   allowNull: false,
@@ -47,8 +52,16 @@ options.classMethods = {
       })
   },
   bulkCreateWithMerchant: function(transactions) {
-    console.log(transactions);
-    return Promise.all(map(this.createOrFindWithMerchant.bind(this), transactions))
+    const createOnlyWhenUnique = (transaction) => {
+      let { fitid } = transaction
+      this.find({
+        where: {
+          fitid
+        }
+      })
+      .then(found => !found ? this.createOrFindWithMerchant : found)
+    }
+    return Promise.map(transactions, createOnlyWhenUnique)
   }
 };
 
@@ -97,11 +110,12 @@ options.hooks = {
   },
 
   afterCreate: function(transaction) {
-    let updatingAccount = transaction.getAccount()
-      .then(account => {
-        account.balance = account.balance + transaction.amount;
-        return account.save()
-      });
+
+    // let updatingAccount = transaction.getAccount()
+      // .then(account => {
+        // account.balance = account.balance + transaction.amount;
+        // return account.save()
+      // });
 
     let updatingBudget = transaction.getCurrentBudget()
       .then(budget => {
@@ -111,8 +125,15 @@ options.hooks = {
         }
       });
 
-    return Promise.all([updatingAccount, updatingBudget])
+    return updatingBudget;
   }
 };
+
+options.indexes = [
+  {
+    unique: true,
+    fields: ['fitid']
+  }
+]
 
 module.exports = db.define('transaction', fields, options);

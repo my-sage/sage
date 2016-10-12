@@ -17,11 +17,11 @@ describe('Budgets API Routes', () => {
 
 	const merchant2 = {name: 'Open Market', categoryId: 2};
 
-	const transaction1 = {amount: -100.00, date: Date.now().valueOf(), note: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction1 = {amount: -100.00, fitid: '1234',  date: Date.now().valueOf(), note: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction2 = {amount: -40, date: Date.now().valueOf(), note: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction2 = {amount: -40, fitid: '98234', date: Date.now().valueOf(), note: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction3 = {amount: -10, date: Date.now().valueOf(), note: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
+	const transaction3 = {amount: -10, fitid: '98294', date: Date.now().valueOf(), note: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
 
 	const budget1 = {name: 'MyBudget', targetAmount: 200, type: 'Spending', categoryId: 1};
 
