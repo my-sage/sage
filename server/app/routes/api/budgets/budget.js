@@ -3,6 +3,7 @@ const router = express.Router();
 
 const db = require('../../../../db');
 const Budget = db.model('budget');
+const Category = db.model('category');
 
 router.get('/', (req, res, next) => {
 	//startDate, endDate, categoryId
@@ -11,7 +12,8 @@ router.get('/', (req, res, next) => {
 	if (startDate && endDate) filter.endDate = {$between: [startDate, endDate]};
 	if(categoryId) filter.categoryId = categoryId;
 	Budget.findAll({
-		where: filter
+		where: filter,
+		include: [Category]
 	}).then(budgets => {
 		res.status(200).json(budgets);
 	})
@@ -53,6 +55,9 @@ router.put('/:budgetId', (req, res, next) => {
 		.then(budget => {
 			return budget.update(req.body);
 		})
+    .then(budget => {
+      return budget.reload();
+    })	
 		.then(budget => {
 			res.status(200).json(budget);
 		})

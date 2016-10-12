@@ -6,7 +6,7 @@ import BudgetUpdateModal from './BudgetUpdateModal'
 class BudgetItem extends Component {
   render(){
 
-    const {name, currentAmount, targetAmount, endDate} = this.props.budget;
+    const {name, currentAmount, targetAmount, endDate, category} = this.props.budget;
     // let budgets = this.props.budgets.map((budget, i) => {
     //     return (
     //       <li key={i}>Name: {budget.name} | Currrent: {budget.currentAmount} | Max Amount: {budget.targetAmount} | Expiration: {budget.endDate}</li>
@@ -17,8 +17,8 @@ class BudgetItem extends Component {
     return (
         
         <li>
-        <p>Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {endDate}
-        <BudgetUpdateModal budget={this.props.budget} /></p>
+        <p>Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {endDate} | Category: {category.name}
+        <BudgetUpdateModal budget={this.props.budget} style={{display: "inline-block"}}/></p>
         <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
         </li>
         

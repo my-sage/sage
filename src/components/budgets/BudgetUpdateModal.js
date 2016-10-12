@@ -51,9 +51,9 @@ class BudgetUpdateModal extends Component {
   render () {
   	let close = () => this.setState({show: false});
   	return (
-	  	<div className="modal-container" style={{height: 50}}>
+	  	<div className="modal-container" style={{height: 50, display: "inline-block"}}>
 
-	  		<Button bsStyle="primary" bsSize="large" onClick={this.open}>
+	  		<Button bsStyle="primary" bsSize="small" onClick={this.open} style={{margin: 10}}>
            Edit Panel
 	  		</Button>
 
