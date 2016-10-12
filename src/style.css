@@ -17,3 +17,42 @@ body {
 /*.active {
 	color:white;
 }*/
+
+
+ .buttoncss {
+    width: 100%;
+    padding: 35px 0px;
+    background: transparent;
+    border: 0px solid transparent;
+    border-left: transparent;
+    border-right: transparent;
+    outline: 0;
+    color: white;
+}
+
+.selected {
+	background-color: #22303D;
+	padding: 39px 0% 41px 0%;
+	font-weight: bold;
+	color: #1B9D81;
+}
+
+
+.buttoncss:hover {
+	background: #22303D;
+}
+
+.selectbuttoncss:hover {
+	background: #22303D;	
+}
+
+.selectbuttoncss {
+	background: white;
+	max-height: 100px;
+	max-width: 200px;	
+}
+
+.selectimage {
+	max-height: 100px;
+	max-width: 200px;		
+}

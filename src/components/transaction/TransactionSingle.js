@@ -11,7 +11,6 @@ const TransactionSingle = ({date, merchantId, categoryId, amount, id, category, 
 
 	return (
 		<tr key={id} style={{border: "1px solid black"}}>
-			<td>{id}</td>
 			<td style={styles.dataStyle}>{formattedDate}</td>
 			<td style={styles.dataStyle}>{merchant.name}</td>
 			<td style={styles.dataStyle}>{category.name}</td>
@@ -27,9 +26,9 @@ const TransactionSingle = ({date, merchantId, categoryId, amount, id, category, 
 
 const styles = {
 	dataStyle: {
-		paddingRight: '5'
+		// paddingRight: '5'
 		// border: "1px solid #ddd",
-		// "text-align": "center"
+		textAlign: "center"
 	}
 };
 
