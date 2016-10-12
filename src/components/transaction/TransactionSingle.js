@@ -5,8 +5,7 @@ import TransactionModal from './TransactionModal';
 
 const TransactionSingle = ({date, merchantId, categoryId, amount, id, category, merchant}) => {
 	const transaction = {date,merchantId,categoryId,amount,id}  //with out the category and merchant name
-
-    let dt = new Date(date*1000);
+    let dt = new Date(+date);
     let formattedDate = ('0' + dt.getDate()).slice(-2) + '/' + ('0' + (dt.getMonth() + 1)).slice(-2) + '/' + dt.getFullYear() + ' ' + ('0' + dt.getHours()).slice(-2) + ':' + ('0' + dt.getMinutes()).slice(-2);
 
 	return (
