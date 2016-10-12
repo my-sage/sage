@@ -1,9 +1,14 @@
 import React, {PropTypes} from 'react';
 
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
+	
+	const labelVerify = (label) => {
+		if(label) return <label htmlFor={name}>{label}</label>
+	}
+
 	return (
 		<div className="form-group">
-			<label htmlFor={name}>{label}</label>
+			{labelVerify(label)}
 			<div className="field">
 				<select style={{width: 300}}
 					name={name}
