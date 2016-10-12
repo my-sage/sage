@@ -5,7 +5,7 @@ import Bootstrap, {Navbar, NavItem, Nav, NavDropdown, MenuItem} from 'react-boot
 import { render } from 'react-dom';
 
 const divStyle = {
-	marginLeft: "249px"
+	marginLeft: "247px"
 }
 
 const float = {

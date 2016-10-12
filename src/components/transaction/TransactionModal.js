@@ -72,7 +72,7 @@ class TransactionModal extends Component {
 	  			</Modal.Body>
 
 	  			<Modal.Footer>
-	  				<Button onClick={this.update}>Save and Close</Button>
+	  				<Button bsStyle="success" onClick={this.update}>Save and Close</Button>
 	  			</Modal.Footer>
 
 	  		</Modal>

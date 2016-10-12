@@ -32,11 +32,11 @@ export default React.createClass ({
             <div>
               <div style={styles.divStyle}>
               <img src={Logo} style={styles.logo}/>
-                 <Link to="/" activeClassName="selected" onlyActiveOnIndex={true}><button className="buttoncss"><i className="fa fa-tachometer" aria-hidden="true"></i>&nbsp; &nbsp; Overview</button></Link>
-                 <Link to="/transactions" activeClassName="selected"><button className="buttoncss"><i className="fa fa-money" aria-hidden="true"></i>&nbsp; &nbsp; Transactions</button></Link>
-                 <Link to="/budgets" activeClassName="selected"><button className="buttoncss"><span className="glyphicon glyphicon-exclamation-sign"></span> &nbsp; &nbsp; Budgets</button></Link>
-                 <Link to="/trends" activeClassName="selected"><button className="buttoncss"><i className="fa fa-line-chart" aria-hidden="true"></i> &nbsp; &nbsp; Trends</button></Link>
-                 <Link to="/settings" activeClassName="selected"><button className="buttoncss"><span className="glyphicon glyphicon-leaf"></span> &nbsp; &nbsp; Settings</button></Link>
+                 <Link to="/" activeClassName="selected" onlyActiveOnIndex={true}><button className="buttoncss"><i className="fa fa-tachometer" aria-hidden="true"></i> &nbsp; Overview</button></Link>
+                 <Link to="/transactions" activeClassName="selected"><button className="buttoncss"><i className="fa fa-money" aria-hidden="true"></i> &nbsp; Transactions</button></Link>
+                 <Link to="/budgets" activeClassName="selected"><button className="buttoncss"><i className="fa fa-tasks" aria-hidden="true"></i>  &nbsp; Budgets</button></Link>
+                 <Link to="/trends" activeClassName="selected"><button className="buttoncss"><i className="fa fa-line-chart" aria-hidden="true"></i>  &nbsp; Trends</button></Link>
+                 <Link to="/settings" activeClassName="selected"><button className="buttoncss"><span className="glyphicon glyphicon-leaf"></span>  &nbsp; Settings</button></Link>
                </div>
             </div>
         )

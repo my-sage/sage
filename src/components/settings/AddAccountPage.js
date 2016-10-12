@@ -12,7 +12,6 @@ import CAPITAL from '../../images/selectCAPITAL.png'
 import PNC from '../../images/selectPNC.png'
 import Radium from 'radium'
 
-
 const styles = {
   button: {
    	backgroundColor: 'transparent',
