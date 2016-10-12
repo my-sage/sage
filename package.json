@@ -61,7 +61,8 @@
     "redux-immutable-state-invariant": "^1.2.3",
     "redux-thunk": "2.0.1",
     "sequelize": "^3.24.3",
-    "toastr": "2.1.2"
+    "toastr": "2.1.2",
+    "victory": "^0.12.1"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",

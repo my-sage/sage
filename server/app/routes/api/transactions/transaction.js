@@ -24,7 +24,6 @@ router.get('/', (req, res, next) => {
       where: filter,
       include: [Category, Merchant]
     }).then(transactions => {
-      console.log('getting all transactions', transactions)
       res.status(200).json(transactions);
     })
     .catch(next);

@@ -10,7 +10,7 @@ import * as TransactionActions from '../../actions/transactionActions';
 
 const TransactionHeaderStyle = {
   float: "right"
-}
+};
 
 class TransactionPage extends Component {
 
