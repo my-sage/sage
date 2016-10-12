@@ -1,8 +1,6 @@
-'use strict';
+import React, {PropTypes} from 'react';
 
-import React, { PropTypes } from 'react';
-
-const DropdownInput = ({name, label, onChange, defaultOption, value, error, options}) => {
+const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
 	return (
 		<div className="form-group">
 			<label htmlFor={name}>{label}</label>
@@ -24,14 +22,13 @@ const DropdownInput = ({name, label, onChange, defaultOption, value, error, opti
 	);
 };
 
-DropdownInput.propTypes = {
+SelectInput.propTypes = {
 	name: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	defaultOption: PropTypes.string,
-	value: PropTypes.number,
 	error: PropTypes.number,
 	options: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default DropdownInput;
+export default SelectInput;

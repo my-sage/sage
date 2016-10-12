@@ -9,7 +9,7 @@ import * as BudgetActions from '../../actions/budgetActions';
 import BudgetEditForm from './BudgetEditForm';
 import { pick } from 'ramda';
 
-class BudgetCreateModal extends Component {
+class BudgetUpdateModal extends Component {
 
 	constructor (props) {
 		super(props);
@@ -36,7 +36,7 @@ class BudgetCreateModal extends Component {
 
   update() {
     const newbudget = this.state.budget;
-    this.props.actions.createBudget(newbudget);
+    this.props.actions.updateBudget(this.state.budget.id,newbudget);
     this.close();
   }	
 
@@ -54,7 +54,7 @@ class BudgetCreateModal extends Component {
 	  	<div className="modal-container" style={{height: 50}}>
 
 	  		<Button bsStyle="primary" bsSize="large" onClick={this.open}>
-          + Create Budget
+           Edit Panel
 	  		</Button>
 
 	  		<Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
@@ -86,13 +86,11 @@ class BudgetCreateModal extends Component {
   }
 };
 
-BudgetCreateModal.propTypes = {
+BudgetUpdateModal.propTypes = {
   categories: PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
-
-	let initialBudget = {name: "",targetAmount: 0, endDate: 0, categoryId: "",type: ""}
  
 	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
 		return {
@@ -108,7 +106,6 @@ function mapStateToProps(state, ownProps) {
 
 	return {
 		categories: CategoriesFormattedForDropdown,
-		budget: initialBudget,
 		typeBudgets: typeBudgets
 	}
 }
@@ -119,4 +116,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(BudgetCreateModal)
+export default connect(mapStateToProps,mapDispatchToProps)(BudgetUpdateModal)

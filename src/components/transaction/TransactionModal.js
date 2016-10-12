@@ -87,10 +87,10 @@ TransactionModal.propTypes = {
   merchants: PropTypes.array.isRequired
 };
 
-const formatForDropdown = (data) => ({
-  value: data.id,
-  text: data.name
-})
+// const formatForDropdown = (data) => ({
+//   value: data.id,
+//   text: data.name
+// })
 
 // const mapStateToProps = compose(map(map(formatForDropdown)), pick(['categories', 'merchants']))
 function mapStateToProps(state, ownProps) {

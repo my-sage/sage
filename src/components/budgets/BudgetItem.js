@@ -1,6 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
-import BudgetBar from './BudgetBar'
+import BudgetBar from './BudgetBar';
+import BudgetUpdateModal from './BudgetUpdateModal'
 
 class BudgetItem extends Component {
   render(){
@@ -16,7 +17,8 @@ class BudgetItem extends Component {
     return (
         
         <li>
-        Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {endDate}
+        <p>Name: {name} | Currrent: {currentAmount} | Max Amount: {targetAmount} | Expiration: {endDate}
+        <BudgetUpdateModal budget={this.props.budget} /></p>
         <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
         </li>
         

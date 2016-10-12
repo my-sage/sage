@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import BudgetItem from './BudgetItem'
 import { Button, Row, Col, Grid } from 'react-bootstrap';
+import BudgetCreateModal from './BudgetCreateModal';
 
 class BudgetBlock extends Component {
   render(){
@@ -12,7 +13,7 @@ class BudgetBlock extends Component {
       <Grid>
         <Row>
           <Col sm={6} md={3}>
-            <Button bsStyle="primary">+ Create Budget</Button>
+            <BudgetCreateModal />
           </Col>
         </Row>
         <Row>
