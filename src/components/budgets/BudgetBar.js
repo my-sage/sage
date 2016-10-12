@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Bootstrap, {ProgressBar} from 'react-bootstrap'
 
 const howFilled = (currentAmount, targetAmount) => {
-    return ((targetAmount - currentAmount) / targetAmount) * 100
+    return ((targetAmount - Math.abs(currentAmount)) / targetAmount) * 100
 }
 
 
