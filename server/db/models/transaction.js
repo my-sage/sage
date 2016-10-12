@@ -6,6 +6,7 @@ const { map } = require('ramda');
 const Account = require('./account');
 const Merchant = require('./merchant');
 const Category = require('./category');
+const Promise = require('bluebird');
 
 const fields = {};
 const options = {};
@@ -53,13 +54,13 @@ options.classMethods = {
   },
   bulkCreateWithMerchant: function(transactions) {
     const createOnlyWhenUnique = (transaction) => {
-      let { fitid } = transaction
+      let { fitid } = transaction.transaction
       this.find({
         where: {
           fitid
         }
       })
-      .then(found => !found ? this.createOrFindWithMerchant : found)
+      .then(found => !found ? this.createOrFindWithMerchant(transaction) : found)
     }
     return Promise.map(transactions, createOnlyWhenUnique)
   }
