@@ -18,7 +18,7 @@ const groupByProp = (prop) => R.groupBy(transaction => transaction[prop]);
 const reduceToSum = (sum, transaction) => _.round(sum + transaction.amount, 2);
 const mapOverData = R.mapObjIndexed(R.reduce(reduceToSum, 0));
 const formattingFunction = (value, key) => {
-	return {x: key, y: Math.abs(value), label: key}
+	return {x: key, y: Math.abs(value), label: `${key}: $${value}`}
 };
 const formatData = (transactionData) => {
 	const result = [];
