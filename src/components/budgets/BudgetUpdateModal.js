@@ -9,6 +9,10 @@ import * as BudgetActions from '../../actions/budgetActions';
 import BudgetEditForm from './BudgetEditForm';
 import { pick } from 'ramda';
 
+const button = {
+	float:'right'
+}
+
 class BudgetUpdateModal extends Component {
 
 	constructor (props) {
@@ -53,8 +57,8 @@ class BudgetUpdateModal extends Component {
   	return (
 	  	<div className="modal-container" style={{height: 50, display: "inline-block"}}>
 
-	  		<Button bsStyle="primary" bsSize="small" onClick={this.open} style={{margin: 10}}>
-           Edit Panel
+	  		<Button bsStyle="primary" bsSize="small" onClick={this.open} style={button}>
+           	Edit Panel
 	  		</Button>
 
 	  		<Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
@@ -76,7 +80,7 @@ class BudgetUpdateModal extends Component {
           </Modal.Body>
 
 	  			<Modal.Footer>
-	  				<Button onClick={this.update}>Save and Close</Button>
+	  				<Button bsStyle='success' onClick={this.update}>Save and Close</Button>
 	  			</Modal.Footer>
 
 	  		</Modal>
