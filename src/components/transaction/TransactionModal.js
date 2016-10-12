@@ -51,8 +51,8 @@ class TransactionModal extends Component {
   	return (
 	  	<div className="modal-container" style={{height: 40}}>
 
-	  		<Button bsStyle="primary" bsSize="large" onClick={this.open}>
-	  			Edit Panel
+	  		<Button bsStyle="primary" bsSize="xsmall" onClick={this.open}>
+	  			<i className="fa fa-pencil" aria-hidden="true"></i>
 	  		</Button>
 
 	  		<Modal show={this.state.show} onHide={this.close} container={this} aria-labelledby="contained-modal-title">

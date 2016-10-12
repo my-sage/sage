@@ -8,13 +8,12 @@ const TransactionTable = ({transactions}) => {
 	return (
 		<Table striped bordered condensed hover responsive>
 			<thead>
-				<tr>
-					<th>#</th>
-					<th>Date</th>
-					<th>Merchant</th>
-					<th>Category</th>
-					<th>Amount</th>
-					<th>Edit</th>
+				<tr style={headerBar}>
+					<th style={header}>Date</th>
+					<th style={header}>Merchant</th>
+					<th style={header}>Category</th>
+					<th style={header}>Amount</th>
+					<th style={header}>Edit</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,8 +23,17 @@ const TransactionTable = ({transactions}) => {
 	)
 };
 
-var tableStyle = {
-      "border": "1px solid black"
+const tableStyle = {
+      broder: "1px solid black"
 };
+
+const header = {
+	textAlign: "center"
+}
+
+const headerBar = {
+	background: "#34495C",
+	color:'white'
+}
 
 export default TransactionTable
