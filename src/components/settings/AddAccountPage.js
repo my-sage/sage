@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router'
-import {Grid, Row, Col, Thumbnail, Button} from 'react-bootstrap'
+import {Grid, Row, Col, Button, Panel} from 'react-bootstrap'
 import BoA from '../../images/selectBOA.png'
 import AMEX from '../../images/selectAMEX.png'
 import WELLS from '../../images/selectWELLS.png'
@@ -9,12 +9,16 @@ import CITI from '../../images/selectCITI.png'
 import TD from '../../images/selectTD.png'
 import CHARLES from '../../images/selectCHARLES.png'
 import CAPITAL from '../../images/selectCAPITAL.png'
+import PNC from '../../images/selectPNC.png'
 import Radium from 'radium'
 
 
 const styles = {
   button: {
    	backgroundColor: 'transparent',
+  },
+  panel: {
+  	boxShadow: "5px 5px 7px grey"
   },
   image: {
   	maxHeight: '100px',
@@ -26,49 +30,57 @@ const styles = {
   grid: {
   	marginTop: "45px"
   },
+  tableTitle: {
+  	marginBottom: "20px",
+  	fontStyle: "italic"
+  },
+  h4: {
+  	marginTop: '0px'
+  }
 }
-
 
 const AddAccountPage = (props) => {
 		return (
 			<div>
 				<div>
 					<h3>Add Account</h3>
-					<h5 style={{textAlign:"center"}}>Select your bank</h5>
 			    </div>
 			    <div>
 			    	<Grid style={styles.grid}>
+			    	<Row style={styles.tableTitle}>
+			    		<h4 style={styles.h4}>Select your bank</h4>
+			    	</Row>
 			    	  <Row style={styles.row} >
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={BoA}/></Button>
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={BoA}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
-			    	  	<Button style={styles.button}><img style={styles.image} src={AMEX}/></Button>  
+			    	  	<Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={AMEX}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={WELLS}/></Button>  
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={WELLS}/></Button></Panel>  
 			    	  </Col>
 			    	  </Row>
 			    	  <Row style={styles.row} >
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={CHASE}/></Button>  
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CHASE}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={CITI}/></Button>  
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CITI}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={TD}/></Button>  
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={TD}/></Button></Panel>  
 			    	  </Col>
 			    	  </Row>
 			    	  <Row style={styles.row} >
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={CHARLES}/></Button>  
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CHARLES}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={CAPITAL}/></Button>  
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CAPITAL}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
-			    	    <Button style={styles.button}><img style={styles.image} src={TD}/></Button>  
+			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={PNC}/></Button></Panel>  
 			    	  </Col>
 			    	  </Row>
 			    	</Grid>
