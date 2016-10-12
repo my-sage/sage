@@ -23,6 +23,7 @@ class BudgetItem extends Component {
         <Panel>
         <li style={style.li}>
         <p><b>Name:</b> {name} <b>| Currrent:</b> {currentAmount} <b>| Max Amount:</b> {targetAmount} <b>| Expiration:</b> {formattedDate} <b>| Category: </b>{category.name}
+        <br></br>
         <BudgetUpdateModal budget={this.props.budget}/></p>
         <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
         </li> 

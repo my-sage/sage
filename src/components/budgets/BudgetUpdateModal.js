@@ -10,7 +10,7 @@ import BudgetEditForm from './BudgetEditForm';
 import { pick } from 'ramda';
 
 const button = {
-	float:'right'
+	marginRight:'100px'
 }
 
 class BudgetUpdateModal extends Component {
@@ -57,7 +57,7 @@ class BudgetUpdateModal extends Component {
   	return (
 	  	<div className="modal-container" style={{height: 50, display: "inline-block"}}>
 
-	  		<Button bsStyle="primary" bsSize="small" onClick={this.open} style={button}>
+	  		<Button bsStyle="primary" bsSize="small" onClick={this.open}>
            	Edit Panel
 	  		</Button>
 
