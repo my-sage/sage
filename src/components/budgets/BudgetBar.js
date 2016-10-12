@@ -14,7 +14,7 @@ const BudgetBar = ({targetAmount, currentAmount}) => {
 
     // Write IFs to determine ProgressBar color
 
-    return <ProgressBar bsStyle={fillColor} now={howFilledAmI}/>
+    return <ProgressBar active bsStyle={fillColor} now={howFilledAmI}/>
 }
 
 export default BudgetBar;
