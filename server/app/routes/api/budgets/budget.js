@@ -44,6 +44,7 @@ router.get('/:budgetId', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
 	Budget.create(req.body)
+		.then(budget=> budget.reload())
 		.then(budget => {
 			res.status(201).json(budget);
 		})
