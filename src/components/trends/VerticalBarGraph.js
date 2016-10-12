@@ -2,17 +2,16 @@
 
 import React from 'react';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryTooltip} from 'victory';
-import composeData from '../../utils/graphUtils';
-import R from 'ramda';
-import moment from 'moment';
+import {composeData} from '../../utils/graphUtils';
 
 const VerticalBarGraph = ({data, groupBy}) => {
 	const composedData = composeData(groupBy)(data);
+
 	return (
-		<VictoryChart theme={VictoryTheme.material} width={600} scale={{x: "time"}} domainPadding={25}>
+		<VictoryChart theme={VictoryTheme.material} width={600} domainPadding={25}>
 			<VictoryAxis fixLabelOverlap={true}/>
-			<VictoryAxis dependentAxis={true}/>
-			<VictoryBar data={composedData} colorScale={"qualitative"} labelComponent={<VictoryTooltip/>}/>
+			<VictoryAxis dependentAxis={true} tickFormat={(y) => `$${y}`}/>
+			<VictoryBar data={composedData} labelComponent={<VictoryTooltip/>} />
 		</VictoryChart>
 	)
 };
