@@ -6,37 +6,81 @@ import {Form, Button, FormGroup, ControlLabel} from "react-bootstrap";
 import DatePicker from "react-bootstrap-date-picker";
 import SelectInput from '../shared/DropdownInput';
 
-const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart,onChangeEnd,filter,errors}) => {
+const style = {
+	spacingRight : {
+		marginRight: '10px',
+		fontWeight: 'bold'
+	},
+	spacingRightAndLeft : {
+		margin: '0px 10px 0px 20px',
+		fontWeight: 'bold'
+	},
+	spacingLeft: {
+		marginLeft: '30px',
+		fontWeight: 'bold'
+	},
+	center: {
+		textAlign: 'center'
+	}
+}
+
+const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart,onChangeEnd,filter,getCurrent,errors}) => {
+	
+	let getCurrentButton;
+	if(getCurrent) {
+		getCurrentButton =  <Button bsStyle='primary' onClick={getCurrent} style={style.spacingLeft}>Current</Button>
+	}
+
+	let merchantSelect;
+	if (merchants) {
+		merchantSelect = <div style={{display: "inline"}}>
+			<ControlLabel style={style.spacingRight}>Merchant</ControlLabel>
+			<SelectInput
+				name="merchantId"
+				value={instance.merchantId}
+				defaultOption="Pick Merchant"
+				options={merchants}
+				onChange={onChange}
+				error={errors.merchantId}/>
+		</div>
+	}
+	
+
 
 	return (
 
-		<Form inline>
-				<ControlLabel>Category</ControlLabel>
+		<Form inline style={style.center}>
+
+				{merchantSelect}
+
+				<ControlLabel style={style.spacingRightAndLeft}><b>Category</b></ControlLabel>
+
 				<SelectInput
 					name="categoryId"
 					value={instance.categoryId}
-					defaultOption="Select the correct Category"
+					defaultOption="Pick Category"
 					options={categories}
 					onChange={onChange} 
-					error={errors.categoryId}/>
+					error={errors.categoryId}
+					style={style.spacing}/>
 
-				<ControlLabel>Start Date</ControlLabel>
+				<ControlLabel style={style.spacingRightAndLeft}>Start Date</ControlLabel>
 				<DatePicker 
 					name="startDate"
 					value={instance.startDate}
 					onChange={onChangeStart}
 					error={errors.startDate} />
 
-			<FormGroup controlId="endDate">
-				<ControlLabel>End Date</ControlLabel>
+				<ControlLabel style={style.spacingRightAndLeft}>End Date</ControlLabel>
+				
 				<DatePicker 
 					name="endDate"
 					value={instance.endDate}
 					onChange={onChangeEnd}
-					error={errors.endDate} />
-			</FormGroup>			
+					error={errors.endDate} />		
 
-			<Button type="submit" onClick={filter}>Filter</Button>
+			<Button bsStyle='primary' type="submit" onClick={filter} style={style.spacingLeft}>Filter</Button>
+			{getCurrentButton}
 		</Form>
 	)
 }

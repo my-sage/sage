@@ -10,7 +10,7 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
 		<div className="form-group">
 			{labelVerify(label)}
 			<div className="field">
-				<select style={{width: 300}}
+				<select style={{width: "100%"}}
 					name={name}
 					value={value}
 					onChange={onChange}
