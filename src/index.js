@@ -7,20 +7,21 @@ import { Router, browserHistory } from 'react-router';
 import stateGen from './static-state-generator';
 import routes from './routes';
 import { getCurrentBudgets, updateBudget, deleteBudget } from './actions/budgetActions';
+import { getAllTransactions, createTransaction} from './actions/transactionActions';
+import { getAllCategories } from './actions/categoryActions';
+import { getAllMerchants } from './actions/merchantActions';
 import '../node_modules/toastr/build/toastr.min.css'
 import R from 'ramda';
 
-const data = R.pick(['budgets', 'transactions', 'categories', 'merchants'], stateGen())
-let state = {};
-state.budgets = {};
-state.transactions = {
-	data: data.transactions,
-	isFetching: false,
-}
-state = R.merge(data, state)
+// const data = R.pick(['merchants'], stateGen())
+// let state = {};
+// state = R.merge(data, state)
 
-const store = configureStore(state);
+const store = configureStore();
 store.dispatch(getCurrentBudgets());
+store.dispatch(getAllTransactions());
+store.dispatch(getAllCategories());
+store.dispatch(getAllMerchants());
 
 render(
   <Provider store={store}>

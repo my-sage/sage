@@ -7,7 +7,6 @@ import Transactions from './components/transaction/TransactionPage'
 import Budgets from './components/budgets/BudgetsPage'
 import Trends from './components/trends/TrendsPage'
 import Settings from './components/settings/SettingsPage'
-import Spending from './components/trends/SpendingPage'
 
 export default (
 		<Route path='/' component={App}>

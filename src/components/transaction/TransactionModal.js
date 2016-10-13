@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import {Modal, Button} from "react-bootstrap";
 import TransactionEditForm from "./TransactionEditForm";
+import * as TransactionActions from '../../actions/transactionActions';
+import { pick, compose, map } from 'ramda';
 
 class TransactionModal extends Component {
 
@@ -17,25 +19,42 @@ class TransactionModal extends Component {
 			errors: {}
 		};
 		this.updateTransactionState = this.updateTransactionState.bind(this);
+    this.update = this.update.bind(this);
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
 	}
 
 	updateTransactionState(event) {
+    const coerceToInt = (maybeInt) => isNaN(+maybeInt) ? maybeInt : +maybeInt;
 		const field = event.target.name;
 		let transaction = this.state.transaction;
-		transaction[field] = event.target.value;
+		transaction[field] = coerceToInt(event.target.value);
 		return this.setState(transaction: transaction);
 	}
 
-  render () {
-  	let close = () => this.setState({show: false});
-  	return (
-	  	<div className="modal-container" style={{height: 50}}>
+  update() {
+    const id = this.state.transaction.id, transaction = this.state.transaction;
+    this.props.actions.updateTransaction(id, transaction);
+    this.close();
+  }
 
-	  		<Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
-	  			Edit Panel
+  close() {
+    this.setState({show: false});
+  }
+
+  open() {
+    this.setState({show: true});
+  }
+
+  render () {
+  	return (
+	  	<div className="modal-container" style={{height: 40}}>
+
+	  		<Button bsStyle="primary" bsSize="xsmall" onClick={this.open}>
+	  			<i className="fa fa-pencil" aria-hidden="true"></i>
 	  		</Button>
 
-	  		<Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
+	  		<Modal show={this.state.show} onHide={this.close} container={this} aria-labelledby="contained-modal-title">
 	  			
 	  			<Modal.Header closeButton>
 	  				<Modal.Title id="Contained-modal-title">Transaction Management</Modal.Title>
@@ -52,7 +71,7 @@ class TransactionModal extends Component {
 	  			</Modal.Body>
 
 	  			<Modal.Footer>
-	  				<Button onClick={close}>Save and Close</Button>
+	  				<Button bsStyle="success" onClick={this.update}>Save and Close</Button>
 	  			</Modal.Footer>
 
 	  		</Modal>
@@ -68,17 +87,22 @@ TransactionModal.propTypes = {
   merchants: PropTypes.array.isRequired
 };
 
+// const formatForDropdown = (data) => ({
+//   value: data.id,
+//   text: data.name
+// })
 
+// const mapStateToProps = compose(map(map(formatForDropdown)), pick(['categories', 'merchants']))
 function mapStateToProps(state, ownProps) {
 
-	const CategoriesFormattedForDropdown = state.categories.map(category => {
+	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
 		return {
 			value: category.id,
 			text: category.name
 		};
 	});
 
-	const MerchantsFormattedForDropdown = state.merchants.map(merchant => {
+	const MerchantsFormattedForDropdown = state.merchants.data.map(merchant => {
 		return {
 			value: merchant.id,
 			text: merchant.name
@@ -93,7 +117,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({}, dispatch)
+    actions: bindActionCreators(TransactionActions, dispatch)
   }
 }
 

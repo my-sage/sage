@@ -1,38 +1,48 @@
 'use strict';
 import { combineReducers } from 'redux';
-import { CREATE_TRANSACTION, DELETE_TRANSACTION, FETCH_TRANSACTIONS_SUCCESS, FETCH_TRANSACTIONS_REQUEST, FETCH_TRANSACTIONS_FAIL} from '../actions/constants/transactionActionTypes';
-import {createReducer} from '../utils';
-import {evolve, map, filter} from 'ramda';
+import * as actions from '../actions/constants/transactionActionTypes';
 import initialState from './initialState';
+import { evolve, map, curry, filter, append } from 'ramda';
+import { createReducer, createFetchingHandlers, createErrorHandlers } from '../utils';
 
-const {transactions} = initialState;
+const { transactions } = initialState;
 
 const dataHandlers = {
-	[CREATE_TRANSACTION](state, action) {
-		return state;
+	[actions.CREATE_TRANSACTION_SUCCESS](state, action) {
+		return append(action.transaction, state);
 	},
-	[DELETE_TRANSACTION](state, action){
-		return state.filter(transaction => transaction);
-	},
-	[FETCH_TRANSACTIONS_SUCCESS](state, action){
-		return action.transactions;
-	}
-};
-
-const isFetchingHandlers = {
-	[FETCH_TRANSACTIONS_REQUEST](state, action) {
-		return true;
-	},
-	[FETCH_TRANSACTIONS_SUCCESS](state, action) {
-		return false;
-	},
-	[FETCH_TRANSACTIONS_FAIL](state, action) {
-		return false;
-	}
+  [actions.FETCH_TRANSACTIONS_SUCCESS](state, action) {
+    return action.transactions;
+  },
+	[actions.DELETE_TRANSACTION_SUCCESS](state, action){
+    return filter(transaction => transaction.id !== +action.deletedTransactionId
+    , state);
+  },
+  [actions.UPDATE_TRANSACTION_SUCCESS](state, action) {
+    const update = curry((updatedTransaction, oldTransaction) => 
+      oldTransaction.id === updatedTransaction.id ? updatedTransaction : oldTransaction)
+    return map(update(action.transaction), state)
+  }
 };
 
 const data = createReducer(transactions.data, dataHandlers);
 
+const isFetchingHandlers = createFetchingHandlers({
+  truthy: [actions.FETCH_TRANSACTIONS_REQUEST],
+  falsey: [actions.FETCH_TRANSACTIONS_SUCCESS, actions.API_FAIL]
+});
+
 const isFetching = createReducer(transactions.isFetching, isFetchingHandlers);
 
-export default combineReducers({data, isFetching});
+const errorMessageHandlers = createErrorHandlers({
+  truthy: [actions.API_FAIL],
+  falsey: [actions.FETCH_TRANSACTIONS_SUCCESS, actions.FETCH_TRANSACTIONS_REQUEST]
+});
+
+const errorMessage = createReducer(transactions.errorMessage, errorMessageHandlers);
+
+export default combineReducers({
+  data, 
+  isFetching,
+  errorMessage
+});
