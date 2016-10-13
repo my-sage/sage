@@ -36,6 +36,4 @@ storiesOf('TransactionSingle', module)
 storiesOf('TransactionTable', module)
 	.add('with state', ()=> (
 		<TransactionTable transactions={state.transactions}/>
-	))
-
-console.log(state);
+	));

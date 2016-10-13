@@ -15,7 +15,7 @@ const bluebird = require('bluebird');
 
 const numAccounts = 6;
 const numMerchants = 6;
-const numCategories = 6;
+const numCategories = 7;
 const CreditAccountId = [2,6];
 const NonCreditAccountId = [1,3,4,5];
 const numberOfTransaction = 50;
@@ -64,7 +64,10 @@ function seedCategory() {
     name: 'Housing'
   }, {
     name: 'Entertainment'
-  }];
+  }, {
+  	name: 'Income'
+  }
+  ];
 
   const creatingCategory = categoryObjs.map(categoryObj => Category.create(categoryObj));
 
@@ -148,7 +151,7 @@ let randomDateGen = (monthsAway) =>
     let currentDate = new Date(),
       randomNum = _.random(-monthsAway, monthsAway);
     return new Date(currentDate.getFullYear(), currentDate.getMonth() + randomNum, _.random(1, 27)).valueOf();
-  }
+  };
 
 let randomDate2MonthsAway = randomDateGen(2);
 
@@ -190,7 +193,7 @@ let randomTransactions = (numOfTransaction,savingDays,accountIdArray) => {
 
 function promiseNester(promisifiedFunc, argsArray) {
   if (argsArray.length === 1) 
-  	return promisifiedFunc(argsArray[0]).then(function(resolvedContent) {console.log(resolvedContent)});
+  	return promisifiedFunc(argsArray[0])
   return promisifiedFunc(argsArray[0])
     .then(function(resolvedContent) {
       return promiseNester(promisifiedFunc, argsArray.slice(1))
