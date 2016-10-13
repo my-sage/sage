@@ -2,7 +2,9 @@
 
 const Sequelize = require('sequelize');
 const db = require('../_db');
-const { map } = require('ramda');
+const {
+  map
+} = require('ramda');
 const Account = require('./account');
 const Merchant = require('./merchant');
 const Category = require('./category');
@@ -47,20 +49,23 @@ options.classMethods = {
         return this.create(transaction)
           .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
           .then(ct => ct.reload())
-          .then((createdTransaction) => {
-            return createdTransaction
+          .then(transaction => {
+            transaction.categoryId = transaction.merchant.categoryId;
+            return transaction.save();
           })
       })
   },
   bulkCreateWithMerchant: function(transactions) {
     const createOnlyWhenUnique = (transaction) => {
-      let { fitid } = transaction.transaction
+      let {
+        fitid
+      } = transaction.transaction
       this.find({
-        where: {
-          fitid
-        }
-      })
-      .then(found => !found ? this.createOrFindWithMerchant(transaction) : found)
+          where: {
+            fitid
+          }
+        })
+        .then(found => !found ? this.createOrFindWithMerchant(transaction) : found)
     }
     return Promise.map(transactions, createOnlyWhenUnique)
   }
@@ -111,30 +116,21 @@ options.hooks = {
   },
 
   afterCreate: function(transaction) {
-
-    // let updatingAccount = transaction.getAccount()
-      // .then(account => {
-        // account.balance = account.balance + transaction.amount;
-        // return account.save()
-      // });
-
-    let updatingBudget = transaction.getCurrentBudget()
+    const updatingBudget = transaction.getCurrentBudget()
       .then(budget => {
         if (budget) {
           budget.currentAmount = budget.currentAmount - transaction.amount
           return budget.save()
         }
       });
-
-    return updatingBudget;
+    if (transaction)
+      return updatingBudget;
   }
 };
 
-options.indexes = [
-  {
-    unique: true,
-    fields: ['fitid']
-  }
-]
+options.indexes = [{
+  unique: true,
+  fields: ['fitid']
+}]
 
 module.exports = db.define('transaction', fields, options);

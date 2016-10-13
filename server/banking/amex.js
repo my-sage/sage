@@ -79,9 +79,4 @@ let getAmex = (user, accId, password, start, end, accountInstance) => {
         .catch(console.log)
 }
 
-// const start = 20160101,
-  // end = 20161005;
-
-// getAmex('', '', '', start, end);
-
 module.exports = getAmex;
