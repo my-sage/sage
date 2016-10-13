@@ -6,12 +6,30 @@ import {Form, Button, FormGroup, ControlLabel} from "react-bootstrap";
 import DatePicker from "react-bootstrap-date-picker";
 import SelectInput from '../shared/DropdownInput';
 
+const style = {
+	spacingRight : {
+		marginRight: '10px',
+		fontWeight: 'bold'
+	},
+	spacingRightAndLeft : {
+		margin: '0px 10px 0px 20px',
+		fontWeight: 'bold'
+	},
+	spacingLeft: {
+		marginLeft: '30px',
+		fontWeight: 'bold'
+	},
+	center: {
+		textAlign: 'center'
+	}
+}
+
 const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart,onChangeEnd,filter,errors}) => {
 
 	return (
 
-		<Form inline>
-				<ControlLabel>Merchant</ControlLabel>
+		<Form inline style={style.center}>
+				<ControlLabel style={style.spacingRight}>Merchant</ControlLabel>
 				<SelectInput
 					name="merchantId"
 					value={instance.merchantId}
@@ -20,31 +38,33 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 					onChange={onChange}
 					error={errors.merchantId}/>
 
-				<ControlLabel>Category</ControlLabel>
+				<ControlLabel style={style.spacingRightAndLeft}><b>Category</b></ControlLabel>
+
 				<SelectInput
 					name="categoryId"
 					value={instance.categoryId}
 					defaultOption="Pick Category"
 					options={categories}
 					onChange={onChange} 
-					error={errors.categoryId}/>
+					error={errors.categoryId}
+					style={style.spacing}/>
 
-				<ControlLabel>Start Date</ControlLabel>
+				<ControlLabel style={style.spacingRightAndLeft}>Start Date</ControlLabel>
 				<DatePicker 
 					name="startDate"
 					value={instance.startDate}
 					onChange={onChangeStart}
 					error={errors.startDate} />
 
-
-				<ControlLabel>End Date</ControlLabel>
+				<ControlLabel style={style.spacingRightAndLeft}>End Date</ControlLabel>
+				
 				<DatePicker 
 					name="endDate"
 					value={instance.endDate}
 					onChange={onChangeEnd}
 					error={errors.endDate} />		
 
-			<Button type="submit" onClick={filter}>Filter</Button>
+			<Button bsStyle='primary' type="submit" onClick={filter} style={style.spacingLeft}>Filter</Button>
 		</Form>
 	)
 }
