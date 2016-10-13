@@ -11,7 +11,7 @@ class FilterContainer extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			instance: Object.assign({},{categoryId: "",startDate: "",endDate: ""}),
+			instance: Object.assign({},{categoryId: "",merchantId: "",startDate: "",endDate: ""}),
 			errors: {}
 		};
 		this.updateInstanceState = this.updateInstanceState.bind(this);
@@ -44,14 +44,19 @@ class FilterContainer extends Component {
 	filter (event) {
 		event.preventDefault();
 		//some ajax action with filtering parameter in the get command
-		let {categoryId, startDate, endDate} = this.state.instance;
+		let {categoryId, merchantId,startDate, endDate} = this.state.instance;
 		this.props.actions.getAllTransactions
 		let strCategory,strStart,strEnd;
 		let filterUrl="";
 		if(categoryId){
-			//strCategory = "categoryId="+categoryId;
 			filterUrl +=("?" +"categoryId="+categoryId);
-		}
+		}else{
+			filterUrl +=("?" +"categoryId=");
+		} 
+		if(merchantId){
+			//strCategory = "categoryId="+categoryId;
+			filterUrl +=("&merchantId="+merchantId);
+		}		
 		if(startDate){
 			//strStart="&startDate="+moment(startDate).valueOf()
 			filterUrl += ("&startDate="+moment(startDate).valueOf())
@@ -68,6 +73,7 @@ class FilterContainer extends Component {
 	render () {
 		return <InlineFormFilter 
 							instance={this.state.instance}
+							merchants={this.props.merchants}
 							categories={this.props.categories}
 							onChange={this.updateInstanceState}
 							onChangeStart={this.updateStartDate}
@@ -91,8 +97,16 @@ function mapStateToProps(state, ownProps) {
 		};
 	});
 
+	const MerchantsFormattedForDropdown = state.merchants.data.map(merchant => {
+		return {
+			value: merchant.id,
+			text: merchant.name
+		};
+	}); 
+
 	return {
 		categories: CategoriesFormattedForDropdown,
+		merchants: MerchantsFormattedForDropdown
 	} 
 }
 

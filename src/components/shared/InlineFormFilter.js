@@ -11,11 +11,20 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 	return (
 
 		<Form inline>
+				<ControlLabel>Merchant</ControlLabel>
+				<SelectInput
+					name="merchantId"
+					value={instance.merchantId}
+					defaultOption="Pick Merchant"
+					options={merchants}
+					onChange={onChange}
+					error={errors.merchantId}/>
+
 				<ControlLabel>Category</ControlLabel>
 				<SelectInput
 					name="categoryId"
 					value={instance.categoryId}
-					defaultOption="Select the correct Category"
+					defaultOption="Pick Category"
 					options={categories}
 					onChange={onChange} 
 					error={errors.categoryId}/>
@@ -27,14 +36,13 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 					onChange={onChangeStart}
 					error={errors.startDate} />
 
-			<FormGroup controlId="endDate">
+
 				<ControlLabel>End Date</ControlLabel>
 				<DatePicker 
 					name="endDate"
 					value={instance.endDate}
 					onChange={onChangeEnd}
-					error={errors.endDate} />
-			</FormGroup>			
+					error={errors.endDate} />		
 
 			<Button type="submit" onClick={filter}>Filter</Button>
 		</Form>
