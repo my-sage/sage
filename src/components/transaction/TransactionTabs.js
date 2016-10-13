@@ -28,9 +28,6 @@ export default React.createClass({
 					            	<MenuItem eventKey="2.4">TD Bank</MenuItem>
 					            	<MenuItem eventKey="2.5">American Express</MenuItem>
 					            </NavDropdown>
-					            <NavDropdown eventKey="3" title="Tags">
-					            	<MenuItem eventKey="3">Tags</MenuItem>
-					            </NavDropdown>
 					          </Nav>
 					        </Col>
 					        <Filter/>

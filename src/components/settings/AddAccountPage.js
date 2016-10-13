@@ -34,7 +34,8 @@ const styles = {
   	fontStyle: "italic"
   },
   h4: {
-  	marginTop: '0px'
+  	marginTop: '0px',
+  	textAlign: 'center'
   }
 }
 
@@ -59,27 +60,23 @@ const AddAccountPage = (props) => {
 			    	  <Col xs={6} md={3}>
 			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={WELLS}/></Button></Panel>  
 			    	  </Col>
-			    	  </Row>
-			    	  <Row style={styles.row} >
 			    	  <Col xs={6} md={3}>
 			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CHASE}/></Button></Panel>  
 			    	  </Col>
+			    	  </Row>
+			    	  
+			    	  <Row style={styles.row} >
 			    	  <Col xs={6} md={3}>
 			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CITI}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
 			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={TD}/></Button></Panel>  
 			    	  </Col>
-			    	  </Row>
-			    	  <Row style={styles.row} >
 			    	  <Col xs={6} md={3}>
 			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CHARLES}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
 			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={CAPITAL}/></Button></Panel>  
-			    	  </Col>
-			    	  <Col xs={6} md={3}>
-			    	    <Panel style={styles.panel}><Button style={styles.button}><img style={styles.image} src={PNC}/></Button></Panel>  
 			    	  </Col>
 			    	  </Row>
 			    	</Grid>
