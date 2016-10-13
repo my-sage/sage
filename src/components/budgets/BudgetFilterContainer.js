@@ -49,7 +49,7 @@ BudgetFilterContainer.propTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
-	console.log('getting all the categories', state)
+
 	return {
 		categories: formatForDropDown(state.categories.data)
 	} 
