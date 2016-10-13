@@ -4,6 +4,11 @@ import TypeTabs from './TypeTabs'
 import TransactionTable from './TransactionTable'
 import Filter from '../shared/FilterContainer'
 
+const style = {
+	pushDown: {
+		marginBottom: '40px'
+	}
+}
 
 export default React.createClass({
 	render(){
@@ -12,7 +17,7 @@ export default React.createClass({
 				<div>
 					  <Tab.Container id="tabs-with-dropdown" defaultActiveKey="1">
 					      <Row className="clearfix">
-					        <Col sm={12}>
+					        <Col sm={12}  style={style.pushDown}>
 					          <Nav bsStyle="tabs">
 					            <NavDropdown eventKey="1" title="Type">
 					            	<MenuItem eventKey="1">All Transactions</MenuItem>
@@ -30,7 +35,9 @@ export default React.createClass({
 					            </NavDropdown>
 					          </Nav>
 					        </Col>
+
 					        <Filter/>
+
 					        <Col sm={12}>
 					          <Tab.Content animation>
 
@@ -65,10 +72,6 @@ export default React.createClass({
 					            </Tab.Pane>
 					            <Tab.Pane eventKey="2.5">
 					              <h3>American Express</h3>
-					            </Tab.Pane>
-
-					            <Tab.Pane eventKey="3">
-					              <h3>Tags</h3>
 					            </Tab.Pane>
 
 					          </Tab.Content>

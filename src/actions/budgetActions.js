@@ -9,10 +9,15 @@ export const fetchBudgetsSuccess = makeActionCreator(actions.FETCH_BUDGETS_SUCCE
 export const createBudgetSuccess = makeActionCreator(actions.CREATE_BUDGET_SUCCESS, 'budget');
 export const deleteBudgetSuccess = makeActionCreator(actions.DELETE_BUDGET_SUCCESS, 'deletedBudgetId');
 export const updateBudgetSuccess = makeActionCreator(actions.UPDATE_BUDGET_SUCCESS, 'budget');
-export const apiFail = makeActionCreator(actions.API_FAIL, 'message');
+export const apiFail = makeActionCreator(actions.API_FAIL, 'error');
 
 //thunk actions
 export const getCurrentBudgets = makeThunkCreator(budgetApi.getCurrentBudgets
+, fetchBudgets
+, fetchBudgetsSuccess
+, apiFail);
+
+export const getAllBudgets = makeThunkCreator(budgetApi.getAllBudgets
 , fetchBudgets
 , fetchBudgetsSuccess
 , apiFail);
