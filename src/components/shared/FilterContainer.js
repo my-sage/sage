@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import InlineFormFilter from './InlineFormFilter';
 import * as TransactionActions from '../../actions/transactionActions';  //input whatever actions you need
-import moment from 'moment'
+import { updateInstanceState, updateStartDate, updateEndDate, queryUrl} from './shareFilterComponentUtils';
+import {formatForDropDown} from './formatForDropDown'
 
 class FilterContainer extends Component {
 	constructor (props) {
@@ -14,59 +15,12 @@ class FilterContainer extends Component {
 			instance: Object.assign({},{categoryId: "",merchantId: "",startDate: "",endDate: ""}),
 			errors: {}
 		};
-		this.updateInstanceState = this.updateInstanceState.bind(this);
-		this.updateStartDate = this.updateStartDate.bind(this);
-		this.updateEndDate = this.updateEndDate.bind(this);
 		this.filter = this.filter.bind(this);
-	}
-
-	updateInstanceState(event) {
-		const coerceToInt = (maybeInt) => isNaN(+maybeInt) ? maybeInt : +maybeInt;
-		console.log('event name',event.target.name)
-		const field = event.target.name;
-		let instance = this.state.instance;
-		instance[field] = event.target.value;
-		return this.setState({instance: instance});
-	}
-
-	updateStartDate(value) {
-		let instance = this.state.instance;
-		instance.startDate = value;
-		return this.setState({instance: instance})
-	}
-
-	updateEndDate(value) {
-		let instance = this.state.instance;
-		instance.endDate = value;
-		return this.setState({endDate: value})
 	}
 
 	filter (event) {
 		event.preventDefault();
-		//some ajax action with filtering parameter in the get command
-		let {categoryId, merchantId,startDate, endDate} = this.state.instance;
-		this.props.actions.getAllTransactions
-		let strCategory,strStart,strEnd;
-		let filterUrl="";
-		if(categoryId){
-			filterUrl +=("?" +"categoryId="+categoryId);
-		}else{
-			filterUrl +=("?" +"categoryId=");
-		} 
-		if(merchantId){
-			//strCategory = "categoryId="+categoryId;
-			filterUrl +=("&merchantId="+merchantId);
-		}		
-		if(startDate){
-			//strStart="&startDate="+moment(startDate).valueOf()
-			filterUrl += ("&startDate="+moment(startDate).valueOf())
-		}
-		if(endDate){
-			//strEnd="&endDate="+moment(endDate).valueOf()
-			filterUrl += ("&endDate="+moment(endDate).valueOf())
-		}
-		//let filterUrl = "?"+strCategory+strStart+strEnd;
-		console.log('the complete Url',filterUrl)		
+		let filterUrl = queryUrl(this);		
 		this.props.actions.getAllTransactions(filterUrl)
 	}
 
@@ -75,9 +29,9 @@ class FilterContainer extends Component {
 							instance={this.state.instance}
 							merchants={this.props.merchants}
 							categories={this.props.categories}
-							onChange={this.updateInstanceState}
-							onChangeStart={this.updateStartDate}
-							onChangeEnd={this.updateEndDate}
+							onChange={updateInstanceState(this)}
+							onChangeStart={updateStartDate(this)}
+							onChangeEnd={updateEndDate(this)}
 							filter={this.filter}
 							errors={this.state.errors}
 						/>
@@ -90,23 +44,9 @@ FilterContainer.propTypes = {
 
 function mapStateToProps(state, ownProps) {
 
-	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
-		return {
-			value: category.id,
-			text: category.name
-		};
-	});
-
-	const MerchantsFormattedForDropdown = state.merchants.data.map(merchant => {
-		return {
-			value: merchant.id,
-			text: merchant.name
-		};
-	}); 
-
 	return {
-		categories: CategoriesFormattedForDropdown,
-		merchants: MerchantsFormattedForDropdown
+		categories: formatForDropDown(state.categories.data),
+		merchants: formatForDropDown(state.merchants.data)
 	} 
 }
 

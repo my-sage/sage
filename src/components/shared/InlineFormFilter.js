@@ -24,19 +24,34 @@ const style = {
 	}
 }
 
-const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart,onChangeEnd,filter,errors}) => {
+const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart,onChangeEnd,filter,getCurrent,errors}) => {
+	
+	let getCurrentButton;
+	if(getCurrent) {
+		getCurrentButton =  <Button bsStyle='primary' onClick={getCurrent} style={style.spacingLeft}>Current</Button>
+	}
+
+	let merchantSelect;
+	if (merchants) {
+		merchantSelect = <div style={{display: "inline"}}>
+			<ControlLabel style={style.spacingRight}>Merchant</ControlLabel>
+			<SelectInput
+				name="merchantId"
+				value={instance.merchantId}
+				defaultOption="Pick Merchant"
+				options={merchants}
+				onChange={onChange}
+				error={errors.merchantId}/>
+		</div>
+	}
+	
+
 
 	return (
 
 		<Form inline style={style.center}>
-				<ControlLabel style={style.spacingRight}>Merchant</ControlLabel>
-				<SelectInput
-					name="merchantId"
-					value={instance.merchantId}
-					defaultOption="Pick Merchant"
-					options={merchants}
-					onChange={onChange}
-					error={errors.merchantId}/>
+
+				{merchantSelect}
 
 				<ControlLabel style={style.spacingRightAndLeft}><b>Category</b></ControlLabel>
 
@@ -65,6 +80,7 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 					error={errors.endDate} />		
 
 			<Button bsStyle='primary' type="submit" onClick={filter} style={style.spacingLeft}>Filter</Button>
+			{getCurrentButton}
 		</Form>
 	)
 }
