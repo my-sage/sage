@@ -1,17 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import TrendsTabs from './TrendsTabs'
 
-
-export default React.createClass({
-	render(){
+class TrendsPage extends Component {
+	render() {
+  const {transactions, merchants, categories, dispatch} = this.props;
 		return (
 			<div>
-			<div>
-			<h1>Trends</h1>
+				<div>
+					<h1>Trends</h1>
+				</div>
+				<TrendsTabs transactions={transactions} merchants={merchants} categories={categories} dispatch={dispatch}/>
 			</div>
-				<TrendsTabs/>
-		    </div>
 		)
 	}
-})
+}
+function mapStateToProps(state, ownProps) {
+	return {transactions: state.transactions.data, merchants: state.merchants.data, categories: state.categories.data}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: bindActionCreators({}, dispatch)
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrendsPage);

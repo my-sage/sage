@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Modal, Button } from "react-bootstrap";
 import DropdownInput from '../shared/DropdownInput';
+import * as BudgetActions from '../../actions/budgetActions';
+import BudgetEditForm from './BudgetEditForm';
 import { pick } from 'ramda';
 
 class BudgetCreateModal extends Component {
@@ -14,24 +16,44 @@ class BudgetCreateModal extends Component {
 
 		this.state = {
 			show: false,
-			categories: pick(['categories'], this.props)
+			budget: Object.assign({},this.props.budget),
 			errors: {}
 		};
+
+		this.updateBudgetState = this.updateBudgetState.bind(this);
+    this.update = this.update.bind(this);
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
 	}
 
-	updateTransactionState(event) {
+	updateBudgetState(event) {
+		const coerceToInt = (maybeInt) => isNaN(+maybeInt) ? maybeInt : +maybeInt;
 		const field = event.target.name;
-		let transaction = this.state.transaction;
-		transaction[field] = event.target.value;
-		return this.setState(transaction: transaction);
+		let budget = this.state.budget;
+		budget[field] = event.target.value;
+		return this.setState({budget: budget});
 	}
+
+  update() {
+    const newbudget = this.state.budget;
+    this.props.actions.createBudget(newbudget);
+    this.close();
+  }	
+
+  close () {
+  	this.setState({show: false});
+  }
+
+  open () {
+  	this.setState({show: true});
+  }
 
   render () {
   	let close = () => this.setState({show: false});
   	return (
 	  	<div className="modal-container" style={{height: 50}}>
 
-	  		<Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
+	  		<Button bsStyle="primary" bsSize="large" onClick={this.open}>
           + Create Budget
 	  		</Button>
 
@@ -40,19 +62,21 @@ class BudgetCreateModal extends Component {
 	  			<Modal.Header closeButton>
 	  				<Modal.Title id="Contained-modal-title">Create A Budget</Modal.Title>
 	  			</Modal.Header>
-          <DropdownInput 
-            name='categories'
-            label='Categories'
-            onChange={ onChange }
-            defaultOption='Select Budget Category'
-            options={ categories }
-          />
+
           <Modal.Body>
-            
+
+ 	  				<BudgetEditForm
+	  					onChange={this.updateBudgetState}
+	  					budget={this.state.budget}
+	  					categories={this.props.categories}
+	  					typeBudgets={this.props.typeBudgets}
+	  					errors={this.state.errors}
+	  				/>
+
           </Modal.Body>
 
 	  			<Modal.Footer>
-	  				<Button onClick={close}>Save and Close</Button>
+	  				<Button onClick={this.update}>Save and Close</Button>
 	  			</Modal.Footer>
 
 	  		</Modal>
@@ -62,8 +86,37 @@ class BudgetCreateModal extends Component {
   }
 };
 
-TransactionModal.propTypes = {
-  transaction: PropTypes.object.isRequired,
+BudgetCreateModal.propTypes = {
   categories: PropTypes.array.isRequired,
-  merchants: PropTypes.array.isRequired
 };
+
+function mapStateToProps(state, ownProps) {
+
+	let initialBudget = {name: "",targetAmount: 0, endDate: 0, categoryId: "",type: ""}
+ 
+	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
+		return {
+			value: category.id,
+			text: category.name
+		};
+	});
+
+	const typeBudgets = [
+		{value: "Spending", text: "Spending"},
+		{value: "Incoming", text: "Imcoming"}
+	]
+
+	return {
+		categories: CategoriesFormattedForDropdown,
+		budget: initialBudget,
+		typeBudgets: typeBudgets
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(BudgetActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(BudgetCreateModal)

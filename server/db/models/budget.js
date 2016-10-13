@@ -2,6 +2,7 @@
 
 const Sequelize = require('sequelize');
 const db = require('../_db');
+const Category = require('./category');
 
 const fields = {};
 const options = {};
@@ -86,5 +87,9 @@ instanceMethods.getTransactions = function () {
 };
 
 options.instanceMethods = instanceMethods;
+
+options.defaultScope = {
+  include: [Category]
+};
 
 module.exports = db.define('budget', fields, options);
