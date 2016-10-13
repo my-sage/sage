@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router'
 import {Tabs, Tab} from 'react-bootstrap'
 import SpendingPage from './SpendingPage';
 import IncomePage from './IncomePage';
