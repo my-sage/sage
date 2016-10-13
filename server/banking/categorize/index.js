@@ -1,7 +1,7 @@
 'use strict';
 
 const db = require('../../db');
-const Merchant = db.model('merchant');
+const Transaction = db.model('transaction');
 const stringSimilarity = require('string-similarity');
 const {
   prop,
@@ -10,24 +10,36 @@ const {
   filter
 } = require('ramda');
 
-const categorize = uncategorizedMerchant => {
-  const getName = prop('name'),
-    getNames = map(getName),
-    withCategories = filter(prop('categoryId')),
-    getBestMatch = compose(prop('target'), prop('bestMatch')),
+const categorize = uncategorizedTransaction => {
+  const getMerchant = prop('merchant')
+  , getMerchants = map(getMerchant)
+  , withCategories = filter(prop('categoryId'))
+  , getBestMatch = compose(prop('target'), prop('bestMatch'))
+  , getRating = compose(prop('rating'), prop('bestMatch'))
     findByName = (merchantName) => filter((merchant) => merchantName === merchant.name));
-// notSameName = curry((id, merchant) => merchant.id !== id)),
-// otherMerchants = filter(notSameName),
-// getNamesOfThoseWithCategories = compose(getNames, withCategories)
-  Merchant.findAll()
-    .then(merchants => {
-      const categorizedMerchants = withCategories(merchants),
-        merchantNames = getNames(categorizedMerchants),
-        bestMatch = getBestMatch(stringSimilarity.findBestMatch(uncategorizedMerchant.name, merchantNames));
-      uncategorizedMerchant.categoryId = findByName(bestMatch)(categorizedMerchants).categoryId;
-      return uncategorizedMerchant.save()
-    })
-    .catch(console.log)
+
+  Transaction.findAll({
+    where: {
+      attributes: ['merchant', 'categoryId'],
+      where: {
+        categoryId: {
+          $ne: null
+        }
+      }
+    }
+  })
+  .then(categorizedMerchants => {
+    const merchantNames = getMerchants(categorizedMerchants)
+    , matches = stringSimilarity.findBestMatch(uncategorizedTransaction.merchant, merchantNames)
+    , bestMatch = getBestMatch(matches)
+    , rating = getRating(matches)
+    , newCategory = rating > 0.5 ? bestMatch : false;
+    if(newCategory) {
+      uncategorizedTransaction.categoryId = findByName(bestMatch)(categorizedMerchants).categoryId;
+      return uncategorizedTransaction.save()
+    }
+  })
+  .catch(console.log)
 }
 
 module.exports = categorize;

@@ -171,7 +171,7 @@ let randomTransaction = (accountId,status) => {
 		accountId: accountId,
 		categoryId: _.random(1, numCategories),
     merchantId: _.random(1, numMerchants),
-    fitid: _.sample(['1', '2', '3', '4'])
+    fitid: _.random(100000000, 900000000)
 	}
 }
 
@@ -211,6 +211,13 @@ function seedTransaction() {
   return promiseNester(Transaction.upsert.bind(Transaction),transactionObjs)
 }
 
+function setMerchant1ToCat1(updatedMerchant = { categoryId: 1 }) {
+  return Merchant.findById(1)
+  .then(merchant => {
+    return merchant.updateWithTransactions(updatedMerchant);
+  })
+}
+
 // ----------------------------------Datebase Sync-------------------------------------------------//
 
 db.sync({
@@ -235,6 +242,10 @@ db.sync({
   .then(() => {
     console.log(chalk.green('Transaction Seeding Successful'));
     return seedBudget();
+  })
+  .then(() => {
+    console.log(chalk.green('Set Merchant 1 To Cat 1'));
+    return setMerchant1ToCat1();
   })
   .then(() => {
     console.log(chalk.blue('finish seeding'));

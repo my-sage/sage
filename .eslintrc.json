@@ -13,10 +13,11 @@
   "plugins": [
     "react"
   ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "strict": 0,
     "quotes": 0,
-    "no-unused-vars": 0,
+    "no-unused-vars": 1,
     "camelcase": 0,
     "no-underscore-dangle": 0
   }
