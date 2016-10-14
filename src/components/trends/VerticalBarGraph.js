@@ -6,12 +6,17 @@ import {composeData} from '../../utils/graphUtils';
 
 const VerticalBarGraph = ({data, groupBy}) => {
 	const composedData = composeData(groupBy)(data);
-	const barWidth = (data) => (300/data.length)-2;
+	const barWidth = (data) => (250/data.length)-2;
 	return (
-		<VictoryChart theme={VictoryTheme.material} width={700} domainPadding={25}>
+		<VictoryChart theme={VictoryTheme.material} width={800} domainPadding={35}>
 			<VictoryAxis fixLabelOverlap={true}/>
 			<VictoryAxis dependentAxis={true} tickFormat={(y) => `$${y}`}/>
-			<VictoryBar data={composedData} labelComponent={<VictoryTooltip  style={{labels: {padding: 5}}}/>} style={{data: {width: barWidth(composedData), fill: '#2ecc71'}}}/>
+			<VictoryBar data={composedData}
+			            labelComponent={<VictoryTooltip/>}
+			            style={{
+			            	data: {width: barWidth(composedData),
+				            fill: (data)=> data.y > 0 ? '#2ecc71' : '#c0392b'
+			}}}/>
 		</VictoryChart>
 	)
 };
