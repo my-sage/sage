@@ -10,6 +10,20 @@ body {
 	background-color: black;
 }
 
+.leftNav {
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #34495C;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 20px;
+	z-index:3000;
+}
+
 .activeButton {
 	color:white;
 }
@@ -59,4 +73,31 @@ body {
 .selectimage {
 	max-height: 100px;
 	max-width: 200px;		
+}
+
+@media(max-width: 765px){
+	body {
+		margin-left: 0px;
+	}
+	.leftNav {
+		display: none;
+	}
+	.main {
+		padding: 68px 0px 42px 36px;	
+	}
+}
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 3) {
+  	body {
+  		margin-left: 0px;
+  	}
+  	.leftNav {
+  		display: none;
+  	}
+  	.main {
+  		padding: 68px 0px 42px 36px;	
+  	}
 }

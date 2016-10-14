@@ -6,7 +6,6 @@ import { render } from 'react-dom';
 import {Link} from 'react-router'
 
 const divStyle = {
-	marginLeft: "247px"
 }
 
 const float = {
@@ -21,9 +20,11 @@ export default React.createClass ({
 	render(){
 		return (
 			<Navbar style={divStyle} fluid inverse fixedTop>
+				<Nav>
+					<NavItem><i className="fa fa-bars" aria-hidden="true"></i></NavItem>
+				</Nav>
 			  <Nav style={float}>
-			    <NavItem eventKey={3}><Link to="/settings"  style={white}><span className="glyphicon glyphicon-user"></span></Link></NavItem>
-			    <NavItem eventKey={1} href="#">Logout</NavItem>
+			    <NavItem eventKey={1} style={float}>Logout</NavItem>
 			  </Nav>
 			</Navbar>
 		)
