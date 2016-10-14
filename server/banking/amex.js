@@ -60,7 +60,6 @@ const parseBankRes = curry((startDate, endDate, accountId, res) => {
 });
 
 const postRes = (res) => {
-  console.log(res);
   return Transaction.bulkCreateWithMerchant(res.transactions)
 };
 

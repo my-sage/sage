@@ -12,6 +12,24 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+//need to check if logged in
+router.get('/syncAll', (req, res, next) => {
+  Account.findAll()
+    .then(accounts => {
+      return Promise.map(accounts, (account) => {
+        const bankHandler = bankHandlers[account.name];
+        if (bankHandler) {
+          return bankHandler(user, accId, password, start, end, account)
+        } else return new Error(`${account.name} handler not found`)
+      })
+    })
+    .then((handledAccounts) => {
+      res.status(200).json(handledAccounts);
+    })
+    .catch(next);
+});
+
+//need to check if logged in
 router.get('/:accountId', (req, res, next) => {
   Account.findById(req.params.accountId)
     .then(account => {
