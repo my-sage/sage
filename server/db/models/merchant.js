@@ -30,6 +30,7 @@ options.instanceMethods = {
           });
         return Promise.map(updatedTransactions, t => t.save());
       })
+      .then(updatedTransactions => Promise.map(updatedTransactions, (t) => t.reload()))
   }
 }
 
