@@ -31,11 +31,11 @@ export const composeData = (prop) => R.compose(formatData, mapOverData, groupByP
 const wantIncome = (boolean) => {
 	return boolean ?
 		function (transaction) {
-			return transaction.category.name === 'Income' || transaction.category.name === 'income'
+			return transaction.category.name.toLowerCase() === 'income'
 		}
 		:
 		function (transaction) {
-			return transaction.category.name !== 'Income' || transaction.category.name !== 'income'
+			return transaction.category.name.toLowerCase() !== 'income'
 		}
 };
 

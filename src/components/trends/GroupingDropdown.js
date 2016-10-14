@@ -9,11 +9,11 @@ const GroupingDropdown = ({onSelect}) => {
 				Group Results By ...
 			</Dropdown.Toggle>
 			<Dropdown.Menu>
-				<MenuItem eventKey="fullDate">Day</MenuItem>
-				<MenuItem eventKey="month">Month</MenuItem>
-				<MenuItem eventKey="year">Year</MenuItem>
-				<MenuItem eventKey="categoryName">Category</MenuItem>
-				<MenuItem eventKey="merchantName">Merchant</MenuItem>
+				<MenuItem eventKey={{displayName: 'Day', groupBy: 'fullDate'}}>Day</MenuItem>
+				<MenuItem eventKey={{displayName: 'Month', groupBy: 'month'}}>Month</MenuItem>
+				<MenuItem eventKey={{displayName: 'Year', groupBy: 'year'}}>Year</MenuItem>
+				<MenuItem eventKey={{displayName: 'Category', groupBy: 'categoryName'}}>Category</MenuItem>
+				<MenuItem eventKey={{displayName: 'Merchant', groupBy: 'merchantName'}}>Merchant</MenuItem>
 			</Dropdown.Menu>
 		</Dropdown>
 	)

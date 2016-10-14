@@ -78,10 +78,6 @@ class FilterContainer extends Component {
 	}
 };
 
-FilterContainer.propTypes = {
-	categories: PropTypes.array.isRequired,
-}
-
 function mapStateToProps(state, ownProps) {
 
 	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
