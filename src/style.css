@@ -30,6 +30,10 @@ body {
 	color:white;
 }
 
+.container {
+  width:100%;
+}
+
 /*.active {
 	color:white;
 }*/
@@ -64,7 +68,7 @@ body {
 
 .selected {
 	background-color: #22303D;
-	padding: 39px 0% 40px 0%;
+	padding: 40px 0% 40px 0%;
 	font-weight: bold;
 	color: #1B9D81;
 }
@@ -100,15 +104,13 @@ body {
 	.leftNav {
 		display: none;
 	}
-	.main {
-		padding: 68px 0px 42px 36px;	
-	}
 }
 
 @media screen 
   and (device-width: 360px) 
   and (device-height: 640px) 
   and (-webkit-device-pixel-ratio: 3) {
+
   	body {
   		margin-left: 0px;
   	}
@@ -116,8 +118,9 @@ body {
   		display: none;
   	}
   	.main {
-  		/*padding: 68px 0px 0px 36px;	*/
+  		padding: 36px 16px 8px 16px;
   	}
+    
 }
 
 @media screen 
@@ -133,10 +136,9 @@ body {
   	.leftNav {
   		display: none;
   	}
-  	.main {
-  		/*padding: 68px 0px 0px 36px;	*/
-  	}
-
+    .main {
+    padding: 36px 16px 8px 16px;
+    }
 }
 
 
@@ -176,6 +178,10 @@ body {
   font-size: 2em;
 }
 
+.bm-menu-wrap {
+	left: 0;
+}
+
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
   fill: #373a47;
@@ -184,7 +190,7 @@ body {
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 0.8em;
+  /*padding: 0.8em;*/
 }
 
 /* Styling of overlay */
