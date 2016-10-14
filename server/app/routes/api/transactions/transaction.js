@@ -38,7 +38,7 @@ router.get('/:transactionId', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Transaction.create(req.body)
+  Transaction.createOrFindWithMerchant(req.body)
     .then(transaction => {
       res.status(201).json(transaction);
     })

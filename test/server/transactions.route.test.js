@@ -121,7 +121,11 @@ describe('Transactions API Routes', () => {
 
 	describe('Post a New Transaction', () => {
 		it('posts a new transaction', done => {
-			agent.post('/api/transactions').send(transaction4)
+      let transac = {
+        transaction: transaction4,
+        merchant: {name: 'Dummy Merchant'}
+      }
+			agent.post('/api/transactions').send(transac)
 				.expect(201)
 				.end((err, response) => {
 					if (err) return done(err);
