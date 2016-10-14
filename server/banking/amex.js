@@ -1,6 +1,5 @@
 const Banking = require('banking');
 const { pick, curry, compose, prop, map, slice, append, __ } = require('ramda');
-const { password, user, accId } = amex;
 const { promisify } = require('bluebird');
 const handleBankError = require('./bankError');
 const db = require('../db');
@@ -20,9 +19,9 @@ const amexBank = (user, accId, password) => Banking({
   fidOrg: 'AMEX',
   url: 'https://online.americanexpress.com/myca/ofxdl/desktop/desktopDownload.do?request_type=nl_ofxdownload',
   bankId: null,
-  user: user,
-  password: password,
-  accId: accId,
+  user,
+  password,
+  accId,
   accType: 'CREDITCARD',
   ofxVer: 103,
   app: 'QWIN',
