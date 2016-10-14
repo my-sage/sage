@@ -19,6 +19,7 @@ class TransactionModal extends Component {
 			errors: {}
 		};
 		this.updateTransactionState = this.updateTransactionState.bind(this);
+		this.updateMerchantCategory = this.updateMerchantCategory.bind(this);
     this.update = this.update.bind(this);
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
@@ -41,10 +42,11 @@ class TransactionModal extends Component {
   }
 
   updateMerchantCategory () {
-		const id = this.state.transaction.id; 
+		let id = this.state.transaction.id; 
 		let transaction = this.state.transaction;
 		let overWrite = true;
 		this.props.actions.updateTransaction(id, {transaction,overWrite});
+		this.close();
 	} 
 
   close() {
@@ -81,7 +83,7 @@ class TransactionModal extends Component {
 
 	  			<Modal.Footer>
 	  				<Button bsStyle="primary" onClick={this.update}>Save and Close</Button>
-	  				<Button bsStyle="primary" onClick={this.update}>Update Merchant Category</Button>
+	  				<Button bsStyle="primary" onClick={this.updateMerchantCategory}>Update Merchant Category</Button>
 	  			</Modal.Footer>
 
 	  		</Modal>
