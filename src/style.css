@@ -24,6 +24,8 @@ body {
 	z-index:3000;
 }
 
+
+
 .activeButton {
 	color:white;
 }
@@ -34,6 +36,22 @@ body {
 
 
  .buttoncss {
+    width: 100%;
+    padding: 35px 0px;
+    background: transparent;
+    border: 0px solid transparent;
+    border-left: transparent;
+    border-right: transparent;
+    outline: 0;
+    color: white;
+}
+
+.burgerMenu {
+	margin: 0px;
+	width: 100%;
+}
+
+ .buttoncssburger {
     width: 100%;
     padding: 35px 0px;
     background: transparent;
@@ -75,7 +93,7 @@ body {
 	max-width: 200px;		
 }
 
-@media(max-width: 765px){
+@media(max-width: 960px){
 	body {
 		margin-left: 0px;
 	}
@@ -98,6 +116,78 @@ body {
   		display: none;
   	}
   	.main {
-  		padding: 68px 0px 42px 36px;	
+  		/*padding: 68px 0px 0px 36px;	*/
   	}
+}
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px)
+  and (-webkit-min-device-pixel-ratio : 4) 
+  and (-webkit-device-pixel-ratio : 4)
+  and (orientation: portrait) {
+
+  	body {
+  		margin-left: 0px;
+  	}
+  	.leftNav {
+  		display: none;
+  	}
+  	.main {
+  		/*padding: 68px 0px 0px 36px;	*/
+  	}
+
+}
+
+
+
+
+
+
+
+.bm-burger-button {
+  position: fixed;
+  width: 24px;
+  height: 20px;
+  left: 24px;
+  top: 18px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: white;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #34495C;
+  /*padding: 2.5em 1.5em 0;*/
+  font-size: 2em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }
