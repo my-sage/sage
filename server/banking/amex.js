@@ -1,6 +1,5 @@
 const Banking = require('banking');
 const { pick, curry, compose, prop, map, slice, append, __ } = require('ramda');
-const { amex } = require('./credentials');
 const { password, user, accId } = amex;
 const { promisify } = require('bluebird');
 const handleBankError = require('./bankError');
