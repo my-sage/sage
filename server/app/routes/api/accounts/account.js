@@ -3,6 +3,7 @@ const router = express.Router();
 const bankHandlers = require('../../../../banking');
 const db = require('../../../../db');
 const Account = db.model('account');
+const Promise = require('bluebird');
 
 router.get('/', (req, res, next) => {
   Account.findAll()
@@ -19,8 +20,8 @@ router.get('/syncAll', (req, res, next) => {
       return Promise.map(accounts, (account) => {
         const bankHandler = bankHandlers[account.name];
         if (bankHandler) {
-          return bankHandler(user, accId, password, start, end, account)
-        } else return new Error(`${account.name} handler not found`)
+          return bankHandler(user, accId, password, start, end, account);
+        } else return `${account.name} handler not found`;
       })
     })
     .then((handledAccounts) => {
