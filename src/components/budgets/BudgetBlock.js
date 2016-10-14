@@ -13,7 +13,7 @@ class BudgetBlock extends Component {
       <Grid>
         <Row>
           <Col sm={6} md={3}>
-            <BudgetCreateModal />
+            <BudgetCreateModal className="createBudget" />
           </Col>
         </Row>
         <Row>

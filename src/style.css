@@ -120,7 +120,7 @@ body {
   	.main {
   		padding: 36px 16px 8px 16px;
   	}
-    
+
 }
 
 @media screen 
@@ -141,10 +141,9 @@ body {
     }
 }
 
-
-
-
-
+.createBudget {
+  float:right;
+}
 
 
 .bm-burger-button {
