@@ -72,7 +72,6 @@ const parseAndPostRes = (start, end, accountId) =>
 let getAmex = (user, accId, password, start, end, accountInstance) => {
   const amexInstance = amexBank(user, accId, password);
   amexInstance.getStatement = promisify(amexInstance.getStatement.bind(amexInstance));
-  console.log('LALA');
   return amexInstance
     .getStatement({start, end})
         .then(res => parseAndPostRes(start, end, accountInstance.id)(res))

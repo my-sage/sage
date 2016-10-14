@@ -38,7 +38,6 @@ const categorize = (newMerchant, threshold = 0.70) => {
     } else
       return newMerchant;
   })
-  .catch(console.log)
 }
 
 module.exports = categorize;

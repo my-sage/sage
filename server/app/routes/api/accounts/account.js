@@ -12,16 +12,6 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/amex', (req, res, next) => {
-  const bankHandler = bankHandlers.amex;
-  console.log(bankHandler)
-  bankHandler('amex16hertz', '', '', 20150801, 20161012, {id: 1})
-    .then(() => {
-      res.status(201).json('Synced Account');
-    })
-    .catch(next)
-})
-
 router.get('/:accountId', (req, res, next) => {
   Account.findById(req.params.accountId)
     .then(account => {
@@ -36,7 +26,7 @@ router.get('/:accountId', (req, res, next) => {
       if (bankHandler) {
         bankHandler(user, accId, password, start, end, account)
           .then(() => {
-            res.status(201).json('Synced Account');
+            res.status(200).json('Synced Account');
           })
           .catch(next)
       } else res.json('Account Handler not found')
