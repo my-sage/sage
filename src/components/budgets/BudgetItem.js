@@ -24,12 +24,14 @@ class BudgetItem extends Component {
         <li style={style.li}>
         <div>
         <p style={{float:'left'}}><b>{category.name}</b>: {name}</p>
-        <p style={{textAlign: 'right'}}><b>${currentAmount}</b><i> of </i><b>${targetAmount}</b></p>
+        <p style={{textAlign: 'right', marginRight: '130px'}}><b>${currentAmount}</b><i> of </i><b>${targetAmount}</b></p>
         </div>
         {/*<p><b>Name:</b> {name} <b>| Currrent:</b> {currentAmount} <b>| Max Amount:</b> {targetAmount} <b>| Expiration:</b> {formattedDate} <b>| Category: </b>{category.name}*/}
         {/*<br></br>*/}
         <BudgetUpdateModal budget={this.props.budget}/>
+        <div>
         <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
+        </div>
         </li> 
         </Panel>   
     )

@@ -145,6 +145,9 @@ body {
   float:right;
 }
 
+.progress {
+  height:36px;
+}
 
 .bm-burger-button {
   position: fixed;
