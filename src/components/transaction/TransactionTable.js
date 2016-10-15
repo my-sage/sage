@@ -8,29 +8,43 @@ import TransactionSingle from './TransactionSingle';
 import { Table } from "react-bootstrap";
 import R from 'ramda';
 
+const arrowIcon = {
+	 float: "right",
+	 marginTop: "5px"
+}
+
 class TransactionTable extends Component {
 
 	constructor (props) {
 		super(props);
-		const defaultArrow = <i style={arrowIcon} className="fa fa-sort" aria-hidden="true"></i>;
+		let defaultArrow = <i style={arrowIcon} className="fa fa-sort" aria-hidden="true"></i>;
 		this.state = {
 			transactions: this.props.transactions,
-			status: {
+			status: Object.assign({},{
 				date: {direction: 'neutral',shape: defaultArrow}, 
 				amount: {direction: 'neutral',shape: defaultArrow},
 				merchant: {direction: 'neutral',shape: defaultArrow},
 				category: {direction: 'neutral',shape: defaultArrow}
-			},
+			}),
 			current: undefined
 		}
 		this.Sort = this.Sort.bind(this);
 		this.arrow = this.arrow.bind(this);
+		//this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
+		let defaultArrow = <i style={arrowIcon} className="fa fa-sort" aria-hidden="true"></i>;
 		this.setState({
-			transactions: nextProps.transactions
-		})
+			transactions: nextProps.transactions,
+			status: Object.assign({},{
+				date: {direction: 'neutral',shape: defaultArrow}, 
+				amount: {direction: 'neutral',shape: defaultArrow},
+				merchant: {direction: 'neutral',shape: defaultArrow},
+				category: {direction: 'neutral',shape: defaultArrow}
+			}),
+			current: undefined
+		});
 	}
 
 	arrow (field) {
@@ -110,10 +124,6 @@ const headerBar = {
 	color:'white'
 }
 
-const arrowIcon = {
-	 float: "right",
-	 marginTop: "5px"
-}
 
 //const mapStateToProps = (state) => ({ transactions: state.transactions.data })
 //const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(TransactionActions, dispatch)});
