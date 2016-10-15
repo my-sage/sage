@@ -120,6 +120,11 @@ body {
   	.main {
   		padding: 36px 16px 8px 16px;
   	}
+    .logInInfo {
+      margin-top:16%;
+      margin-left:10%;
+      margin-right: 10%;
+    }
 
 }
 
@@ -138,6 +143,11 @@ body {
   	}
     .main {
     padding: 36px 16px 8px 16px;
+    }
+    .logInInfo {
+      margin-top:16%;
+      margin-left:10%;
+      margin-right: 10%;
     }
 }
 
@@ -235,7 +245,7 @@ body {
   position: absolute; 
   /*top: 0; 
   right: 0; */
-  /*width: 33%; */
+  width: 33%; 
   margin-top:8%;
   margin-left:33%;
   margin-right: 33%;
