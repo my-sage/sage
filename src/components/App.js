@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <div>
           <TopNavbar/>
-          <BottomNavbar/>
+          
           <div>
             <LeftNav/>
               <div className="main">
