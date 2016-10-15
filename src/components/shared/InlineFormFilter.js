@@ -33,7 +33,7 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 
 	let getAllButton;
 	if(getAll) {
-		getAllButton =  <Button bsStyle='primary' onClick={getAll} style={style.spacingLeft}>All</Button>
+		getAllButton =  <Button bsStyle='primary' onClick={getAll} style={style.spacingLeft}>Get All</Button>
 	}
 
 	let merchantSelect;

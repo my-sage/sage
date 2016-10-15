@@ -10,7 +10,8 @@ import R from 'ramda';
 
 const arrowIcon = {
 	 float: "right",
-	 marginTop: "5px"
+	 marginTop: "5px",
+	 pointerEvents: "none"
 }
 
 class TransactionTable extends Component {
@@ -123,10 +124,5 @@ const headerBar = {
 	background: "#34495C",
 	color:'white'
 }
-
-
-//const mapStateToProps = (state) => ({ transactions: state.transactions.data })
-//const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(TransactionActions, dispatch)});
-
 
 export default TransactionTable;
