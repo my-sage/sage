@@ -3,6 +3,7 @@ import {Link} from 'react-router'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import TrendsTabs from './TrendsTabs'
+import {Panel} from 'react-bootstrap'
 
 class TrendsPage extends Component {
 	render() {
@@ -12,7 +13,9 @@ class TrendsPage extends Component {
 				<div>
 					<h1>Trends</h1>
 				</div>
+				<Panel>
 				<TrendsTabs transactions={transactions} merchants={merchants} categories={categories} dispatch={dispatch}/>
+				</Panel>
 			</div>
 		)
 	}

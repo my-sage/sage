@@ -18,13 +18,13 @@ export default React.createClass ({
      render(){
           return (
             <div>
-              <div className="leftNav" style={styles.divStyle}>
-              <img src={Logo} style={styles.logo}/>
-                 <Link to="/overview" activeClassName="selected" onlyActiveOnIndex={true}><button className="buttoncss"><i className="fa fa-tachometer" aria-hidden="true"></i> &nbsp; Overview</button></Link>
-                 <Link to="/transactions" activeClassName="selected"><button className="buttoncss"><i className="fa fa-money" aria-hidden="true"></i> &nbsp; Transactions</button></Link>
-                 <Link to="/budgets" activeClassName="selected"><button className="buttoncss"><i className="fa fa-tasks" aria-hidden="true"></i>  &nbsp; Budgets</button></Link>
-                 <Link to="/trends" activeClassName="selected"><button className="buttoncss"><i className="fa fa-line-chart" aria-hidden="true"></i>  &nbsp; Trends</button></Link>
-                 <Link to="/settings" activeClassName="selected"><button className="buttoncss"><span className="glyphicon glyphicon-leaf"></span>  &nbsp; Settings</button></Link>
+              <div className="leftNav">
+              {/*<img src={Logo} style={styles.logo}/>*/}
+                 <Link to="/overview" activeClassName="selected" onlyActiveOnIndex={true}><button className="buttoncss"><i style={{fontSize: '250%'}} className="fa fa-tachometer" aria-hidden="true"></i></button></Link>
+                 <Link to="/transactions" activeClassName="selected"><button className="buttoncss"><i  style={{fontSize: '250%'}} className="fa fa-money" aria-hidden="true"></i></button></Link>
+                 <Link to="/budgets" activeClassName="selected"><button className="buttoncss"><i style={{fontSize: '250%'}} className="fa fa-tasks" aria-hidden="true"></i></button></Link>
+                 <Link to="/trends" activeClassName="selected"><button className="buttoncss"><i style={{fontSize: '250%'}} className="fa fa-line-chart" aria-hidden="true"></i></button></Link>
+                 <Link to="/settings" activeClassName="selected"><button className="buttoncss"><i style={{fontSize: '250%'}} className="glyphicon glyphicon-leaf"></i></button></Link>
                </div>
             </div>
         )

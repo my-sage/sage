@@ -7,6 +7,7 @@ import { compose, pick, prop } from 'ramda';
 import TransactionTabs from './TransactionTabs'
 import TransactionHeader from './TransactionHeader'
 import * as TransactionActions from '../../actions/transactionActions';
+import {Panel} from 'react-bootstrap'
 
 const TransactionHeaderStyle = {
   float: "right"
@@ -22,9 +23,11 @@ class TransactionPage extends Component {
         <div>
           <h1>Transactions</h1>
         </div>
+        <Panel>
         <div>
           <TransactionTabs transactions={this.props.transactions}/>
         </div>
+        </Panel>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 body {
-	margin-left: 245px;
+	margin-left: 100px;
+  background-color: #eeeeee;
 }
 
 .main {
@@ -12,7 +13,7 @@ body {
 
 .leftNav {
 	height: 100%;
-	width: 250px;
+	width: 100px;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -20,8 +21,8 @@ body {
 	background-color: #34495C;
 	overflow-x: hidden;
 	transition: 0.5s;
-	padding-top: 20px;
-	z-index:3000;
+	padding-top: 50px;
+	z-index:1200;
 }
 
 
@@ -68,7 +69,7 @@ body {
 
 .selected {
 	background-color: #22303D;
-	padding: 40px 0% 40px 0%;
+	padding: 57px 0% 40px 0%;
 	font-weight: bold;
 	color: #1B9D81;
 }
@@ -97,59 +98,9 @@ body {
 	max-width: 200px;		
 }
 
-@media(max-width: 960px){
-	body {
-		margin-left: 0px;
-	}
-	.leftNav {
-		display: none;
-	}
-}
 
-@media screen 
-  and (device-width: 360px) 
-  and (device-height: 640px) 
-  and (-webkit-device-pixel-ratio: 3) {
 
-  	body {
-  		margin-left: 0px;
-  	}
-  	.leftNav {
-  		display: none;
-  	}
-  	.main {
-  		padding: 36px 16px 8px 16px;
-  	}
-    .logInInfo {
-      margin-top:16%;
-      margin-left:10%;
-      margin-right: 10%;
-    }
 
-}
-
-@media screen 
-  and (device-width: 360px) 
-  and (device-height: 640px)
-  and (-webkit-min-device-pixel-ratio : 4) 
-  and (-webkit-device-pixel-ratio : 4)
-  and (orientation: portrait) {
-
-  	body {
-  		margin-left: 0px;
-  	}
-  	.leftNav {
-  		display: none;
-  	}
-    .main {
-    padding: 36px 16px 8px 16px;
-    }
-    .logInInfo {
-      margin-top:16%;
-      margin-left:10%;
-      margin-right: 10%;
-    }
-}
 
 .createBudget {
   float:right;
@@ -159,17 +110,26 @@ body {
   height:36px;
 }
 
+
+.logoname {
+  max-height: 25px; 
+  margin-top: 14px; 
+  margin-left:-11px; 
+  margin-bottom:14px
+}
+
+
 .bm-burger-button {
   position: fixed;
   width: 24px;
   height: 20px;
-  left: 24px;
+  left: 120px;
   top: 18px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: white;
+  background: #34495C;
 }
 
 /* Position and sizing of clickable cross button */
@@ -307,4 +267,58 @@ body {
 .logInInfo .acronym { 
   display: none; 
   }
+}
+
+@media(max-width: 960px){
+  body {
+    margin-left: 0px;
+  }
+  .leftNav {
+    display: none;
+  }
+}
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 3) {
+
+    body {
+      margin-left: 0px;
+    }
+    .leftNav {
+      display: none;
+    }
+    .main {
+      padding: 36px 16px 8px 16px;
+    }
+    .logInInfo {
+      margin-top:16%;
+      margin-left:10%;
+      margin-right: 10%;
+    }
+
+}
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px)
+  and (-webkit-min-device-pixel-ratio : 4) 
+  and (-webkit-device-pixel-ratio : 4)
+  and (orientation: portrait) {
+
+    body {
+      margin-left: 0px;
+    }
+    .leftNav {
+      display: none;
+    }
+    .main {
+    padding: 36px 16px 8px 16px;
+    }
+    .logInInfo {
+      margin-top:16%;
+      margin-left:10%;
+      margin-right: 10%;
+    }
 }
