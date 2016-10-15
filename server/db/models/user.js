@@ -10,6 +10,13 @@ const {
 
 const db = require('../_db');
 
+const setSaltAndPassword = (user) => {
+  if(user.changed('password')) {
+    user.salt = user.Model.generateSalt();
+    user.password = user.Model.hashPassword(user.password, user.salt);
+  }
+};
+
 const fields = {}
   , options = {};
 
@@ -42,13 +49,6 @@ options.classMethods = {
 options.hooks = {
   beforeCreate: setSaltAndPassword,
   beforeUpdate: setSaltAndPassword
-}
-
-const setSaltAndPassword = (user) => {
-  if(user.changed('password')) {
-    user.salt = user.Model.generateSalt();
-    user.password = user.Model.hashPassword(user.password, user.salt);
-  }
 }
 
 module.exports = db.define('user', fields, options);

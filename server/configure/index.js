@@ -24,6 +24,6 @@ module.exports = function (app, db) {
 		app.use(app.getValue('log'));
 	}
 
-	// require('./authentication')(app, db);
+  require('./authentication')(app, db);
 
 };
