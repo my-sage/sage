@@ -1,6 +1,9 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as TransactionActions from '../../actions/transactionActions';
 import TransactionSingle from './TransactionSingle';
 import { Table } from "react-bootstrap";
 import R from 'ramda';
@@ -14,11 +17,20 @@ class TransactionTable extends Component {
 			transactions: this.props.transactions,
 			status: {
 				date: {direction: 'neutral',shape: defaultArrow}, 
-				amount: {direction: 'neutral',shape: defaultArrow}},
+				amount: {direction: 'neutral',shape: defaultArrow},
+				merchant: {direction: 'neutral',shape: defaultArrow},
+				category: {direction: 'neutral',shape: defaultArrow}
+			},
 			current: undefined
 		}
 		this.Sort = this.Sort.bind(this);
 		this.arrow = this.arrow.bind(this);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			transactions: nextProps.transactions
+		})
 	}
 
 	arrow (field) {
@@ -36,7 +48,7 @@ class TransactionTable extends Component {
 
 	Sort (event) {
 		let field = event.target.getAttribute('name');
-
+		let transactions;
 		if(field!==this.state.current){
 
 			if(this.state.current!==undefined) {
@@ -49,17 +61,14 @@ class TransactionTable extends Component {
 			temp.direction = true;
 			this.arrow(field)
 
-			let transactions = R.sortBy(R.prop(field), this.state.transactions);
-			
-			// for(let props in this.state.status) {
-			// 	this.state.status[props] = '';
-			// }
-
-			//this.state.arrow = true;
-			//this.arrow(field);
-
+			if(field==='date' || field==='amount'){
+				transactions = R.sortBy(R.prop(field), this.state.transactions);
+			}else{
+				transactions = R.sortBy(R.path([field,'name']),this.state.transactions);
+			}
 			return this.setState({transactions: transactions})
-		}else{
+		}
+		else{
 			let transactions = this.state.transactions.reverse();
 			let temp = this.state.status[field];
 			temp.direction = !temp.direction;
@@ -74,12 +83,12 @@ class TransactionTable extends Component {
 				<thead>
 					<tr style={headerBar}>
 						<th style={header} name="date" onClick={this.Sort}>Date &nbsp; &nbsp;{this.state.status.date.shape}</th>
-						<th style={header} name="merchantId" onClick={this.Sort}>Merchant &nbsp; &nbsp;</th>
-						<th style={header} name="categoryId" onClick={this.Sort}>Category &nbsp; &nbsp;</th>
+						<th style={header} name="merchant" onClick={this.Sort}>Merchant &nbsp; &nbsp;{this.state.status.merchant.shape}</th>
+						<th style={header} name="category" onClick={this.Sort}>Category &nbsp; &nbsp;{this.state.status.category.shape}</th>
 						<th style={header} name="amount" onClick={this.Sort}>Amount &nbsp; &nbsp;{this.state.status.amount.shape}</th>
 						<th style={header}>Edit</th>
 					</tr>
-				</thead>
+			</thead>
 				<tbody>
 				{this.state.transactions.map(transaction=>TransactionSingle(transaction))}
 				</tbody>
@@ -106,4 +115,8 @@ const arrowIcon = {
 	 marginTop: "5px"
 }
 
-export default TransactionTable
+//const mapStateToProps = (state) => ({ transactions: state.transactions.data })
+//const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(TransactionActions, dispatch)});
+
+
+export default TransactionTable;
