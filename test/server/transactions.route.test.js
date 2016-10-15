@@ -121,7 +121,11 @@ describe('Transactions API Routes', () => {
 
 	describe('Post a New Transaction', () => {
 		it('posts a new transaction', done => {
-			agent.post('/api/transactions').send(transaction4)
+      let transac = {
+        transaction: transaction4,
+        merchant: {name: 'Dummy Merchant'}
+      }
+			agent.post('/api/transactions').send(transac)
 				.expect(201)
 				.end((err, response) => {
 					if (err) return done(err);
@@ -136,7 +140,8 @@ describe('Transactions API Routes', () => {
 
 	describe('Update an Existing Transaction', () => {
 		it('updates an existing transaction', done => {
-			agent.put('/api/transactions/1').send({transaction: {categoryId: 2}})
+
+			agent.put('/api/transactions/1').send({transaction: {categoryId: 2}, overWrite: false})
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);

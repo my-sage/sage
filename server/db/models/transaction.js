@@ -46,14 +46,16 @@ options.classMethods = {
         where: merchant
       })
       .spread(createdMerchant => {
-        return this.create(transaction)
-          .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
-          .then(ct => ct.reload())
-          .then(transaction => {
-            transaction.categoryId = transaction.merchant.categoryId;
-            return transaction.save();
-          })
+        return createdMerchant.categoryId ? createdMerchant : createdMerchant.categorize();
       })
+      .then(createdMerchant => this.create(transaction)
+        .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
+        .then(createdTransaction => createdTransaction.reload())
+        .then(transaction => {
+          transaction.categoryId = createdMerchant.categoryId;
+          return transaction.save();
+        }))
+      .then(ct => ct.reload())
   },
   bulkCreateWithMerchant: function(transactions) {
     const createOnlyWhenUnique = (transaction) => {

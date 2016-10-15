@@ -1,7 +1,5 @@
 const Banking = require('banking');
 const { pick, curry, compose, prop, map, slice, append, __ } = require('ramda');
-const { amex } = require('./credentials');
-const { password, user, accId } = amex;
 const { promisify } = require('bluebird');
 const handleBankError = require('./bankError');
 const db = require('../db');
@@ -21,9 +19,9 @@ const amexBank = (user, accId, password) => Banking({
   fidOrg: 'AMEX',
   url: 'https://online.americanexpress.com/myca/ofxdl/desktop/desktopDownload.do?request_type=nl_ofxdownload',
   bankId: null,
-  user: user,
-  password: password,
-  accId: accId,
+  user,
+  password,
+  accId,
   accType: 'CREDITCARD',
   ofxVer: 103,
   app: 'QWIN',
@@ -62,7 +60,6 @@ const parseBankRes = curry((startDate, endDate, accountId, res) => {
 });
 
 const postRes = (res) => {
-  console.log(res);
   return Transaction.bulkCreateWithMerchant(res.transactions)
 };
 
@@ -72,7 +69,6 @@ const parseAndPostRes = (start, end, accountId) =>
 let getAmex = (user, accId, password, start, end, accountInstance) => {
   const amexInstance = amexBank(user, accId, password);
   amexInstance.getStatement = promisify(amexInstance.getStatement.bind(amexInstance));
-  console.log('LALA');
   return amexInstance
     .getStatement({start, end})
         .then(res => parseAndPostRes(start, end, accountInstance.id)(res))

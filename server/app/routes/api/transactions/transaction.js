@@ -38,7 +38,7 @@ router.get('/:transactionId', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Transaction.create(req.body)
+  Transaction.createOrFindWithMerchant(req.body)
     .then(transaction => {
       res.status(201).json(transaction);
     })
@@ -58,7 +58,7 @@ router.put('/:transactionId', (req, res, next) => {
       return targetTransaction.reload()
     })
     .then(targetTransaction => {
-      if(!overWrite) res.status(200).json(targetTransaction);
+      if(overWrite===false) res.status(200).json(targetTransaction);
       else {
         result = targetTransaction;
         return targetTransaction.getMerchant()

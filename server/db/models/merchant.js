@@ -1,11 +1,13 @@
 'use strict'
 const Sequelize = require('sequelize')
 const db = require('../_db');
-const Transaction = require('./transaction');
+
 const Promise = require('bluebird');
 const {
   assoc
 } = require('ramda');
+
+const categorize = require('../../banking/categorize');
 
 const fields = {}
 const options = {}
@@ -31,6 +33,9 @@ options.instanceMethods = {
         return Promise.map(updatedTransactions, t => t.save());
       })
       .then(updatedTransactions => Promise.map(updatedTransactions, (t) => t.reload()))
+  },
+  categorize: function() {
+    return categorize(this);
   }
 }
 
