@@ -19,3 +19,9 @@ export const updateBudget =
 
 export const getCurrentBudgets = 
   () => axios.get(`${BASE_URL}/api/budgets/current`).then(getData);
+
+export const getAllBudgets = 
+	(filterUrl) => {
+	if(filterUrl) return axios.get(`${BASE_URL}/api/budgets${filterUrl}`).then(getData);
+	else return axios.get(`${BASE_URL}/api/budgets`).then(getData);
+}

@@ -139,13 +139,11 @@ function seedBudget() {
 
 // ----------------------------------Transaction Seed-----------------------------------------------//
 
-let randomNote = [
-	'general spending',
-	'short term loan',
-	'long term loan',
-	'family spending',
-	'basic spending',
-	'Miscellaneous expense'
+let randomType = [
+	'DEBIT',
+	'CREDIT',
+	'TRANSFER',
+	'DEPOSIT'
 ];
 
 let randomDateGen = (monthsAway) =>
@@ -169,10 +167,11 @@ let randomTransaction = (accountId,status) => {
 	return {
 		amount: amount,
 		date: randomDate2MonthsAway(),
-		note: _.sample(randomNote),
+		type: _.sample(randomType),
 		accountId: accountId,
 		categoryId: _.random(1, numCategories),
-		merchantId: _.random(1, numMerchants)
+    merchantId: _.random(1, numMerchants),
+    fitid: _.random(100000000, 900000000)
 	}
 }
 
@@ -209,7 +208,14 @@ function seedTransaction() {
   let transactionObjs = creatingTransactionCredit.concat(creatingTransactionNonCredit);
 
   transactionObjs = _.flatten(transactionObjs)
-  return promiseNester(Transaction.create.bind(Transaction),transactionObjs)
+  return promiseNester(Transaction.upsert.bind(Transaction),transactionObjs)
+}
+
+function setMerchant1ToCat1(updatedMerchant = { categoryId: 1 }) {
+  return Merchant.findById(1)
+  .then(merchant => {
+    return merchant.updateWithTransactions(updatedMerchant);
+  })
 }
 
 // ----------------------------------Datebase Sync-------------------------------------------------//
@@ -236,6 +242,10 @@ db.sync({
   .then(() => {
     console.log(chalk.green('Transaction Seeding Successful'));
     return seedBudget();
+  })
+  .then(() => {
+    console.log(chalk.green('Set Merchant 1 To Cat 1'));
+    return setMerchant1ToCat1();
   })
   .then(() => {
     console.log(chalk.blue('finish seeding'));

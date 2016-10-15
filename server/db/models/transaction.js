@@ -2,9 +2,13 @@
 
 const Sequelize = require('sequelize');
 const db = require('../_db');
+const {
+  map
+} = require('ramda');
 const Account = require('./account');
 const Merchant = require('./merchant');
 const Category = require('./category');
+const Promise = require('bluebird');
 
 const fields = {};
 const options = {};
@@ -19,8 +23,12 @@ fields.date = {
   allowNull: false
 };
 
+fields.fitid = {
+  type: Sequelize.STRING,
+  allowNull: false
+};
 
-fields.note = {
+fields.type = {
   type: Sequelize.STRING,
   allowNull: false,
   defaultValue: 'no comment'
@@ -38,14 +46,30 @@ options.classMethods = {
         where: merchant
       })
       .spread(createdMerchant => {
-        return this.create(transaction)
-          .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
-          .then(ct => ct.reload())
-          .then((createdTransaction) => {
-            return createdTransaction
-          })
+        return createdMerchant.categoryId ? createdMerchant : createdMerchant.categorize();
       })
-
+      .then(createdMerchant => this.create(transaction)
+        .then(createdTransaction => createdTransaction.setMerchant(createdMerchant))
+        .then(createdTransaction => createdTransaction.reload())
+        .then(transaction => {
+          transaction.categoryId = createdMerchant.categoryId;
+          return transaction.save();
+        }))
+      .then(ct => ct.reload())
+  },
+  bulkCreateWithMerchant: function(transactions) {
+    const createOnlyWhenUnique = (transaction) => {
+      let {
+        fitid
+      } = transaction.transaction
+      this.find({
+          where: {
+            fitid
+          }
+        })
+        .then(found => !found ? this.createOrFindWithMerchant(transaction) : found)
+    }
+    return Promise.map(transactions, createOnlyWhenUnique)
   }
 };
 
@@ -59,15 +83,15 @@ options.instanceMethods = {
     let currentUnixTime = new Date().valueOf();
     return this.getCategory()
       .then(category => {
-        return category.getBudgets({
+        return category ? category.getBudgets({
           where: {
             endDate: {
               $gt: currentUnixTime
             }
           }
-        })
+        }) : [false]
       })
-      .then(budgets => budgets[0])
+      .get(0)
   }
 };
 
@@ -76,7 +100,7 @@ options.hooks = {
   beforeUpdate: function(transaction) {
     return transaction.getCurrentBudget()
       .then(budget => {
-        if(budget) {
+        if (budget) {
           budget.currentAmount = budget.currentAmount + transaction.amount;
           return budget.save();
         }
@@ -85,31 +109,30 @@ options.hooks = {
 
   afterUpdate: function(transaction) {
     return transaction.getCurrentBudget()
-     .then(budget => {
-        if(budget) {
+      .then(budget => {
+        if (budget) {
           budget.currentAmount = budget.currentAmount - transaction.amount;
           return budget.save();
         }
-     });
+      });
   },
 
   afterCreate: function(transaction) {
-    let updatingAccount = transaction.getAccount()
-      .then(account => {
-        account.balance = account.balance + transaction.amount;
-        return account.save()
-      });
-
-    let updatingBudget = transaction.getCurrentBudget()
+    const updatingBudget = transaction.getCurrentBudget()
       .then(budget => {
         if (budget) {
           budget.currentAmount = budget.currentAmount - transaction.amount
           return budget.save()
         }
       });
-
-    return Promise.all([updatingAccount,updatingBudget])
+    if (transaction)
+      return updatingBudget;
   }
 };
+
+options.indexes = [{
+  unique: true,
+  fields: ['fitid']
+}]
 
 module.exports = db.define('transaction', fields, options);

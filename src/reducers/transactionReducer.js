@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import * as actions from '../actions/constants/transactionActionTypes';
 import initialState from './initialState';
-import { evolve, map, curry, filter, append } from 'ramda';
+import { evolve, map, curry, filter, append, forEach } from 'ramda';
 import { createReducer, createFetchingHandlers, createErrorHandlers } from '../utils';
 
 const { transactions } = initialState;
@@ -20,7 +20,14 @@ const dataHandlers = {
   },
   [actions.UPDATE_TRANSACTION_SUCCESS](state, action) {
     const update = curry((updatedTransaction, oldTransaction) => 
-      oldTransaction.id === updatedTransaction.id ? updatedTransaction : oldTransaction)
+      oldTransaction.id === updatedTransaction.id ? updatedTransaction : oldTransaction);
+    if(Array.isArray(action.transaction)){
+      let newState = state;
+      forEach((newTransaction) => {
+        newState = map(update(newTransaction), newState);
+      }, action.transaction)
+      return newState;
+    }
     return map(update(action.transaction), state)
   }
 };
