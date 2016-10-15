@@ -53,7 +53,7 @@ class BudgetCreateModal extends Component {
   	return (
 	  	<div className="modal-container" style={{height: 50, marginBottom: '20px'}}>
 
-	  		<Button bsStyle="info" bsSize="large" onClick={this.open} style={{width:'100%'}}>
+	  		<Button bsStyle="info" bsSize="large" onClick={this.open} style={{width:'100%', marginTop:'15px'}}>
           + Create Budget
 	  		</Button>
 

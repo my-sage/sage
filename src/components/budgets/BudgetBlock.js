@@ -14,9 +14,7 @@ class BudgetBlock extends Component {
       <Grid>
         <Row>
           <Col md={12}>
-          <Panel>
             <BudgetFilterContainer />
-          </Panel>
           </Col>
         </Row>
         <br/>

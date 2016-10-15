@@ -8,16 +8,15 @@ import SelectInput from '../shared/DropdownInput';
 
 const style = {
 	spacingRight : {
-		marginRight: '10px',
-		fontWeight: 'bold'
+		marginRight: '15px',
+		width:'40%'
 	},
 	spacingRightAndLeft : {
 		margin: '0px 10px 0px 20px',
 		fontWeight: 'bold'
 	},
-	spacingLeft: {
-		marginLeft: '30px',
-		fontWeight: 'bold'
+	spacingTop: {
+		marginTop: '30px'
 	},
 	center: {
 		textAlign: 'center'
@@ -38,8 +37,8 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 
 	let merchantSelect;
 	if (merchants) {
-		merchantSelect = <div style={{display: "inline"}}>
-			<ControlLabel style={style.spacingRight}>Merchant</ControlLabel>
+		merchantSelect = <div style={{display: "inline", marginRight:'30px'}}>
+			{/*<ControlLabel style={style.spacingRight}>Merchant</ControlLabel>*/}
 			<SelectInput
 				name="merchantId"
 				value={instance.merchantId}
@@ -55,36 +54,41 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 	return (
 
 		<Form inline style={style.center}>
-
+			<div>
 				{merchantSelect}
 
-				<ControlLabel style={style.spacingRightAndLeft}><b>Category</b></ControlLabel>
-
-				<SelectInput
-					name="categoryId"
-					value={instance.categoryId}
-					defaultOption="Pick Category"
-					options={categories}
-					onChange={onChange} 
-					error={errors.categoryId}
-					style={style.spacing}/>
-
-				<ControlLabel style={style.spacingRightAndLeft}>Start Date</ControlLabel>
+				{/*<ControlLabel style={style.spacingRightAndLeft}><b>Category</b></ControlLabel>*/}
+				<div style={{marginRight:'30px', display:'inline'}}>
+					<SelectInput
+						name="categoryId"
+						value={instance.categoryId}
+						defaultOption="Pick Category"
+						options={categories}
+						onChange={onChange} 
+						error={errors.categoryId}/>
+				</div>
+				<div style={{marginRight:'30px', display:'inline'}}>
+				{/*<ControlLabel style={style.spacingRightAndLeft}>Start Date</ControlLabel>*/}
 				<DatePicker 
+					placeholder="Start Date"
 					name="startDate"
 					value={instance.startDate}
 					onChange={onChangeStart}
 					error={errors.startDate} />
-
-				<ControlLabel style={style.spacingRightAndLeft}>End Date</ControlLabel>
-				
+				</div>
+				{/*<ControlLabel style={style.spacingRightAndLeft}>End Date</ControlLabel>*/}
+				<div style={{display:'inline'}}>
 				<DatePicker 
+					placeholder="End Date"
 					name="endDate"
 					value={instance.endDate}
 					onChange={onChangeEnd}
 					error={errors.endDate} />		
+				</div>
+				</div>
+					<br></br>
 
-			<Button bsStyle='primary' type="submit" onClick={filter} style={style.spacingLeft}>Filter</Button>
+			<Button bsStyle='primary' type="submit" onClick={filter} style={style.spacingRight}>Filter</Button>
 			{getCurrentButton}
 			{getAllButton}
 		</Form>
