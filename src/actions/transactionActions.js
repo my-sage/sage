@@ -10,12 +10,14 @@ export const createTransactionSuccess = makeActionCreator(actions.CREATE_TRANSAC
 export const deleteTransactionSuccess = makeActionCreator(actions.DELETE_TRANSACTION_SUCCESS, 'id');
 export const updateTransactionSuccess = makeActionCreator(actions.UPDATE_TRANSACTION_SUCCESS, 'transaction');
 export const apiFail = makeActionCreator(actions.API_FAIL, 'error');
+export const affixQuery = makeActionCreator(actions.AFFIX_QUERY, 'query');
 
 //thunk Actions
 export const getAllTransactions = makeThunkCreator(transactionApi.getAllTransactions
 , fetchTransactions
 , fetchTransactionsSuccess
-, apiFail);
+, apiFail
+	, affixQuery);
 
 export const createTransaction = makeThunkCreator(transactionApi.createTransaction
 , false

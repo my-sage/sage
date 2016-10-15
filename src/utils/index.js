@@ -43,12 +43,13 @@ export function dispatchFail(dispatch, action) {
   return  (err) => dispatch(action(err));
 }
 
-export function makeThunkCreator(asyncCall, fetchAction, successAction, failureAction) {
-  return (asyncArg1, asyncArg2) => {
+export function makeThunkCreator(asyncCall, fetchAction, successAction, failureAction, optionalAction) {
+  return (...args) => {
     let asyncArgs = [].slice.call(arguments);
     return (dispatch) => {
+      if(optionalAction) dispatch(optionalAction(...args))
       if(fetchAction) dispatch(fetchAction())
-      return asyncCall(asyncArg1, asyncArg2)
+      return asyncCall(...args)
       .then(data => {
         dispatch(successAction(data))
       })
