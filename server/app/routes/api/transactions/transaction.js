@@ -58,7 +58,7 @@ router.put('/:transactionId', (req, res, next) => {
       return targetTransaction.reload()
     })
     .then(targetTransaction => {
-      if(overWrite===false) res.status(200).json(targetTransaction);
+      if(!overWrite) res.status(200).json(targetTransaction);
       else {
         result = targetTransaction;
         return targetTransaction.getMerchant()
