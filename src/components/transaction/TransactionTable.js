@@ -10,7 +10,8 @@ import R from 'ramda';
 
 const arrowIcon = {
 	 float: "right",
-	 marginTop: "5px"
+	 marginTop: "5px",
+	 pointerEvents: "none"
 }
 
 class TransactionTable extends Component {
