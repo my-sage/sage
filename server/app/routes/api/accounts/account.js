@@ -3,6 +3,7 @@ const router = express.Router();
 const bankHandlers = require('../../../../banking');
 const db = require('../../../../db');
 const Account = db.model('account');
+const Promise = require('bluebird');
 
 router.get('/', (req, res, next) => {
   Account.findAll()
@@ -12,16 +13,24 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/amex', (req, res, next) => {
-  const bankHandler = bankHandlers.amex;
-  console.log(bankHandler)
-  bankHandler('amex16hertz', '', '', 20150801, 20161012, {id: 1})
-    .then(() => {
-      res.status(201).json('Synced Account');
+//need to check if logged in
+router.get('/syncAll', (req, res, next) => {
+  Account.findAll()
+    .then(accounts => {
+      return Promise.map(accounts, (account) => {
+        const bankHandler = bankHandlers[account.name];
+        if (bankHandler) {
+          return bankHandler(user, accId, password, start, end, account);
+        } else return `${account.name} handler not found`;
+      })
     })
-    .catch(next)
-})
+    .then((handledAccounts) => {
+      res.status(200).json(handledAccounts);
+    })
+    .catch(next);
+});
 
+//need to check if logged in
 router.get('/:accountId', (req, res, next) => {
   Account.findById(req.params.accountId)
     .then(account => {
@@ -36,7 +45,7 @@ router.get('/:accountId', (req, res, next) => {
       if (bankHandler) {
         bankHandler(user, accId, password, start, end, account)
           .then(() => {
-            res.status(201).json('Synced Account');
+            res.status(200).json('Synced Account');
           })
           .catch(next)
       } else res.json('Account Handler not found')
