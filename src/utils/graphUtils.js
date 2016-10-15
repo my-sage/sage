@@ -49,3 +49,13 @@ export const wantIncomeFilter = (boolean) => R.filter(wantIncome(boolean));
 export const enhanceTransactions = (transactions) => R.map(resolveMerchantAndCategory, transactions);
 
 export const objectAddition = (objA, objB) => R.mergeWith(R.add, objA, objB);
+
+const makeAbsolute = (transaction) => {
+	return {x: transaction.x, y: Math.abs(transaction.y), label: transaction.label};
+};
+
+export const mapAbsolute = (transactionData) => {
+	const result = [];
+	_.forEach(transactionData, (transaction) => result.push(makeAbsolute(transaction)));
+	return result;
+};

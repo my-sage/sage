@@ -17,7 +17,7 @@ class TrendsPage extends Component {
 	}
 }
 function mapStateToProps(state, ownProps) {
-	return {transactions: state.transactions.data, merchants: state.merchants.data, categories: state.categories.data}
+	return {transactions: state.transactions.data}
 }
 
 function mapDispatchToProps(dispatch) {

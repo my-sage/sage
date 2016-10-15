@@ -1,27 +1,29 @@
 import React, {Component} from 'react';
 import PieChart from './PieChart';
-import VerticalBarGraph from './VerticalBarGraph';
-import {wantIncomeFilter, enhanceTransactions} from '../../utils/graphUtils';
+import NetIncomeGraph from './NetIncomeGraph';
+import FilterContainer from '../shared/FilterContainer';
+import {enhanceTransactions} from '../../utils/graphUtils';
 import GroupingDropdown from './GroupingDropdown';
-import ChartSelect from './ChartSelect';
 
 class IncomePage extends Component {
 	constructor() {
 		super();
-		this.state = {groupBy: 'fullDate', shouldBePie: false, displayName: 'Day'}
+		this.state = {groupBy: 'fullDate', displayName: 'Day'}
 	}
 
 	render() {
-		const incomeData = wantIncomeFilter(true)(this.props.transactions);
-		const enhancedTransactions = enhanceTransactions(incomeData);
+		const enhancedTransactions = enhanceTransactions(this.props.transactions);
 		const groupSetter = (eventKey) => this.setState({groupBy: eventKey.groupBy, displayName: eventKey.displayName});
-		const chartSelector = (eventKey) => this.setState({shouldBePie: eventKey});
-		const shouldBePie = (boolean) => boolean ? <PieChart data={enhancedTransactions} groupBy={this.state.groupBy}/> : <VerticalBarGraph data={enhancedTransactions} groupBy={this.state.groupBy}/>;
+		const shouldBePie = (boolean) => {
+			return boolean ?
+				<PieChart data={enhancedTransactions} groupBy={this.state.groupBy}/> :
+				<NetIncomeGraph data={enhancedTransactions} groupBy={this.state.groupBy}/>;
+		};
 		return (
 			<div>
+				<FilterContainer />
 				<GroupingDropdown onSelect={groupSetter.bind(this)}/>
-				<ChartSelect onSelect={chartSelector.bind(this)}/>
-				<h1>Income By {this.state.displayName}</h1>
+				<h3>Net Income By {this.state.displayName}</h3>
 				{shouldBePie(this.state.shouldBePie)}
 			</div>
 		)
