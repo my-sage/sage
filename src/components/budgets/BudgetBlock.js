@@ -12,13 +12,9 @@ class BudgetBlock extends Component {
     return (
       <Grid>
         <Row>
-          <Col sm={6} md={3}>
-            <BudgetCreateModal/>
-          </Col>
-        </Row>
-        <Row>
           <Col md={12}>
-            <ul>
+            <ul style={{padding:'0px'}}>
+              <BudgetCreateModal/>
               {budgets}
             </ul>
           </Col>
