@@ -140,6 +140,7 @@ describe('Transactions API Routes', () => {
 
 	describe('Update an Existing Transaction', () => {
 		it('updates an existing transaction', done => {
+
 			agent.put('/api/transactions/1').send({transaction: {categoryId: 2}, overWrite: false})
 				.expect(200)
 				.end((err, response) => {

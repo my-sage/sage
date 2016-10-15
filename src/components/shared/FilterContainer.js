@@ -16,12 +16,18 @@ class FilterContainer extends Component {
 			errors: {}
 		};
 		this.filter = this.filter.bind(this);
+		this.getAll = this.getAll.bind(this);
 	}
 
 	filter (event) {
 		event.preventDefault();
 		let filterUrl = queryUrl(this);		
 		this.props.actions.getAllTransactions(filterUrl)
+	}
+
+	getAll (event) {
+		event.preventDefault();
+		this.props.actions.getAllTransactions();
 	}
 
 	render () {
@@ -33,6 +39,7 @@ class FilterContainer extends Component {
 							onChangeStart={updateStartDate(this)}
 							onChangeEnd={updateEndDate(this)}
 							filter={this.filter}
+							getAll={this.getAll}
 							errors={this.state.errors}
 						/>
 	}

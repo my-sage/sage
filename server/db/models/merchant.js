@@ -1,6 +1,7 @@
 'use strict'
 const Sequelize = require('sequelize')
 const db = require('../_db');
+
 const Promise = require('bluebird');
 const {
   assoc
