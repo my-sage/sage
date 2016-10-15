@@ -4,9 +4,14 @@ import React from 'react';
 import Bootstrap, {Navbar, NavItem, Nav, NavDropdown, MenuItem} from 'react-bootstrap'
 import { render } from 'react-dom';
 import {Link} from 'react-router'
+import Hamburger from './HamburgerMenu'
+import Logo from '../../images/letters.png'
 
 const divStyle = {
-	marginLeft: "247px"
+	backgroundColor:'white',
+	marginBottom: '25px',
+	boxShadow: '1px 1px 1px grey',
+	zIndex:1201
 }
 
 const float = {
@@ -20,10 +25,13 @@ const white = {
 export default React.createClass ({
 	render(){
 		return (
-			<Navbar style={divStyle} fluid inverse fixedTop>
+			<Navbar style={divStyle} fluid fixedTop>
+				<Nav>
+					<img className="logoname" src={Logo}/>
+					<Hamburger slide/>
+				</Nav>
 			  <Nav style={float}>
-			    <NavItem eventKey={3}><Link to="/settings"  style={white}><span className="glyphicon glyphicon-user"></span></Link></NavItem>
-			    <NavItem eventKey={1} href="#">Logout</NavItem>
+			    <NavItem eventKey={1} style={float}><Link to='/'>Logout</Link></NavItem>
 			  </Nav>
 			</Navbar>
 		)

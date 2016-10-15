@@ -1,5 +1,6 @@
 body {
-	margin-left: 245px;
+	margin-left: 100px;
+  background-color: #eeeeee;
 }
 
 .main {
@@ -10,8 +11,28 @@ body {
 	background-color: black;
 }
 
+.leftNav {
+	height: 100%;
+	width: 100px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #34495C;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 50px;
+	z-index:1200;
+}
+
+
+
 .activeButton {
 	color:white;
+}
+
+.container {
+  width:100%;
 }
 
 /*.active {
@@ -30,11 +51,33 @@ body {
     color: white;
 }
 
+.burgerMenu {
+	margin: 0px;
+	width: 100%;
+}
+
+ .buttoncssburger {
+    width: 100%;
+    padding: 35px 0px;
+    background: transparent;
+    border: 0px solid transparent;
+    border-left: transparent;
+    border-right: transparent;
+    outline: 0;
+    color: white;
+}
+
 .selected {
 	background-color: #22303D;
-	padding: 39px 0% 41px 0%;
+	padding: 57px 0% 40px 0%;
 	font-weight: bold;
 	color: #1B9D81;
+}
+
+.selectedhamburger {
+  font-weight: bold;
+  color: #1B9D81;
+  background-color: #22303D;
 }
 
 
@@ -59,4 +102,229 @@ body {
 .selectimage {
 	max-height: 100px;
 	max-width: 200px;		
+}
+
+
+
+
+
+.createBudget {
+  float:right;
+}
+
+.progress {
+  height:36px;
+}
+
+
+.logoname {
+  max-height: 25px; 
+  margin-top: 14px; 
+  margin-left:-11px; 
+  margin-bottom:14px
+}
+
+
+.bm-burger-button {
+  position: fixed;
+  width: 24px;
+  height: 20px;
+  left: 120px;
+  top: 18px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #34495C;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #34495C;
+  /*padding: 2.5em 1.5em 0;*/
+  font-size: 2em;
+}
+
+.bm-menu-wrap {
+	left: 0;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  /*padding: 0.8em;*/
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.video-background {
+  background: #000;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -99;
+}
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.vidtop-content {
+  top: 0;
+  color: #fff;
+}
+.logInInfo { 
+  position: absolute; 
+  /*top: 0; 
+  right: 0; */
+  width: 33%; 
+  margin-top:8%;
+  margin-left:33%;
+  margin-right: 33%;
+  background: rgba(0,0,0,0.3); 
+  color: #fff; 
+  padding: 1rem; 
+  font-family: Avenir, Helvetica, sans-serif; 
+
+}
+
+.logInInfo h1 { 
+  font-size: 2rem; 
+  font-weight: 700; 
+  margin-top: 0; 
+  line-height: 1.2; 
+}
+
+.logInInfo a { 
+  display: block;
+  color: #fff; 
+  text-decoration: none; 
+  background: rgba(0,0,0,0.5); 
+  transition: .6s background; 
+  border-bottom: none; 
+  margin: 1rem auto; 
+  text-align: center; 
+}
+
+.centerIt {
+  width:100%;
+  height:100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .video-foreground { 
+    height: 300%; 
+    top: -100%; 
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .video-foreground { 
+    width: 300%; 
+    left: -100%; 
+  }
+}
+
+@media all and (max-width: 600px) {
+.logInInfo { 
+  width: 50%; 
+  padding: .5rem; 
+}
+
+.logInInfo h1 { 
+  margin-bottom: .2rem; 
+  }
+}
+@media all and (max-width: 500px) {
+.logInInfo .acronym { 
+  display: none; 
+  }
+}
+
+@media(max-width: 960px){
+  body {
+    margin-left: 0px;
+  }
+  .leftNav {
+    display: none;
+  }
+}
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 3) {
+
+    body {
+      margin-left: 0px;
+    }
+    .leftNav {
+      display: none;
+    }
+    .main {
+      padding: 36px 16px 8px 16px;
+    }
+    .logInInfo {
+      margin-top:16%;
+      margin-left:10%;
+      margin-right: 10%;
+    }
+
+}
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px)
+  and (-webkit-min-device-pixel-ratio : 4) 
+  and (-webkit-device-pixel-ratio : 4)
+  and (orientation: portrait) {
+
+    body {
+      margin-left: 0px;
+    }
+    .leftNav {
+      display: none;
+    }
+    .main {
+    padding: 36px 16px 8px 16px;
+    }
+    .logInInfo {
+      margin-top:16%;
+      margin-left:10%;
+      margin-right: 10%;
+    }
 }

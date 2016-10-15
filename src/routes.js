@@ -7,8 +7,11 @@ import Transactions from './components/transaction/TransactionPage'
 import Budgets from './components/budgets/BudgetsPage'
 import Trends from './components/trends/TrendsPage'
 import Settings from './components/settings/SettingsPage'
+import LandingPage from './components/landingPage/landingPage'
 
 export default (
+	<Route>
+		<Route path='/' component={LandingPage}/>
 		<Route path='/' component={App}>
 			<IndexRoute component={Overview}/>
 			<Route path='/overview' component={Overview}/>
@@ -16,6 +19,8 @@ export default (
 			<Route path='/transactions' component={Transactions}/>
 			<Route path='/trends' component={Trends}/>
 			<Route path='/settings' component={Settings}/>
+			<Route path='/welcome' component={LandingPage}/>
+		</Route>
 		</Route>
 )
 

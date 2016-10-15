@@ -26,7 +26,8 @@ class BudgetBlock extends Component {
         <br/>
         <Row>
           <Col md={12}>
-            <ul>
+            <ul style={{padding:'0px'}}>
+              <BudgetCreateModal/>
               {budgets}
             </ul>
           </Col>

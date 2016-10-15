@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 
 const divStyle = {
 	paddingLeft: '44%',
+	zIndex: 2
 }
 
 const navItem = {

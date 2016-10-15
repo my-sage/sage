@@ -55,10 +55,10 @@ class BudgetUpdateModal extends Component {
   render () {
   	let close = () => this.setState({show: false});
   	return (
-	  	<div className="modal-container" style={{height: 50, display: "inline-block"}}>
+	  	<div className="modal-container" style={{height: 35, display: "inline-block", float:'right', marginLeft: '25px', marginRight: '10px'}}>
 
 	  		<Button bsStyle="primary" bsSize="small" onClick={this.open}>
-           	Edit Panel
+           	Edit Budget
 	  		</Button>
 
 	  		<Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">

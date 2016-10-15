@@ -51,9 +51,9 @@ class BudgetCreateModal extends Component {
   render () {
   	let close = () => this.setState({show: false});
   	return (
-	  	<div className="modal-container" style={{height: 50}}>
+	  	<div className="modal-container" style={{height: 50, marginBottom: '20px'}}>
 
-	  		<Button bsStyle="primary" bsSize="large" onClick={this.open}>
+	  		<Button bsStyle="info" bsSize="large" onClick={this.open} style={{width:'100%'}}>
           + Create Budget
 	  		</Button>
 
@@ -76,7 +76,7 @@ class BudgetCreateModal extends Component {
           </Modal.Body>
 
 	  			<Modal.Footer>
-	  				<Button onClick={this.update}>Save and Close</Button>
+	  				<Button bsStyle="success" onClick={this.update}>Save and Close</Button>
 	  			</Modal.Footer>
 
 	  		</Modal>
