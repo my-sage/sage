@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import BudgetItem from './BudgetItem'
-import { Button, Row, Col, Grid } from 'react-bootstrap';
+import { Button, Row, Col, Grid, Panel } from 'react-bootstrap';
 import BudgetCreateModal from './BudgetCreateModal';
 import BudgetFilterContainer from './BudgetFilterContainer'
 
@@ -13,14 +13,10 @@ class BudgetBlock extends Component {
     return (
       <Grid>
         <Row>
-          <Col sm={6} md={3}>
-            <BudgetCreateModal />
-          </Col>
-        </Row>
-
-        <Row>
           <Col md={12}>
+          <Panel>
             <BudgetFilterContainer />
+          </Panel>
           </Col>
         </Row>
         <br/>

@@ -7,6 +7,10 @@ body {
 	padding: 42px 36px;
 }
 
+.modal-content {
+  margin-top: 80px;
+}
+
 .topNav {
 	background-color: black;
 }
@@ -69,7 +73,7 @@ body {
 
 .selected {
 	background-color: #22303D;
-	padding: 57px 0% 40px 0%;
+	padding: 62px 0% 40px 0%;
 	font-weight: bold;
 	color: #1B9D81;
 }
@@ -175,9 +179,6 @@ body {
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
-
-
-
 
 
 

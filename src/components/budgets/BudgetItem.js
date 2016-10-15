@@ -28,7 +28,7 @@ class BudgetItem extends Component {
         </div>
         {/*<p><b>Name:</b> {name} <b>| Currrent:</b> {currentAmount} <b>| Max Amount:</b> {targetAmount} <b>| Expiration:</b> {formattedDate} <b>| Category: </b>{category.name}*/}
         {/*<br></br>*/}
-        <BudgetUpdateModal budget={this.props.budget}/>
+        <BudgetUpdateModal budget={this.props.budget} style={{marginTop: '0px'}}/>
         <div>
         <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
         </div>
