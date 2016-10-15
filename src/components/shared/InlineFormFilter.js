@@ -24,11 +24,16 @@ const style = {
 	}
 }
 
-const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart,onChangeEnd,filter,getCurrent,errors}) => {
+const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart,onChangeEnd,filter,getAll,getCurrent,errors}) => {
 	
 	let getCurrentButton;
 	if(getCurrent) {
 		getCurrentButton =  <Button bsStyle='primary' onClick={getCurrent} style={style.spacingLeft}>Current</Button>
+	}
+
+	let getAllButton;
+	if(getAll) {
+		getAllButton =  <Button bsStyle='primary' onClick={getAll} style={style.spacingLeft}>All</Button>
 	}
 
 	let merchantSelect;
@@ -81,6 +86,7 @@ const InlineFormFilter = ({instance, categories,merchants,onChange,onChangeStart
 
 			<Button bsStyle='primary' type="submit" onClick={filter} style={style.spacingLeft}>Filter</Button>
 			{getCurrentButton}
+			{getAllButton}
 		</Form>
 	)
 }
