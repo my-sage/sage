@@ -45,10 +45,6 @@ class FilterContainer extends Component {
 	}
 };
 
-FilterContainer.propTypes = {
-	categories: PropTypes.array.isRequired,
-}
-
 function mapStateToProps(state, ownProps) {
 
 	return {

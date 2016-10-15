@@ -12,11 +12,13 @@ class App extends React.Component {
     return (
       <div>
           <TopNavbar/>
-          <LeftNav/>
-          <div className="main">
-            {this.props.children || <Overview/>}
+          
+          <div>
+            <LeftNav/>
+              <div className="main">
+                {this.props.children || <Overview/>}
+              </div>
           </div>
-          <BottomNavbar/>
       </div>
     )
   }

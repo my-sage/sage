@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import {Modal, Button} from "react-bootstrap";
+import {Modal, Button, SplitButton, ButtonToolbar, MenuItem} from "react-bootstrap";
 import TransactionEditForm from "./TransactionEditForm";
 import * as TransactionActions from '../../actions/transactionActions';
 import { pick, compose, map } from 'ramda';
@@ -58,6 +58,7 @@ class TransactionModal extends Component {
   }
 
   render () {
+
   	return (
 	  	<div className="modal-container" style={{height: 40}}>
 
@@ -82,8 +83,12 @@ class TransactionModal extends Component {
 	  			</Modal.Body>
 
 	  			<Modal.Footer>
-	  				<Button bsStyle="primary" onClick={this.update}>Save and Close</Button>
-	  				<Button bsStyle="primary" onClick={this.updateMerchantCategory}>Update Merchant Category</Button>
+	  				{/*<Button bsStyle="primary" onClick={this.update}>Save and Close</Button>
+	  				<Button bsStyle="primary" onClick={this.updateMerchantCategory}>Update Merchant Category</Button>*/}
+				    <SplitButton bsStyle="primary" title="Save Change" onClick={this.update}>
+				      <MenuItem eventKey="1" onClick={this.update}>Save and Close</MenuItem>
+				      <MenuItem eventKey="2" onClick={this.updateMerchantCategory}>Overwrite Merchant Category</MenuItem>
+				    </SplitButton>	  				
 	  			</Modal.Footer>
 
 	  		</Modal>

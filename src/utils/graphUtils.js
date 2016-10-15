@@ -16,9 +16,9 @@ const orderByDay = (transactions) => R.sortBy(R.prop('date'), transactions);
 const mapDates = (transactions) => R.map(dateAssign, transactions);
 const groupByProp = (prop) => R.groupBy(transaction => transaction[prop]);
 const reduceToSum = (sum, transaction) => _.round(sum + transaction.amount, 2);
-const mapOverData = R.mapObjIndexed(R.reduce(reduceToSum, 0));
+const mapReduceToSum = R.mapObjIndexed(R.reduce(reduceToSum, 0));
 const formattingFunction = (value, key) => {
-	return {x: key, y: Math.abs(value), label: `${key}: $${value}`}
+	return {x: key, y: value, label: `${key}: $${value}`}
 };
 const formatData = (transactionData) => {
 	const result = [];
@@ -26,20 +26,18 @@ const formatData = (transactionData) => {
 	return result;
 };
 
-export const composeData = (prop) => R.compose(formatData, mapOverData, groupByProp(prop), mapDates, orderByDay, R.clone);
+export const composeData = (prop) => R.compose(formatData, mapReduceToSum, groupByProp(prop), mapDates, orderByDay, R.clone);
 
 const wantIncome = (boolean) => {
 	return boolean ?
 		function (transaction) {
-			return transaction.category.name === 'Income' || transaction.category.name === 'income'
+			return transaction.category.name.toLowerCase() === 'income'
 		}
 		:
 		function (transaction) {
-			return transaction.category.name !== 'Income' || transaction.category.name !== 'income'
+			return transaction.category.name.toLowerCase() !== 'income'
 		}
 };
-
-export const wantIncomeFilter = (boolean) => R.filter(wantIncome(boolean));
 
 const resolveMerchantAndCategory = (transaction) => {
 	transaction.merchantName = transaction.merchant.name;
@@ -47,5 +45,17 @@ const resolveMerchantAndCategory = (transaction) => {
 	return transaction;
 };
 
+export const wantIncomeFilter = (boolean) => R.filter(wantIncome(boolean));
 export const enhanceTransactions = (transactions) => R.map(resolveMerchantAndCategory, transactions);
 
+export const objectAddition = (objA, objB) => R.mergeWith(R.add, objA, objB);
+
+const makeAbsolute = (transaction) => {
+	return {x: transaction.x, y: Math.abs(transaction.y), label: transaction.label};
+};
+
+export const mapAbsolute = (transactionData) => {
+	const result = [];
+	_.forEach(transactionData, (transaction) => result.push(makeAbsolute(transaction)));
+	return result;
+};
