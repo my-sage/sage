@@ -74,6 +74,12 @@ body {
 	color: #1B9D81;
 }
 
+.selectedhamburger {
+  font-weight: bold;
+  color: #1B9D81;
+  background-color: #22303D;
+}
+
 
 .buttoncss:hover {
 	background: #22303D;
