@@ -5,7 +5,7 @@ import SelectInput from './SelectInput';
 
 const TransactionEditForm = ({transaction,categories,merchants,onChange,loading,errors}) => {
 	return (
-		<form>
+		<form style={{textAlign: "left"}}>
 
 			<SelectInput
 				name="merchantId"
