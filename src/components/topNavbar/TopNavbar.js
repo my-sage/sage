@@ -25,7 +25,7 @@ export default React.createClass ({
 					<Hamburger/>
 				</Nav>
 			  <Nav style={float}>
-			    <NavItem eventKey={1} style={float}>Logout</NavItem>
+			    <NavItem eventKey={1} style={float}><Link to='/'>Logout</Link></NavItem>
 			  </Nav>
 			</Navbar>
 		)
