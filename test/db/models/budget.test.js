@@ -25,13 +25,15 @@ describe('Budget Model', function() {
           amount: randomTransacsAmount1,
           date: currentUnixTime,
           accountId: 1,
-          categoryId: 1
+          categoryId: 1,
+          fitid: '12345'
         },
         transac2 = {
           amount: randomTransacsAmount2,
           date: oldUnixTime,
           accountId: 1,
-          categoryId: 1
+          categoryId: 1,
+          fitid: '45674'
         };
 
       return Promise.map([transac1, transac2], (transac) => Transaction.create(transac));
@@ -126,7 +128,8 @@ describe('Budget Model', function() {
           amount: _.random(1, 100),
           date: randomUnixTimeGen(2),
           accountId: 1,
-          categoryId
+          categoryId,
+          fitid: '958938'
         }
       },
       randomTransacsGen = (n, categoryId) => {
@@ -136,7 +139,7 @@ describe('Budget Model', function() {
     beforeEach(function() {
       let newTransacs = randomTransacsGen(5, 1);
       newTransacs = newTransacs.concat(randomTransacsGen(1, 2))
-      return Promise.all(newTransacs.map(t => Transaction.create(t)));
+      return Promise.all(newTransacs.map(t => Transaction.upsert(t)));
     })
 
     it('getTransactions returns all the transactions tied to a budget', function() {

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import TrendsTabs from './TrendsTabs'
@@ -21,7 +20,7 @@ class TrendsPage extends Component {
 	}
 }
 function mapStateToProps(state, ownProps) {
-	return {transactions: state.transactions.data, merchants: state.merchants.data, categories: state.categories.data}
+	return {transactions: state.transactions.data}
 }
 
 function mapDispatchToProps(dispatch) {

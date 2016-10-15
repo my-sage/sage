@@ -15,7 +15,7 @@ class BudgetItem extends Component {
 
     const {name, currentAmount, targetAmount, endDate, category} = this.props.budget;
 
-    let dt = new Date(endDate*1000);
+    let dt = new Date(+endDate);
     let formattedDate = ('0' + dt.getDate()).slice(-2) + '/' + ('0' + (dt.getMonth() + 1)).slice(-2) + '/' + dt.getFullYear() + ' ' + ('0' + dt.getHours()).slice(-2) + ':' + ('0' + dt.getMinutes()).slice(-2);
 
     return (
