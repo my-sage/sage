@@ -11,10 +11,22 @@ import {formatForDropDown} from './formatForDropDown'
 class FilterContainer extends Component {
 	constructor (props) {
 		super(props);
-		this.state = {
-			instance: Object.assign({},{categoryId: "",merchantId: "",startDate: "",endDate: ""}),
-			errors: {}
-		};
+		let query = this.props.query;
+
+		console.log('enforcing filtering action due to redirect from trend',Object.keys(query).length)
+		if(Object.keys(query).length!==0){
+			this.state ={
+				instance: Object.assign({},query),
+				errors: {}
+			}
+			let filterUrl = queryUrl(this)
+			this.props.actions.getAllTransactions(filterUrl);
+		}else {
+			this.state = {
+				instance: Object.assign({},{categoryId: "",merchantId: "",startDate: "",endDate: ""}),
+				errors: {}
+			};
+		}
 		this.filter = this.filter.bind(this);
 		this.getAll = this.getAll.bind(this);
 	}
