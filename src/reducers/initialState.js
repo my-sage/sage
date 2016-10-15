@@ -9,7 +9,8 @@ export default {
   transactions: {
     data: [],
     isFetching: false,
-    errorMessage: null
+    errorMessage: null,
+    query: null
   },
   categories: {
     data: [],

@@ -11,7 +11,10 @@ const dateAssign = (transaction) => {
 	transaction.year = transactionMoment.format('YYYY');
 	return transaction;
 };
-
+const stackTrace = (item) => {
+	console.log(item);
+	return item;
+};
 const orderByDay = (transactions) => R.sortBy(R.prop('date'), transactions);
 const mapDates = (transactions) => R.map(dateAssign, transactions);
 const groupByProp = (prop) => R.groupBy(transaction => transaction[prop]);
@@ -26,7 +29,7 @@ const formatData = (transactionData) => {
 	return result;
 };
 
-export const composeData = (prop) => R.compose(formatData, mapReduceToSum, groupByProp(prop), mapDates, orderByDay, R.clone);
+export const composeData = (prop) => R.compose(formatData, mapReduceToSum, stackTrace, groupByProp(prop), mapDates, orderByDay, R.clone);
 
 const wantIncome = (boolean) => {
 	return boolean ?
@@ -57,5 +60,25 @@ const makeAbsolute = (transaction) => {
 export const mapAbsolute = (transactionData) => {
 	const result = [];
 	_.forEach(transactionData, (transaction) => result.push(makeAbsolute(transaction)));
+	return result;
+};
+
+const eventHandlingFunction = (data) => {
+	console.log(data.xName);
+};
+
+const createEventHandler = (dataPoint, index) => {
+	return {
+		target: 'data',
+		eventKey: index,
+		eventHandlers: {
+			onClick: (proxy, object, key) => eventHandlingFunction(object.datum)
+		}
+	}
+};
+
+export const createEventHandlers = (data) => {
+	const result = [];
+	_.forEach(data, (dataPoint, index) => result.push(createEventHandler(dataPoint, index)));
 	return result;
 };

@@ -2,10 +2,11 @@
 
 import React from 'react';
 import {VictoryChart, VictoryPie, VictoryTooltip} from 'victory';
-import {composeData} from '../../utils/graphUtils';
+import {composeData, createEventHandlers} from '../../utils/graphUtils';
 
 const PieChart = ({data, groupBy}) => {
 	const composedData = composeData(groupBy)(data);
+	const eventHandlers = createEventHandlers(composedData);
 	return (
 		<div style={{width: "50%"}}>
 			<VictoryPie
@@ -13,6 +14,7 @@ const PieChart = ({data, groupBy}) => {
 				colorScale={"qualitative"}
 				labelComponent={<VictoryTooltip pointerLength={0}/>}
 				labelRadius={-40}
+			  events={eventHandlers}
 			/>
 		</div>
 	)
