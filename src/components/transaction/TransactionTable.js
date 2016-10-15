@@ -5,11 +5,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as TransactionActions from '../../actions/transactionActions';
 import TransactionSingle from './TransactionSingle';
-<<<<<<< HEAD
-import { Table ,SplitButton, ButtonToolbar, MenuItem} from "react-bootstrap";
-=======
 import { Table } from "react-bootstrap";
->>>>>>> 8fc177c38de834edfe66a371e836ea0ef7cbdf5b
 import R from 'ramda';
 
 const arrowIcon = {
@@ -128,12 +124,4 @@ const headerBar = {
 	color:'white'
 }
 
-<<<<<<< HEAD
-=======
-
-//const mapStateToProps = (state) => ({ transactions: state.transactions.data })
-//const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(TransactionActions, dispatch)});
-
-
->>>>>>> 8fc177c38de834edfe66a371e836ea0ef7cbdf5b
 export default TransactionTable;
