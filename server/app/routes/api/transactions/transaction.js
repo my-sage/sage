@@ -38,7 +38,7 @@ router.get('/:transactionId', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Transaction.create(req.body)
+  Transaction.createOrFindWithMerchant(req.body)
     .then(transaction => {
       res.status(201).json(transaction);
     })
@@ -46,15 +46,29 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:transactionId', (req, res, next) => {
+
+  let {transaction, overWrite} = req.body;
+  let result;
+
   Transaction.findById(req.params.transactionId)
-    .then(transaction => {
-      return transaction.update(req.body);
+    .then(targetTransaction => {
+      return targetTransaction.update(transaction);
     })
-    .then(transaction => {
-      return transaction.reload()
+    .then(targetTransaction => {
+      return targetTransaction.reload()
     })
-    .then(transaction => {
-      res.status(200).json(transaction);
+    .then(targetTransaction => {
+      if(overWrite===false) res.status(200).json(targetTransaction);
+      else {
+        result = targetTransaction;
+        return targetTransaction.getMerchant()
+          .then(merchant => {
+            return merchant.updateWithTransactions({categoryId: transaction.categoryId});
+          })
+          .then((allUpdatedTranctions) => {
+            res.status(200).json(allUpdatedTranctions);
+          });
+        }
     })
     .catch(next);
 });

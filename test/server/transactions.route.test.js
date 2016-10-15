@@ -17,13 +17,13 @@ describe('Transactions API Routes', () => {
 
 	const merchant2 = {name: 'Open Market', categoryId: 2};
 
-	const transaction1 = {amount: -100.00, date: 1475510400, note: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction1 = {amount: -100.00, fitid: '2983493', date: 1475510400, type: 'Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction2 = {amount: -40, date: 1473609600, note: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
+	const transaction2 = {amount: -40, fitid: '103412', date: 1473609600, type: 'Other Supplies', accountId: 1, categoryId: 1, merchantId: 1};
 
-	const transaction3 = {amount: -10, date: 1473696000, note: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
+	const transaction3 = {amount: -10, fitid: '2983491', date: 1473696000, type: 'Lunch', accountId: 1, categoryId: 2, merchantId: 2};
 
-	const transaction4 = {amount: -20, date: 1473697000, note: 'Snack', accountId: 1, categoryId: 2, merchantId: 2};
+	const transaction4 = {amount: -20, fitid: '9829381', date: 1473697000, type: 'Snack', accountId: 1, categoryId: 2, merchantId: 2};
 
 	beforeEach('Sync DB', () => db.sync({force: true}));
 
@@ -113,7 +113,7 @@ describe('Transactions API Routes', () => {
 					expect(response.body.amount).to.equal(transaction1.amount);
 					//date is coming back as a string not an integer
 					expect(+response.body.date).to.equal(transaction1.date);
-					expect(response.body.note).to.equal(transaction1.note);
+					expect(response.body.type).to.equal(transaction1.type);
 					done();
 				});
 		});
@@ -121,14 +121,18 @@ describe('Transactions API Routes', () => {
 
 	describe('Post a New Transaction', () => {
 		it('posts a new transaction', done => {
-			agent.post('/api/transactions').send(transaction4)
+      let transac = {
+        transaction: transaction4,
+        merchant: {name: 'Dummy Merchant'}
+      }
+			agent.post('/api/transactions').send(transac)
 				.expect(201)
 				.end((err, response) => {
 					if (err) return done(err);
 					expect(response.body.amount).to.equal(transaction4.amount);
 					//date is coming back as a string not an integer
 					expect(+response.body.date).to.equal(transaction4.date);
-					expect(response.body.note).to.equal(transaction4.note);
+					expect(response.body.type).to.equal(transaction4.type);
 					done();
 				});
 		});
@@ -136,7 +140,8 @@ describe('Transactions API Routes', () => {
 
 	describe('Update an Existing Transaction', () => {
 		it('updates an existing transaction', done => {
-			agent.put('/api/transactions/1').send({categoryId: 2})
+
+			agent.put('/api/transactions/1').send({transaction: {categoryId: 2}, overWrite: false})
 				.expect(200)
 				.end((err, response) => {
 					if (err) return done(err);
