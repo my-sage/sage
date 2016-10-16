@@ -25,7 +25,7 @@ class TransactionPage extends Component {
         </div>
         <Panel>
         <div>
-          <TransactionTabs transactions={this.props.transactions}/>
+          <TransactionTabs query={this.props.query} transactions={this.props.transactions}/>
         </div>
         </Panel>
       </div>
@@ -39,7 +39,16 @@ TransactionPage.propTypes = {
   transactions: PropTypes.array.isRequired
 };
 
-const mapStateToProps = (state) => ({ transactions: state.transactions.data })
+const mapStateToProps = (state,ownProps) => {
+
+  const query = ownProps.location.query;
+  console.log('getting the react route query', query);
+
+  return { 
+    transactions: state.transactions.data, 
+    query: query
+  };
+}
 
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(TransactionActions, dispatch)});
 
