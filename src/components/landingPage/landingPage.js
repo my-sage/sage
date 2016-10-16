@@ -6,12 +6,7 @@ import Logo from '../../images/logo.png'
 class LandingPage extends Component {
    render(){
     return (
-      <div style={{textAlign: 'center'}}>
-    	 <div className="video-background">
-        <div className="video-foreground">
-        <iframe src="https://www.youtube.com/embed/W0LHTWG-UmQ?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=W0LHTWG-UmQ" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div className="centerIt" style={{width:"100%"}}>
+      <div className="logInWrapper">
         <div className="logInInfo">
          <img src={Logo} style={{width:'100%'}}/>
           <div>
@@ -20,14 +15,12 @@ class LandingPage extends Component {
           </div>
         <a href="/overview">Log In</a>
         <p style={{textAlign:'center'}}>or</p>
-        <a href='/signup'>Sign Up</a>
-        </div>
+        <a href='/signup'>Create an Account</a>
         </div>
 
         <div className="vidtop-content">
         </div>
-       </div>
-      </div>
+        </div>
     )
   }
 }

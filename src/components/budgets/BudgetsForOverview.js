@@ -14,16 +14,7 @@ class BudgetBlock extends Component {
       <Grid>
         <Row>
           <Col md={12}>
-            <BudgetFilterContainer />
-          </Col>
-        </Row>
-        <br/>
-        <Row>
-          <Col md={12}>
-            <ul style={{padding:'0px'}}>
               {budgets}
-              <BudgetCreateModal/>
-            </ul>
           </Col>
         </Row>
       </Grid>
