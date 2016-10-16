@@ -64,7 +64,7 @@ class BudgetUpdateModal extends Component {
 	  		<Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
 	  			
 	  			<Modal.Header closeButton>
-	  				<Modal.Title id="Contained-modal-title">Create A Budget</Modal.Title>
+	  				<Modal.Title id="Contained-modal-title">Edit Budget</Modal.Title>
 	  			</Modal.Header>
 
           <Modal.Body>
@@ -105,7 +105,7 @@ function mapStateToProps(state, ownProps) {
 
 	const typeBudgets = [
 		{value: "Spending", text: "Spending"},
-		{value: "Imcoming", text: "Imcoming"}
+		{value: "Incoming", text: "Incoming"}
 	]
 
 	return {

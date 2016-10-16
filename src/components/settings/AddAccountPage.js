@@ -17,7 +17,7 @@ const styles = {
    	backgroundColor: 'transparent',
   },
   panel: {
-  	boxShadow: "5px 5px 7px grey",
+  	boxShadow: "3px 3px 5px grey",
   	textAlign: 'center'
   },
   image: {
