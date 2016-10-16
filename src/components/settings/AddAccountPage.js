@@ -43,9 +43,6 @@ const styles = {
 const AddAccountPage = (props) => {
 		return (
 			<div>
-				<div>
-					<h3>Add Account</h3>
-			    </div>
 			    <div>
 			    	<Grid style={styles.grid}>
 			    	<Row style={styles.tableTitle}>
