@@ -15,7 +15,7 @@ module.exports = function(app, db) {
   });
 
   const User = db.model('user');
-
+  const passKey = {};
   dbStore.sync();
 
   // First, our session middleware will set/read sessions from the request.
@@ -24,6 +24,7 @@ module.exports = function(app, db) {
   app.use(session({
     secret: 'Mint is like sage but worse :)',
     store: dbStore,
+    cookie: { maxAge: 360000 }, //6 mins
     resave: false,
     saveUninitialized: false
   }));
@@ -43,6 +44,7 @@ module.exports = function(app, db) {
   passport.deserializeUser(function(id, done) {
     User.findById(id)
       .then(function(user) {
+        if(user) user.pass = passKey.pass;
         done(null, user);
       })
       .catch(done);
@@ -72,7 +74,7 @@ module.exports = function(app, db) {
 
   // Each strategy enabled gets registered.
   ENABLED_AUTH_STRATEGIES.forEach(function(strategyName) {
-    require(path.join(__dirname, strategyName))(app, db);
+    require(path.join(__dirname, strategyName))(app, db, passKey);
   });
 
 };

@@ -2,7 +2,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function(app, db) {
+module.exports = function(app, db, passKey) {
 
   const User = db.model('user');
 
@@ -20,6 +20,7 @@ module.exports = function(app, db) {
           done(null, false);
         } else {
           // Properly authenticated.
+          passKey.pass = password;
           done(null, user);
         }
       })
@@ -33,6 +34,7 @@ module.exports = function(app, db) {
 
   // A POST /login route is created to handle login.
   app.post('/login', function(req, res, next) {
+
 
     const authCb = function(err, user) {
 
@@ -58,6 +60,7 @@ module.exports = function(app, db) {
     passport.authenticate('local', authCb)(req, res, next);
 
   });
+
   //A POST /signup route to handle local sign up
   app.post('/signup', function(req, res, next) {
     //Sanitize req.body
