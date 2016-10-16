@@ -19,8 +19,8 @@ class SpendingPage extends Component {
 		const chartSelector = (eventKey) => this.setState({shouldBePie: eventKey});
 		const shouldBePie = (boolean) => {
 			return boolean ?
-			<PieChart data={enhancedTransactions} groupBy={this.state.groupBy}/> :
-			<VerticalBarGraph data={enhancedTransactions} groupBy={this.state.groupBy} barColor='#c0392b'/>;
+			<PieChart data={enhancedTransactions} groupBy={this.state.groupBy} eventHandlingFunction={this.props.eventHandlingFunction}/> :
+			<VerticalBarGraph data={enhancedTransactions} groupBy={this.state.groupBy} barColor='#c0392b' eventHandlingFunction={this.props.eventHandlingFunction}/>;
 		};
 		return (
 			<div>

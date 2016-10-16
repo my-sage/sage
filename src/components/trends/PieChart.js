@@ -4,9 +4,9 @@ import React from 'react';
 import {VictoryChart, VictoryPie, VictoryTooltip} from 'victory';
 import {composeData, createEventHandlers} from '../../utils/graphUtils';
 
-const PieChart = ({data, groupBy}) => {
+const PieChart = ({data, groupBy, eventHandlingFunction}) => {
 	const composedData = composeData(groupBy)(data);
-	const eventHandlers = createEventHandlers(composedData);
+	const eventHandlers = createEventHandlers(composedData, eventHandlingFunction);
 	return (
 		<div style={{width: "50%"}}>
 			<VictoryPie
