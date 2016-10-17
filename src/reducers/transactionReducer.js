@@ -25,7 +25,7 @@ const dataHandlers = {
       let newState = state;
       forEach((newTransaction) => {
         newState = map(update(newTransaction), newState);
-      }, action.transaction)
+      }, action.transaction);
       return newState;
     }
     return map(update(action.transaction), state)
@@ -48,8 +48,26 @@ const errorMessageHandlers = createErrorHandlers({
 
 const errorMessage = createReducer(transactions.errorMessage, errorMessageHandlers);
 
+const queryHandlers = {
+  [actions.AFFIX_QUERY](state, action) {
+    return action.query ? action.query : null;
+  }
+};
+
+const query = createReducer(transactions.query, queryHandlers);
+
+const shouldFetchAllHandlers = {
+  [actions.SHOULD_FETCH_ALL](state, action) {
+    return action.payload;
+  }
+};
+
+const shouldFetchAll = createReducer(transactions.shouldFetchAll, shouldFetchAllHandlers);
+
 export default combineReducers({
   data, 
   isFetching,
-  errorMessage
+  errorMessage,
+  query,
+  shouldFetchAll
 });

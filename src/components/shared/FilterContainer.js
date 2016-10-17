@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
@@ -7,6 +7,8 @@ import InlineFormFilter from './InlineFormFilter';
 import * as TransactionActions from '../../actions/transactionActions';  //input whatever actions you need
 import { updateInstanceState, updateStartDate, updateEndDate, queryUrl} from './shareFilterComponentUtils';
 import {formatForDropDown} from './formatForDropDown'
+
+//import NProgress from 'nprogress';
 
 class FilterContainer extends Component {
 	constructor (props) {
@@ -22,12 +24,15 @@ class FilterContainer extends Component {
 	filter (event) {
 		event.preventDefault();
 		let filterUrl = queryUrl(this);		
-		this.props.actions.getAllTransactions(filterUrl)
+		this.props.actions.getAllTransactions(filterUrl);
+		console.log('start the progress',NProgress);
+		//NProgress.set(0.8);
 	}
 
 	getAll (event) {
 		event.preventDefault();
 		this.props.actions.getAllTransactions();
+		//NProgress.set(0.8);
 	}
 
 	render () {
@@ -43,7 +48,7 @@ class FilterContainer extends Component {
 							errors={this.state.errors}
 						/>
 	}
-};
+}
 
 function mapStateToProps(state, ownProps) {
 
@@ -60,6 +65,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(FilterContainer)
-
-
-

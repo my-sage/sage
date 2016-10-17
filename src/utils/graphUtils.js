@@ -11,7 +11,6 @@ const dateAssign = (transaction) => {
 	transaction.year = transactionMoment.format('YYYY');
 	return transaction;
 };
-
 const orderByDay = (transactions) => R.sortBy(R.prop('date'), transactions);
 const mapDates = (transactions) => R.map(dateAssign, transactions);
 const groupByProp = (prop) => R.groupBy(transaction => transaction[prop]);
@@ -31,18 +30,19 @@ export const composeData = (prop) => R.compose(formatData, mapReduceToSum, group
 const wantIncome = (boolean) => {
 	return boolean ?
 		function (transaction) {
-			return transaction.category.name.toLowerCase() === 'income'
+			return transaction.category && transaction.category.name.toLowerCase() === 'income'
 		}
 		:
 		function (transaction) {
-			return transaction.category.name.toLowerCase() !== 'income'
+			return transaction.category && transaction.category.name.toLowerCase() !== 'income'
 		}
 };
 
 const resolveMerchantAndCategory = (transaction) => {
-	transaction.merchantName = transaction.merchant.name;
-	transaction.categoryName = transaction.category.name;
-	return transaction;
+	const newTransac = R.clone(transaction);
+	newTransac.merchantName = newTransac.merchant.name;
+	newTransac.categoryName = newTransac.category.name;
+	return newTransac;
 };
 
 export const wantIncomeFilter = (boolean) => R.filter(wantIncome(boolean));
@@ -57,5 +57,21 @@ const makeAbsolute = (transaction) => {
 export const mapAbsolute = (transactionData) => {
 	const result = [];
 	_.forEach(transactionData, (transaction) => result.push(makeAbsolute(transaction)));
+	return result;
+};
+
+const createEventHandler = (dataPoint, index, eventHandlingFunction, groupingBy, defaultCategory) => {
+	return {
+		target: 'data',
+		eventKey: index,
+		eventHandlers: {
+			onClick: (proxy, object, key) => eventHandlingFunction(object.datum, groupingBy, defaultCategory)
+		}
+	}
+};
+
+export const createEventHandlers = (data, eventHandlingFunction, groupingBy, defaultCategory) => {
+	const result = [];
+	_.forEach(data, (dataPoint, index) => result.push(createEventHandler(dataPoint, index, eventHandlingFunction, groupingBy, defaultCategory)));
 	return result;
 };

@@ -19,15 +19,20 @@ class SpendingPage extends Component {
 		const chartSelector = (eventKey) => this.setState({shouldBePie: eventKey});
 		const shouldBePie = (boolean) => {
 			return boolean ?
-			<PieChart data={enhancedTransactions} groupBy={this.state.groupBy}/> :
-			<VerticalBarGraph data={enhancedTransactions} groupBy={this.state.groupBy} barColor='#c0392b'/>;
+			<PieChart data={enhancedTransactions} groupBy={this.state.groupBy} eventHandlingFunction={this.props.eventHandlingFunction}/> :
+			<VerticalBarGraph data={enhancedTransactions} groupBy={this.state.groupBy} barColor='#c0392b' eventHandlingFunction={this.props.eventHandlingFunction}/>;
 		};
 		return (
 			<div>
-				<FilterContainer />
-				<GroupingDropdown onSelect={groupSetter.bind(this)}/>
-				<ChartSelect onSelect={chartSelector.bind(this)}/>
+				<div style={{paddingTop:'20px'}}>
+					<FilterContainer />
+				</div>
+
 				<h3>Spending By {this.state.displayName}</h3>
+				<div>
+					<GroupingDropdown onSelect={groupSetter.bind(this)}/>
+					<ChartSelect onSelect={chartSelector.bind(this)}/>
+				</div>
 				{shouldBePie(this.state.shouldBePie)}
 			</div>
 		)

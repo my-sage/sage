@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router'
 import {Tabs, Tab, NavDropdown, MenuItem, Row, Col, NavItem, Nav} from 'react-bootstrap'
 import Profile from './ProfilePage'
-import Accounts from './AccountsPage'
 import AddAccount from './AddAccountPage'
 
 export default React.createClass({
@@ -14,10 +13,7 @@ export default React.createClass({
 					        <Col sm={12}>
 					          <Nav bsStyle="tabs">
 					            <NavItem eventKey="first">Profile</NavItem>
-					            <NavDropdown eventKey="2" title="Your Accounts" id="nav-dropdown-within-tab">
-					              <MenuItem eventKey="2.1">All Accounts</MenuItem>
-					              <MenuItem eventKey="2.2">Add Account</MenuItem>
-					            </NavDropdown>
+					            <NavItem eventKey="2">Add Bank Account</NavItem>
 					          </Nav>
 					        </Col>
 					        <Col sm={12}>
@@ -25,10 +21,7 @@ export default React.createClass({
 					            <Tab.Pane eventKey="first">
 					              <Profile/>
 					            </Tab.Pane>
-					            <Tab.Pane eventKey="2.1">
-					              <Accounts/>
-					            </Tab.Pane>
-					            <Tab.Pane eventKey="2.2">
+					            <Tab.Pane eventKey="2">
 					              <AddAccount/>
 					            </Tab.Pane>
 					          </Tab.Content>
