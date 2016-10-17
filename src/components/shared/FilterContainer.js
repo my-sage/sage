@@ -41,13 +41,13 @@ class FilterContainer extends Component {
 		let filterUrl = queryUrl(this);		
 		this.props.actions.getAllTransactions(filterUrl);
 		console.log('start the progress',NProgress);
-		NProgress.set(0.8);
+		//NProgress.set(0.8);
 	}
 
 	getAll (event) {
 		event.preventDefault();
 		this.props.actions.getAllTransactions();
-		NProgress.set(0.8);
+		//NProgress.set(0.8);
 	}
 
 	render () {

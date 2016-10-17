@@ -48,8 +48,8 @@ class TransactionTable extends Component {
 			}),
 			current: undefined
 		});
-		NProgress.set(0.9);
-		NProgress.done();
+		//NProgress.set(0.9);
+		//NProgress.done();
 	}
 
 	arrow (field) {

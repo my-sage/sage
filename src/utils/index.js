@@ -7,8 +7,27 @@ export function parseJSON(res) {
     .then(text => text ? JSON.parse(text) : {})
 }
 
-export const getData = res => res.data;
+let counter = 0;
+let animationId;
 
+export const getData = res => {
+  console.log('making animation for good data come back')
+  animationProgress();
+  return res.data;
+}
+
+
+function animationProgress () {
+  counter++;
+  if(counter<=5) {
+    NProgress.set(0.5+counter/10);
+    animationId = setTimeout(animationProgress,100);
+  }else{
+    clearTimeout(animationId);
+    counter=0;
+    animationId=0;
+  }
+}
 export function makeActionCreator(type, ...argNames) {
   return function(...args) {
     let action = {
