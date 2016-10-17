@@ -7,7 +7,10 @@ const {
   assoc
 } = require('ramda');
 
-const categorize = require('../../banking/categorize');
+const {
+  categorize,
+  proactiveCategorize
+} = require('../../banking/categorize');
 
 const fields = {};
 const options = {};
@@ -18,7 +21,12 @@ fields.name = {
   allowNull: false
 };
 
+options.hooks = {};
+
 options.instanceMethods = {
+  proactiveCategorize: function() {
+    return proactiveCategorize(this);
+  },
   updateWithTransactions: function(updatedMerchant) {
     return this.update(updatedMerchant)
       .then(merchant => {
