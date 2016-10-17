@@ -8,6 +8,8 @@ import TransactionSingle from './TransactionSingle';
 import { Table } from "react-bootstrap";
 import R from 'ramda';
 
+//import NProgress from 'nprogress';
+
 const arrowIcon = {
 	 float: "right",
 	 marginTop: "5px",
@@ -46,6 +48,8 @@ class TransactionTable extends Component {
 			}),
 			current: undefined
 		});
+		NProgress.set(0.9);
+		NProgress.done();
 	}
 
 	arrow (field) {
