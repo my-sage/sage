@@ -60,18 +60,18 @@ export const mapAbsolute = (transactionData) => {
 	return result;
 };
 
-const createEventHandler = (dataPoint, index, eventHandlingFunction, groupingBy) => {
+const createEventHandler = (dataPoint, index, eventHandlingFunction, groupingBy, defaultCategory) => {
 	return {
 		target: 'data',
 		eventKey: index,
 		eventHandlers: {
-			onClick: (proxy, object, key) => eventHandlingFunction(object.datum, groupingBy)
+			onClick: (proxy, object, key) => eventHandlingFunction(object.datum, groupingBy, defaultCategory)
 		}
 	}
 };
 
-export const createEventHandlers = (data, eventHandlingFunction, groupingBy) => {
+export const createEventHandlers = (data, eventHandlingFunction, groupingBy, defaultCategory) => {
 	const result = [];
-	_.forEach(data, (dataPoint, index) => result.push(createEventHandler(dataPoint, index, eventHandlingFunction, groupingBy)));
+	_.forEach(data, (dataPoint, index) => result.push(createEventHandler(dataPoint, index, eventHandlingFunction, groupingBy, defaultCategory)));
 	return result;
 };

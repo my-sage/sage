@@ -11,6 +11,7 @@ export const deleteTransactionSuccess = makeActionCreator(actions.DELETE_TRANSAC
 export const updateTransactionSuccess = makeActionCreator(actions.UPDATE_TRANSACTION_SUCCESS, 'transaction');
 export const apiFail = makeActionCreator(actions.API_FAIL, 'error');
 export const affixQuery = makeActionCreator(actions.AFFIX_QUERY, 'query');
+export const shouldFetchAll = makeActionCreator(actions.SHOULD_FETCH_ALL, 'payload');
 
 //thunk Actions
 export const getAllTransactions = makeThunkCreator(transactionApi.getAllTransactions

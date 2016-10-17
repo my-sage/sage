@@ -16,12 +16,3 @@ export const getAllTransactions =
 
 export const updateTransaction =
 	(id, update) => axios.put(`${BASE_URL}/api/transactions/${id}`, update).then(getData);
-
-export const getAllMerchants =
-	() => axios.get(`${BASE_URL}/api/merchants/`).then(getData);
-
-export const getAllCategories =
-	() => axios.get(`${BASE_URL}/api/categories/`).then(getData);
-
-export const getByMerchantId =
-	(merchantId) => axios.get(`${BASE_URL}/api/merchants/${id}`).then(getData);

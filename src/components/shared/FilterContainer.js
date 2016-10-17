@@ -1,9 +1,8 @@
-'use strict'
+'use strict';
 
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import _ from 'lodash';
 import InlineFormFilter from './InlineFormFilter';
 import * as TransactionActions from '../../actions/transactionActions';  //input whatever actions you need
 import { updateInstanceState, updateStartDate, updateEndDate, queryUrl} from './shareFilterComponentUtils';
@@ -18,20 +17,6 @@ class FilterContainer extends Component {
 		};
 		this.filter = this.filter.bind(this);
 		this.getAll = this.getAll.bind(this);
-	}
-
-	componentWillReceiveProps(nextProps) {
-
-		let query = nextProps.query;
-		console.log('enforcing filtering action due to redirect from trend',Object.keys(query).length)
-
-		if(Object.keys(query).length!==0 && !_.isEqual(nextProps, this.props)){
-			this.setState({
-				instance: Object.assign({},query),
-			});
-			let filterUrl = queryUrl(this)
-			this.props.actions.getAllTransactions(filterUrl);
-		}
 	}
 
 	filter (event) {
@@ -58,7 +43,7 @@ class FilterContainer extends Component {
 							errors={this.state.errors}
 						/>
 	}
-};
+}
 
 function mapStateToProps(state, ownProps) {
 
@@ -75,6 +60,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(FilterContainer)
-
-
-

@@ -10,7 +10,8 @@ export default {
     data: [],
     isFetching: false,
     errorMessage: null,
-    query: null
+    query: null,
+    shouldFetchAll: true
   },
   categories: {
     data: [],

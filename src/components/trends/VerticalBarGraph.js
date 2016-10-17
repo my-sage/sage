@@ -4,10 +4,10 @@ import React from 'react';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryTooltip} from 'victory';
 import {composeData, mapAbsolute, createEventHandlers} from '../../utils/graphUtils';
 
-const VerticalBarGraph = ({data, groupBy, barColor, eventHandlingFunction}) => {
+const VerticalBarGraph = ({data, groupBy, barColor, eventHandlingFunction, defaultCategory}) => {
 	const composedData = composeData(groupBy)(data);
 	const absoluteData = mapAbsolute(composedData);
-	const eventHandlers = createEventHandlers(absoluteData, eventHandlingFunction, groupBy);
+	const eventHandlers = createEventHandlers(absoluteData, eventHandlingFunction, groupBy, defaultCategory);
 	const barWidth = (data) => (250 / data.length) - 2;
 	return (
 		<VictoryChart theme={VictoryTheme.material} width={800} domainPadding={{x: 90}}>
