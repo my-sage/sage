@@ -55,6 +55,7 @@ class TransactionModal extends Component {
 
   open() {
     this.setState({show: true});
+    console.log('state', this.state)
   }
 
   render () {

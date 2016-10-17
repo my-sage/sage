@@ -17,7 +17,7 @@ import AddAccountEditForm from './AddAccountEditForm';
 
 const styles = {
   button: {
-   	backgroundColor: 'transparent',
+   	backgroundColor: 'transparent'
   },
   panel: {
   	boxShadow: "5px 5px 7px grey",
@@ -25,7 +25,8 @@ const styles = {
   },
   image: {
   	maxHeight: '100px',
-  	maxWidth: '200px'
+  	maxWidth: '200px',
+  	pointerEvents: "none"
   },
   row: {
   	marginBottom: "45px"
@@ -51,25 +52,28 @@ class AddAccountPage extends Component {
 		this.state = {
 			show: false,
 			account: Object.assign({},{
+				name: '',
 				routeNum:'', 
 				accountNum:'',
 				userName: '',
-				password: '',
-			})
+				password: ''
+			}),
+			errors: {}
 		}
 
 		this.updateAccountState = this.updateAccountState.bind(this);
-		this.update = this.update.bind(this);
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
 	}
 
 	updateAccountState(event) {
-    //const coerceToInt = (maybeInt) => isNaN(+maybeInt) ? maybeInt : +maybeInt;
+    const coerceToInt = (maybeInt) => isNaN(+maybeInt) ? maybeInt : +maybeInt;
 		let field = event.target.name;
+		 console.log('updating the account state with field',field);
+		 console.log('updating the account state with value',event.target.value);
 		let account = this.state.account;
-		account[field] = event.target.value;
-		return this.setState({account: account});
+		account[field] = coerceToInt(event.target.value);
+		this.setState({account: account},console.log('the new account state',this.state));
 	}
 
 	close() {
@@ -77,8 +81,8 @@ class AddAccountPage extends Component {
   }
 
   open(event) {
-  	console.log(event.target.getAttribute('name'))
-    this.setState({show: true});
+  	console.log('open.......',event.target.name)
+    this.setState({show: true, account: {name: event.target.name}});
   }
 
 	render() {
@@ -122,32 +126,32 @@ class AddAccountPage extends Component {
 			    	  </Col>
 			    	  </Row>
 			    	</Grid>
+
+			    <div className="modal-container" style={{height: 40}}>
+			  		<Modal show={this.state.show} onHide={this.close} container={this} aria-labelledby="contained-modal-title">
+			  			
+			  			<Modal.Header closeButton style={{textAlign: "center"}}>
+			  				<Modal.Title id="Contained-modal-title">{this.state.account.name}</Modal.Title>
+			  			</Modal.Header>
+
+			  			<Modal.Body>
+			  				<AddAccountEditForm
+			  					onChange={this.updateAccountState}
+			  					account={this.state.account}
+			  					errors={this.state.errors}
+			  				/>
+			  			</Modal.Body>
+
+			  			<Modal.Footer>
+			  				
+								<Button bsStyle="success">Add Bank Account</Button>  				
+			  			</Modal.Footer>
+
+			  		</Modal>
+			  	</div>			    	
 			    </div>
 
-	  		<Modal show={this.state.show} onHide={this.close} container={this} aria-labelledby="contained-modal-title">
-	  			
-	  			<Modal.Header closeButton>
-	  				<Modal.Title id="Contained-modal-title">Account Management</Modal.Title>
-	  			</Modal.Header>
 
-	  			<Modal.Body>
-	  				<AddAccountEditForm
-	  					onChange={this.updateAccountState}
-	  					transaction={this.state.account}
-	  					errors={this.state.errors}
-	  				/>
-	  			</Modal.Body>
-
-	  			<Modal.Footer>
-	  				{/*<Button bsStyle="primary" onClick={this.update}>Save and Close</Button>
-	  				<Button bsStyle="primary" onClick={this.updateMerchantCategory}>Update Merchant Category</Button>*/}
-				    <SplitButton bsStyle="primary" title="Save Change" onClick={this.update}>
-				      <MenuItem eventKey="1" onClick={this.update}>Save and Close</MenuItem>
-				      <MenuItem eventKey="2" onClick={this.updateMerchantCategory}>Overwrite Merchant Category</MenuItem>
-				    </SplitButton>	  				
-	  			</Modal.Footer>
-
-	  		</Modal>
 
 
 			 </div>
@@ -155,4 +159,4 @@ class AddAccountPage extends Component {
 	}
 }
 
-export default Radium(AddAccountPage);
+export default AddAccountPage;

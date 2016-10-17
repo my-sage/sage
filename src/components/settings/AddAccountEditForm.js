@@ -1,26 +1,27 @@
 import React from 'react';
-import TextInput from '../share/PolyInput';
-import SelectInput from '../share/DropdownInput';
+import TextInput from '../shared/PolyInput';
+import SelectInput from '../shared/DropdownInput';
 
-const AddAccountEditForm = ({account}) => {
+export default ({account,errors, onChange}) => {
 	return (
-			<PolyInput
-				name="routeNumber"
+		<form style={{textAlign: "left"}}>
+			<TextInput
+				name="routeNum"
 				label="Routing Number"
 				value={account.routeNum}
-				type="number"
+				type="text"
 				onChange={onChange}
 				error={errors.title} />
 
-			<PolyInput
+			<TextInput
 				name="accountNum"
 				label="Account Number"
-				type="number"
+				type="text"
 				value={account.accountNum}
 				onChange={onChange}
 				error={errors.title} />
 
-				<PolyInput
+				<TextInput
 				name="userName"
 				label="User Name"
 				type="text"
@@ -28,12 +29,13 @@ const AddAccountEditForm = ({account}) => {
 				onChange={onChange}
 				error={errors.title} />	
 
-				<PolyInput
+				<TextInput
 				name="password"
 				label="Password"
 				type="password"
 				value={account.password}
 				onChange={onChange}
-				error={errors.title} />					
+				error={errors.title} />	
+			</form>				
 	);
 }
