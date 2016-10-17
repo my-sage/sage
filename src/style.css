@@ -19,18 +19,18 @@ body {
 	height: 100%;
 	width: 100px;
 	position: fixed;
-	z-index: 1;
 	top: 0;
 	left: 0;
 	background-color: #34495C;
 	overflow-x: hidden;
 	transition: 0.5s;
 	padding-top: 50px;
-	z-index:1200;
+	z-index:1000;
 }
 
-
-
+.navbar {
+  z-index: 1001 !important;
+}
 .activeButton {
 	color:white;
 }
