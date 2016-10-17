@@ -4,17 +4,17 @@ import SpendingPage from './SpendingPage';
 import IncomePage from './IncomePage';
 import NetIncomePage from './NetIncomePage';
 
-const TrendsTabs = ({transactions, categories, merchants}) => {
+const TrendsTabs = ({transactions, eventHandlingFunction}) => {
 	return (
 		<Tabs defaultActiveKey={1}>
 			<Tab eventKey={1} title="Spending">
-				<SpendingPage transactions={transactions} categories={categories} merchants={merchants}/>
+				<SpendingPage transactions={transactions} eventHandlingFunction={eventHandlingFunction}/>
 			</Tab>
 			<Tab eventKey={2} title="Income">
-				<IncomePage transactions={transactions} categories={categories} merchants={merchants}/>
+				<IncomePage transactions={transactions} eventHandlingFunction={eventHandlingFunction}/>
 			</Tab>
 			<Tab eventKey={3} title="Net Income">
-				<NetIncomePage transactions={transactions} categories={categories} merchants={merchants}/>
+				<NetIncomePage transactions={transactions} eventHandlingFunction={eventHandlingFunction}/>
 			</Tab>
 		</Tabs>
 	)
