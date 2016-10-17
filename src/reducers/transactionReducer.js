@@ -25,7 +25,7 @@ const dataHandlers = {
       let newState = state;
       forEach((newTransaction) => {
         newState = map(update(newTransaction), newState);
-      }, action.transaction)
+      }, action.transaction);
       return newState;
     }
     return map(update(action.transaction), state)
@@ -56,9 +56,18 @@ const queryHandlers = {
 
 const query = createReducer(transactions.query, queryHandlers);
 
+const shouldFetchAllHandlers = {
+  [actions.SHOULD_FETCH_ALL](state, action) {
+    return action.payload;
+  }
+};
+
+const shouldFetchAll = createReducer(transactions.shouldFetchAll, shouldFetchAllHandlers);
+
 export default combineReducers({
   data, 
   isFetching,
   errorMessage,
-  query
+  query,
+  shouldFetchAll
 });

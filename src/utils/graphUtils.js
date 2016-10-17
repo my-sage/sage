@@ -39,9 +39,10 @@ const wantIncome = (boolean) => {
 };
 
 const resolveMerchantAndCategory = (transaction) => {
-	transaction.merchantName = transaction.merchant.name;
-	transaction.categoryName = transaction.category ? transaction.category.name : 'UNCATEGORIZED';
-	return transaction;
+	const newTransac = R.clone(transaction);
+	newTransac.merchantName = newTransac.merchant.name;
+	newTransac.categoryName = newTransac.category.name;
+	return newTransac;
 };
 
 export const wantIncomeFilter = (boolean) => R.filter(wantIncome(boolean));
@@ -59,18 +60,18 @@ export const mapAbsolute = (transactionData) => {
 	return result;
 };
 
-const createEventHandler = (dataPoint, index, eventHandlingFunction, groupingBy) => {
+const createEventHandler = (dataPoint, index, eventHandlingFunction, groupingBy, defaultCategory) => {
 	return {
 		target: 'data',
 		eventKey: index,
 		eventHandlers: {
-			onClick: (proxy, object, key) => eventHandlingFunction(object.datum, groupingBy)
+			onClick: (proxy, object, key) => eventHandlingFunction(object.datum, groupingBy, defaultCategory)
 		}
 	}
 };
 
-export const createEventHandlers = (data, eventHandlingFunction, groupingBy) => {
+export const createEventHandlers = (data, eventHandlingFunction, groupingBy, defaultCategory) => {
 	const result = [];
-	_.forEach(data, (dataPoint, index) => result.push(createEventHandler(dataPoint, index, eventHandlingFunction, groupingBy)));
+	_.forEach(data, (dataPoint, index) => result.push(createEventHandler(dataPoint, index, eventHandlingFunction, groupingBy, defaultCategory)));
 	return result;
 };

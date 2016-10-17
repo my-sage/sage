@@ -2,15 +2,16 @@
 
 import React from 'react';
 import {VictoryChart, VictoryPie, VictoryTooltip} from 'victory';
-import {composeData, createEventHandlers} from '../../utils/graphUtils';
+import {composeData, createEventHandlers, mapAbsolute} from '../../utils/graphUtils';
 
-const PieChart = ({data, groupBy, eventHandlingFunction}) => {
+const PieChart = ({data, groupBy, eventHandlingFunction, defaultCategory}) => {
 	const composedData = composeData(groupBy)(data);
-	const eventHandlers = createEventHandlers(composedData, eventHandlingFunction);
+	const absoluteData = mapAbsolute(composedData);
+	const eventHandlers = createEventHandlers(absoluteData, eventHandlingFunction, groupBy, defaultCategory);
 	return (
 		<div style={{width: "50%"}}>
 			<VictoryPie
-				data={composedData}
+				data={absoluteData}
 				colorScale={"qualitative"}
 				labelComponent={<VictoryTooltip pointerLength={0}/>}
 				labelRadius={-40}
