@@ -5,19 +5,27 @@ const {
   prop,
   map,
   compose,
-  filter
+  filter,
+  lt,
+  find,
+  propEq
 } = require('ramda');
 const Category = require('../../db/models/category');
+const Transaction = require('../../db/models/transaction');
 const Promise = require('bluebird');
+
+const getName = prop('name')
+  , getNames = map(getName)
+  , getTargets = map(prop('target'))
+  , getBestMatch = compose(prop('target'), prop('bestMatch'))
+  , getRating = compose(prop('rating'), prop('bestMatch'))
+  , findByName = (merchantName) => filter((merchant) => merchantName === merchant.name)
+  , gtThreshold = (threshold) => compose(getTargets, filter(e => lt(threshold, e.rating)), prop('ratings'))
+  , updateCategories = (categoryId, merchants) => Promise.all(map(merch => merch.updateWithTransactions({categoryId}), merchants))
+  , getTransacs = (m) => m.getTransactions();
 
 // kth nearest neighbor to determine likely category from category training data
 const categorize = (newMerchant, threshold = 0.70) => {
-  const getName = prop('name')
-  , getNames = map(getName)
-  , getBestMatch = compose(prop('target'), prop('bestMatch'))
-  , getRating = compose(prop('rating'), prop('bestMatch'))
-  , findByName = (merchantName) => filter((merchant) => merchantName === merchant.name);
-
   return newMerchant.Model.findAll({
     where: {
       id: {
@@ -29,7 +37,7 @@ const categorize = (newMerchant, threshold = 0.70) => {
     }
   })
   .then(categorizedMerchants => {
-    const merchantNames = getNames(categorizedMerchants)
+    const merchantNames = getNames(categorizedMerchants)[0] ? getNames(categorizedMerchants) : ['']
     , matches = stringSimilarity.findBestMatch(newMerchant.name, merchantNames)
     , bestMatch = getBestMatch(matches)
     , rating = getRating(matches)
@@ -50,4 +58,36 @@ const categorize = (newMerchant, threshold = 0.70) => {
   })
 }
 
-module.exports = categorize;
+const proactiveCategorize = (updatedMerchant, threshold = 0.70) => {
+  return Category.findOne({
+    where: {
+      name: 'UNCATEGORIZED'
+    }
+  })
+  .then(category => {
+    if(category) {
+      return updatedMerchant.Model.findAll({
+        where: {
+          categoryId: category.id
+        }
+      })
+    }
+  })
+  .then(uncategorizedMerchants => {
+    if(uncategorizedMerchants) {
+      const uncategorizedNames = getNames(uncategorizedMerchants)
+      , matches = stringSimilarity.findBestMatch(updatedMerchant.name, uncategorizedNames)
+      , namesToCategorize = gtThreshold(threshold)(matches);
+      if(namesToCategorize[0]){
+        const merchantsToCategorize = map((name) => find(propEq('name', name), uncategorizedMerchants), namesToCategorize);
+        return updateCategories(updatedMerchant.categoryId, merchantsToCategorize)
+              // .then(_ => Promise.map(merchantsToCategorize, getTransacs))
+      }
+    }
+  })
+}
+
+module.exports = {
+  categorize,
+  proactiveCategorize
+};
