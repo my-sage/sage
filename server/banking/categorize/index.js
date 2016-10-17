@@ -31,12 +31,9 @@ const categorize = (newMerchant, threshold = 0.70) => {
     , matches = stringSimilarity.findBestMatch(newMerchant.name, merchantNames)
     , bestMatch = getBestMatch(matches)
     , rating = getRating(matches)
-    , newCategory = rating > threshold ? bestMatch : false;
-    if(newCategory) {
-      newMerchant.categoryId = findByName(bestMatch)(categorizedMerchants)[0].categoryId;
+    , newCategory = rating > threshold ? bestMatch : 'UNCATEGORIZED';
+      newMerchant.categoryId = findByName(newCategory)(categorizedMerchants)[0].categoryId;
       return newMerchant.save()
-    } else
-      return newMerchant;
   })
 }
 
