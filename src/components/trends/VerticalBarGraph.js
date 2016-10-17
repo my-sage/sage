@@ -10,7 +10,7 @@ const VerticalBarGraph = ({data, groupBy, barColor, eventHandlingFunction}) => {
 	const eventHandlers = createEventHandlers(absoluteData, eventHandlingFunction, groupBy);
 	const barWidth = (data) => (250 / data.length) - 2;
 	return (
-		<VictoryChart theme={VictoryTheme.material} width={800} domainPadding={{x: 40}}>
+		<VictoryChart theme={VictoryTheme.material} width={800} domainPadding={{x: 90}}>
 			<VictoryAxis fixLabelOverlap={true}/>
 			<VictoryAxis dependentAxis={true} tickFormat={(y) => `$${y}`}/>
 			<VictoryBar data={absoluteData}
