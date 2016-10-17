@@ -31,17 +31,17 @@ export const composeData = (prop) => R.compose(formatData, mapReduceToSum, group
 const wantIncome = (boolean) => {
 	return boolean ?
 		function (transaction) {
-			return transaction.category.name.toLowerCase() === 'income'
+			return transaction.category && transaction.category.name.toLowerCase() === 'income'
 		}
 		:
 		function (transaction) {
-			return transaction.category.name.toLowerCase() !== 'income'
+			return transaction.category && transaction.category.name.toLowerCase() !== 'income'
 		}
 };
 
 const resolveMerchantAndCategory = (transaction) => {
 	transaction.merchantName = transaction.merchant.name;
-	transaction.categoryName = transaction.category.name;
+	transaction.categoryName = transaction.category ? transaction.category.name : 'UNCATEGORIZED';
 	return transaction;
 };
 

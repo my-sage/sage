@@ -19,21 +19,20 @@ class BudgetItem extends Component {
     let formattedDate = ('0' + dt.getDate()).slice(-2) + '/' + ('0' + (dt.getMonth() + 1)).slice(-2) + '/' + dt.getFullYear() + ' ' + ('0' + dt.getHours()).slice(-2) + ':' + ('0' + dt.getMinutes()).slice(-2);
 
     return (
-        
         <Panel>
-        <li style={style.li}>
-        <div>
-        <p style={{float:'left'}}><b>{category.name}</b>: {name}</p>
-        <p style={{textAlign: 'right', marginRight: '130px'}}><b>${currentAmount}</b><i> of </i><b>${targetAmount}</b></p>
-        </div>
-        {/*<p><b>Name:</b> {name} <b>| Currrent:</b> {currentAmount} <b>| Max Amount:</b> {targetAmount} <b>| Expiration:</b> {formattedDate} <b>| Category: </b>{category.name}*/}
-        {/*<br></br>*/}
-        <BudgetUpdateModal budget={this.props.budget}/>
-        <div>
-        <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
-        </div>
-        </li> 
-        </Panel>   
+          <li style={style.li}>
+            <div>
+              <p style={{float:'left'}}><b>{category ? category.name : 'UNCATEGORIZED'}</b>: {name}</p>
+              <p style={{textAlign: 'right', marginRight: '130px'}}><b>${currentAmount}</b><i> of </i><b>${targetAmount}</b></p>
+            </div>
+              {/*<p><b>Name:</b> {name} <b>| Currrent:</b> {currentAmount} <b>| Max Amount:</b> {targetAmount} <b>| Expiration:</b> {formattedDate} <b>| Category: </b>{category ? category.name : 'UNCATEGORIZED'}*/}
+              {/*<br></br>*/}
+              <BudgetUpdateModal budget={this.props.budget} style={{marginTop: '0px'}}/>
+            <div>
+            <BudgetBar targetAmount={targetAmount} currentAmount={currentAmount}/>
+            </div>
+          </li>
+        </Panel>
     )
   }
 }

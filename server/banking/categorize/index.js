@@ -7,6 +7,8 @@ const {
   compose,
   filter
 } = require('ramda');
+const Category = require('../../db/models/category');
+const Promise = require('bluebird');
 
 // kth nearest neighbor to determine likely category from category training data
 const categorize = (newMerchant, threshold = 0.70) => {
@@ -31,12 +33,20 @@ const categorize = (newMerchant, threshold = 0.70) => {
     , matches = stringSimilarity.findBestMatch(newMerchant.name, merchantNames)
     , bestMatch = getBestMatch(matches)
     , rating = getRating(matches)
-    , newCategory = rating > threshold ? bestMatch : false;
-    if(newCategory) {
-      newMerchant.categoryId = findByName(bestMatch)(categorizedMerchants)[0].categoryId;
-      return newMerchant.save()
-    } else
-      return newMerchant;
+    , newCategory = rating > threshold ? bestMatch : 'UNCATEGORIZED';
+    if(newCategory !== 'UNCATEGORIZED')
+      newMerchant.categoryId = findByName(newCategory)(categorizedMerchants)[0].categoryId;
+    else 
+      return Category.findOrCreate({
+        where: {
+          name: 'UNCATEGORIZED'
+        }
+      })
+      .spread(category => {
+        newMerchant.categoryId = category.id;
+        return newMerchant.save();
+      })
+    return newMerchant.save()
   })
 }
 
