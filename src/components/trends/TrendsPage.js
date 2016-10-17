@@ -46,7 +46,7 @@ class TrendsPage extends Component {
 					break;
 			}
 			for(let key in newQueryObj){
-				if(newQueryObj[key]!=='') newQuery+=`${key}=${newQueryObj[key]}&`;
+				if(newQueryObj[key]!==''&&newQueryObj[key]!=='NaN') newQuery+=`${key}=${newQueryObj[key]}&`;
 			}
 			browserHistory.push(`/transactions${newQuery.substring(0, newQuery.length-1)}`);
 		};

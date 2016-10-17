@@ -23,13 +23,13 @@ class FilterContainer extends Component {
 	componentWillReceiveProps(nextProps) {
 
 		let query = nextProps.query;
-		// console.log('enforcing filtering action due to redirect from trend',Object.keys(query).length);
+		console.log('enforcing filtering action due to redirect from trend',Object.keys(query).length)
 
-		if(!_.isEqual(nextProps, this.props)){
+		if(Object.keys(query).length!==0 && !_.isEqual(nextProps, this.props)){
 			this.setState({
 				instance: Object.assign({},query),
 			});
-			let filterUrl = queryUrl(this);
+			let filterUrl = queryUrl(this)
 			this.props.actions.getAllTransactions(filterUrl);
 		}
 	}
