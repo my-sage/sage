@@ -12,7 +12,7 @@ const TransactionSingle = ({date, merchantId, categoryId, amount, id, category, 
 		<tr key={id} style={{border: "1px solid black"}}>
 			<td style={styles.dataStyle}>{formattedDate}</td>
 			<td style={styles.dataStyle}>{merchant.name}</td>
-			<td style={styles.dataStyle}>{category.name}</td>
+			<td style={styles.dataStyle}>{category ? category.name : 'UNCATEGORIZED'}</td>
 			<td style={styles.dataStyle}>${amount}</td>
 			<td style={styles.dataStyle}>
 				<TransactionModal transaction={transaction}/>
@@ -20,8 +20,6 @@ const TransactionSingle = ({date, merchantId, categoryId, amount, id, category, 
 		</tr>
 	)
 };
-
-
 
 const styles = {
 	dataStyle: {

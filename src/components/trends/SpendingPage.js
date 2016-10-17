@@ -24,10 +24,15 @@ class SpendingPage extends Component {
 		};
 		return (
 			<div>
-				<FilterContainer />
-				<GroupingDropdown onSelect={groupSetter.bind(this)}/>
-				<ChartSelect onSelect={chartSelector.bind(this)}/>
+				<div style={{paddingTop:'20px'}}>
+					<FilterContainer />
+				</div>
+
 				<h3>Spending By {this.state.displayName}</h3>
+				<div>
+					<GroupingDropdown onSelect={groupSetter.bind(this)}/>
+					<ChartSelect onSelect={chartSelector.bind(this)}/>
+				</div>
 				{shouldBePie(this.state.shouldBePie)}
 			</div>
 		)

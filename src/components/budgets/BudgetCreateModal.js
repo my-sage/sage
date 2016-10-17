@@ -53,7 +53,7 @@ class BudgetCreateModal extends Component {
   	return (
 	  	<div className="modal-container" style={{height: 50, marginBottom: '20px'}}>
 
-	  		<Button bsStyle="info" bsSize="large" onClick={this.open} style={{width:'100%'}}>
+	  		<Button bsSize="large" onClick={this.open} style={{width:'100%', marginTop:'15px'}}>
           + Create Budget
 	  		</Button>
 
@@ -97,13 +97,13 @@ function mapStateToProps(state, ownProps) {
 	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
 		return {
 			value: category.id,
-			text: category.name
+			text: category ? category.name : 'UNCATEGORIZED'
 		};
 	});
 
 	const typeBudgets = [
 		{value: "Spending", text: "Spending"},
-		{value: "Incoming", text: "Imcoming"}
+		{value: "Incoming", text: "Incoming"}
 	]
 
 	return {

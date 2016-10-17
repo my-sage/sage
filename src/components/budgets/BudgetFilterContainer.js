@@ -31,16 +31,18 @@ class BudgetFilterContainer extends Component {
 	}
 
 	render () {
-		return <InlineFormFilter 
-							instance={this.state.instance}
-							categories={this.props.categories}
-							onChange={updateInstanceState(this)}
-							onChangeStart={updateStartDate(this)}
-							onChangeEnd={updateEndDate(this)}
-							filter={this.filter}
-							getCurrent={this.getCurrent}
-							errors={this.state.errors}
-						/>
+		return (
+				<InlineFormFilter
+					instance={this.state.instance}
+					categories={this.props.categories}
+					onChange={updateInstanceState(this)}
+					onChangeStart={updateStartDate(this)}
+					onChangeEnd={updateEndDate(this)}
+					filter={this.filter}
+					getCurrent={this.getCurrent}
+					errors={this.state.errors}
+				/>
+		)
 	}
 };
 

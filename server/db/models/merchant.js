@@ -9,14 +9,14 @@ const {
 
 const categorize = require('../../banking/categorize');
 
-const fields = {}
-const options = {}
+const fields = {};
+const options = {};
 
 fields.name = {
   type: Sequelize.STRING,
   unique: true,
   allowNull: false
-}
+};
 
 options.instanceMethods = {
   updateWithTransactions: function(updatedMerchant) {
@@ -37,6 +37,6 @@ options.instanceMethods = {
   categorize: function() {
     return categorize(this);
   }
-}
+};
 
-module.exports = db.define('merchant', fields, options)
+module.exports = db.define('merchant', fields, options);

@@ -7,6 +7,10 @@ body {
 	padding: 42px 36px;
 }
 
+.modal-content {
+  margin-top: 80px;
+}
+
 .topNav {
 	background-color: black;
 }
@@ -42,7 +46,7 @@ body {
 
  .buttoncss {
     width: 100%;
-    padding: 35px 0px;
+    padding: 34px 0px;
     background: transparent;
     border: 0px solid transparent;
     border-left: transparent;
@@ -69,7 +73,7 @@ body {
 
 .selected {
 	background-color: #22303D;
-	padding: 57px 0% 40px 0%;
+	padding: 62px 0% 40px 0%;
 	font-weight: bold;
 	color: #1B9D81;
 }
@@ -185,14 +189,8 @@ body {
 
 
 
-
-
-
-.video-background {
+/*.video-background {
   background: #000;
-  position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
-  z-index: -99;
 }
 .video-foreground,
 .video-background iframe {
@@ -206,19 +204,16 @@ body {
 .vidtop-content {
   top: 0;
   color: #fff;
-}
+}*/
 .logInInfo { 
   position: absolute; 
-  /*top: 0; 
-  right: 0; */
-  width: 33%; 
-  margin-top:8%;
+  margin-top:11%;
   margin-left:33%;
   margin-right: 33%;
   background: rgba(0,0,0,0.3); 
   color: #fff; 
   padding: 1rem; 
-  font-family: Avenir, Helvetica, sans-serif; 
+  /*font-family: Avenir, Helvetica, sans-serif; */
 
 }
 
@@ -245,7 +240,7 @@ body {
   height:100%;
 }
 
-@media (min-aspect-ratio: 16/9) {
+/*@media (min-aspect-ratio: 16/9) {
   .video-foreground { 
     height: 300%; 
     top: -100%; 
@@ -257,9 +252,9 @@ body {
     width: 300%; 
     left: -100%; 
   }
-}
+}*/
 
-@media all and (max-width: 600px) {
+/*@media all and (max-width: 600px) {
 .logInInfo { 
   width: 50%; 
   padding: .5rem; 
@@ -273,7 +268,7 @@ body {
 .logInInfo .acronym { 
   display: none; 
   }
-}
+}*/
 
 @media(max-width: 960px){
   body {

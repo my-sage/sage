@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tabs, Tab, NavDropdown, MenuItem, Row, Col, NavItem, Nav} from 'react-bootstrap'
+import {Tabs, Tab, NavDropdown, MenuItem, Row, Col, NavItem, Nav, Panel} from 'react-bootstrap'
 import TypeTabs from './TypeTabs'
 import TransactionTable from './TransactionTable'
 import Filter from '../shared/FilterContainer'
@@ -19,14 +19,8 @@ export default React.createClass({
 					      <Row className="clearfix">
 					        <Col sm={12}  style={style.pushDown}>
 					          <Nav bsStyle="tabs">
-					            <NavDropdown eventKey="1" title="Type">
-					            	<MenuItem eventKey="1">All Transactions</MenuItem>
-					            	<MenuItem eventKey="1.1">Cash & Credit</MenuItem>
-					            	<MenuItem eventKey="1.2">Investment</MenuItem>
-					            	<MenuItem eventKey="1.3">Cash Only</MenuItem>
-					            	<MenuItem eventKey="1.4">Loan</MenuItem>
-					            </NavDropdown>
-					            <NavDropdown eventKey="2" title="Accounts">
+					            <NavItem eventKey="1">All Transactions</NavItem>
+					            <NavDropdown eventKey="2" title="By Bank">
 					            	<MenuItem eventKey="2.1">View All</MenuItem>
 					            	<MenuItem eventKey="2.2">Bank of America</MenuItem>
 					            	<MenuItem eventKey="2.3">Chase</MenuItem>
@@ -35,9 +29,7 @@ export default React.createClass({
 					            </NavDropdown>
 					          </Nav>
 					        </Col>
-
 					        <Filter query={this.props.query}/>
-
 					        <Col sm={12}>
 					          <Tab.Content animation>
 
