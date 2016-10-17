@@ -23,7 +23,7 @@ class BudgetItem extends Component {
           <li style={style.li}>
             <div>
               <p style={{float:'left'}}><b>{category ? category.name : 'UNCATEGORIZED'}</b>: {name}</p>
-              <p style={{textAlign: 'right', marginRight: '130px'}}><b>${currentAmount}</b><i> of </i><b>${targetAmount}</b></p>
+              <p style={{textAlign: 'right', marginRight: '130px'}}><b>${Math.abs(currentAmount)}</b><i> of </i><b>${targetAmount}</b></p>
             </div>
               {/*<p><b>Name:</b> {name} <b>| Currrent:</b> {currentAmount} <b>| Max Amount:</b> {targetAmount} <b>| Expiration:</b> {formattedDate} <b>| Category: </b>{category ? category.name : 'UNCATEGORIZED'}*/}
               {/*<br></br>*/}

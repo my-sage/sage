@@ -103,7 +103,7 @@ function mapStateToProps(state, ownProps) {
 
 	const typeBudgets = [
 		{value: "Spending", text: "Spending"},
-		{value: "Incoming", text: "Incoming"}
+		{value: "Income", text: "Income"}
 	]
 
 	return {

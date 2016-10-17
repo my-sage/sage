@@ -18,7 +18,7 @@ const BudgetEditForm = ({budget, categories, typeBudgets,onChange, loading, erro
 				name="categoryId"
 				label="Category"
 				value={budget.categoryId}
-				defaultOption="Select the correct Category"
+				defaultOption="Select Category"
 				options={categories}
 				onChange={onChange} error={errors.categoryId}/>
 
@@ -26,7 +26,7 @@ const BudgetEditForm = ({budget, categories, typeBudgets,onChange, loading, erro
 				name="type"
 				label="Type"
 				value={budget.type}
-				defaultOption="Select the correct type"
+				defaultOption="Select Type"
 				options={typeBudgets}
 				onChange={onChange} error={errors.categoryId}/>
 
