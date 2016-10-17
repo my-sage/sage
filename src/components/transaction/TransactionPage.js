@@ -48,7 +48,7 @@ const mapStateToProps = (state,ownProps) => {
     transactions: state.transactions.data, 
     query: query
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(TransactionActions, dispatch)});
 

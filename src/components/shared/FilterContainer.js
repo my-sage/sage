@@ -25,7 +25,7 @@ class FilterContainer extends Component {
 		let query = nextProps.query;
 		// console.log('enforcing filtering action due to redirect from trend',Object.keys(query).length);
 
-		if(query && !_.isEqual(nextProps, this.props)){
+		if(!_.isEqual(nextProps, this.props)){
 			this.setState({
 				instance: Object.assign({},query),
 			});

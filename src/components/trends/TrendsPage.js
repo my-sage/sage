@@ -42,14 +42,12 @@ class TrendsPage extends Component {
 					newQueryObj.merchantId = '' + R.filter((merchant)=>merchant.name===data.xName, merchants)[0].id;
 					break;
 				default:
-					console.log('default case');
+					console.log('Something unexpected may have happened');
 					break;
 			}
 			for(let key in newQueryObj){
-				if(key!=='') newQuery+=`${key}=${newQueryObj[key]}&`;
+				if(newQueryObj[key]!=='') newQuery+=`${key}=${newQueryObj[key]}&`;
 			}
-			console.log(newQuery);
-			console.log(oldQueryParts);
 			browserHistory.push(`/transactions${newQuery.substring(0, newQuery.length-1)}`);
 		};
 		return (
