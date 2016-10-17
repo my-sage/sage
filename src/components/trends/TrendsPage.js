@@ -22,31 +22,31 @@ class TrendsPage extends Component {
 			switch(groupingBy){
 				case('fullDate'):
 					date = moment(data.xName, 'MM DD YYYY');
-					newQueryObj.startDate = R.clone(date).subtract(1, 'd').valueOf();
-					newQueryObj.endDate = date.valueOf();
+					newQueryObj.startDate = +R.clone(date).subtract(1, 'd').valueOf();
+					newQueryObj.endDate = +date.valueOf();
 					break;
 				case('month'):
 					date = moment(data.xName, 'MM YYYY');
-					newQueryObj.startDate = R.clone(date).subtract(1, 'd').valueOf();
-					newQueryObj.endDate = date.endOf('month').valueOf();
+					newQueryObj.startDate = +R.clone(date).subtract(1, 'd').valueOf();
+					newQueryObj.endDate = +date.endOf('month').valueOf();
 					break;
 				case('year'):
 					date = moment(data.xName, 'YYYY');
-					newQueryObj.startDate = R.clone(date).subtract(1, 'd').valueOf();
-					newQueryObj.endDate = date.endOf('year').valueOf();
+					newQueryObj.startDate = +R.clone(date).subtract(1, 'd').valueOf();
+					newQueryObj.endDate = +date.endOf('year').valueOf();
 					break;
 				case('categoryName'):
-					newQueryObj.categoryId = '' + R.filter((category)=>category.name===data.xName, categories)[0].id;
+					newQueryObj.categoryId = +R.filter((category)=>category.name===data.xName, categories)[0].id;
 					break;
 				case('merchantName'):
-					newQueryObj.merchantId = '' + R.filter((merchant)=>merchant.name===data.xName, merchants)[0].id;
+					newQueryObj.merchantId = +R.filter((merchant)=>merchant.name===data.xName, merchants)[0].id;
 					break;
 				default:
 					console.log('Something unexpected may have happened');
 					break;
 			}
 			for(let key in newQueryObj){
-				if(newQueryObj[key]!==''&&newQueryObj[key]!=='NaN') newQuery+=`${key}=${newQueryObj[key]}&`;
+				if(newQueryObj[key]!==''&&newQueryObj[key]!=='NaN') newQuery+=`${key}=${+newQueryObj[key]}&`;
 			}
 			browserHistory.push(`/transactions${newQuery.substring(0, newQuery.length-1)}`);
 		};
