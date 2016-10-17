@@ -5,42 +5,49 @@ import TrendsTabs from './TrendsTabs';
 import {Panel} from 'react-bootstrap';
 import R from 'ramda';
 import moment from 'moment';
+import {browserHistory} from 'react-router';
 
 class TrendsPage extends Component {
 	render() {
 		const {transactions, query, merchants, categories} = this.props;
 		const eventHandlingFunction = (data, groupingBy) => {
-			let merchantId, categoryId, startDate, endDate, date, queryParts;
-			// console.log('data:', data.xName);
-			// console.log('groupingBy:', groupingBy);
-			// groupingBy could be fullDate, month, year, categoryName, merchantName
+			let date, oldQueryParts, newQueryObj={}, newQuery='?';
+			if(query){
+				oldQueryParts = query.split('?')[1].split('&').map(part=> part.split('='));
+				for(let i=0; i<oldQueryParts.length; i++){
+					newQueryObj[oldQueryParts[i][0]] = oldQueryParts[i][1]||'';
+				}
+			}
 			switch(groupingBy){
 				case('fullDate'):
 					date = moment(data.xName, 'MM DD YYYY');
-					startDate = R.clone(date).subtract(1, 'd').valueOf();
-					endDate = date.valueOf();
+					newQueryObj.startDate = R.clone(date).subtract(1, 'd').valueOf();
+					newQueryObj.endDate = date.valueOf();
 					break;
 				case('month'):
 					date = moment(data.xName, 'MM YYYY');
-					startDate = R.clone(date).subtract(1, 'd').valueOf();
-					endDate = date.endOf('month').valueOf();
+					newQueryObj.startDate = R.clone(date).subtract(1, 'd').valueOf();
+					newQueryObj.endDate = date.endOf('month').valueOf();
 					break;
 				case('year'):
 					date = moment(data.xName, 'YYYY');
-					startDate = R.clone(date).subtract(1, 'd').valueOf();
-					endDate = date.endOf('year').valueOf();
+					newQueryObj.startDate = R.clone(date).subtract(1, 'd').valueOf();
+					newQueryObj.endDate = date.endOf('year').valueOf();
 					break;
 				case('categoryName'):
-					categoryId = R.filter((category)=>category.name===data.xName, categories)[0].id;
+					newQueryObj.categoryId = '' + R.filter((category)=>category.name===data.xName, categories)[0].id;
 					break;
 				case('merchantName'):
-					merchantId = R.filter((merchant)=>merchant.name===data.xName, merchants)[0].id;
+					newQueryObj.merchantId = '' + R.filter((merchant)=>merchant.name===data.xName, merchants)[0].id;
 					break;
 				default:
 					console.log('default case');
 					break;
 			}
-			if(query) queryParts = query.split('?')[1].split('&');
+			for(let key in newQueryObj){
+				newQuery+=`${key}=${newQueryObj[key]}&`
+			}
+			browserHistory.push(`/transactions/${newQuery.substring(0, newQuery.length-1)}`);
 		};
 		return (
 			<div>
