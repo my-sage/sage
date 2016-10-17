@@ -70,7 +70,7 @@ router.post('/', (req, res, next) => {
       .then(account => {
         account = account.decrypt(req.user.pass);
         const { user, accId, password } = account
-          , start = daysAgo(30)
+          , start = daysAgo(180)
           , end = now()
           ,  bankHandler = bankHandlers[account.name];
           if (bankHandler) {
