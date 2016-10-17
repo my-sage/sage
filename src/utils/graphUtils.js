@@ -39,9 +39,10 @@ const wantIncome = (boolean) => {
 };
 
 const resolveMerchantAndCategory = (transaction) => {
-	transaction.merchantName = transaction.merchant.name;
-	transaction.categoryName = transaction.category.name;
-	return transaction;
+	const newTransac = R.clone(transaction);
+	newTransac.merchantName = newTransac.merchant.name;
+	newTransac.categoryName = newTransac.category.name;
+	return newTransac;
 };
 
 export const wantIncomeFilter = (boolean) => R.filter(wantIncome(boolean));

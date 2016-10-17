@@ -1,3 +1,4 @@
+'use strict';
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -45,9 +46,11 @@ class TrendsPage extends Component {
 					break;
 			}
 			for(let key in newQueryObj){
-				newQuery+=`${key}=${newQueryObj[key]}&`
+				if(key!=='') newQuery+=`${key}=${newQueryObj[key]}&`;
 			}
-			browserHistory.push(`/transactions/${newQuery.substring(0, newQuery.length-1)}`);
+			console.log(newQuery);
+			console.log(oldQueryParts);
+			browserHistory.push(`/transactions${newQuery.substring(0, newQuery.length-1)}`);
 		};
 		return (
 			<div>
