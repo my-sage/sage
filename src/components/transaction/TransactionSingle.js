@@ -21,8 +21,6 @@ const TransactionSingle = ({date, merchantId, categoryId, amount, id, category, 
 	)
 };
 
-
-
 const styles = {
 	dataStyle: {
 		// paddingRight: '5'
