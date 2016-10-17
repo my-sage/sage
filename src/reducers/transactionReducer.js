@@ -48,8 +48,17 @@ const errorMessageHandlers = createErrorHandlers({
 
 const errorMessage = createReducer(transactions.errorMessage, errorMessageHandlers);
 
+const queryHandlers = {
+  [actions.AFFIX_QUERY](state, action) {
+    return action.query ? action.query : null;
+  }
+};
+
+const query = createReducer(transactions.query, queryHandlers);
+
 export default combineReducers({
   data, 
   isFetching,
-  errorMessage
+  errorMessage,
+  query
 });

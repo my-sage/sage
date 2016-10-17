@@ -29,7 +29,7 @@ export default React.createClass({
 					            </NavDropdown>
 					          </Nav>
 					        </Col>
-					        <Filter/>
+					        <Filter query={this.props.query}/>
 					        <Col sm={12}>
 					          <Tab.Content animation>
 

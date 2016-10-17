@@ -3,10 +3,13 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
+import _ from 'lodash';
 import InlineFormFilter from './InlineFormFilter';
 import * as TransactionActions from '../../actions/transactionActions';  //input whatever actions you need
 import { updateInstanceState, updateStartDate, updateEndDate, queryUrl} from './shareFilterComponentUtils';
 import {formatForDropDown} from './formatForDropDown'
+
+//import NProgress from 'nprogress';
 
 class FilterContainer extends Component {
 	constructor (props) {
@@ -19,15 +22,32 @@ class FilterContainer extends Component {
 		this.getAll = this.getAll.bind(this);
 	}
 
+	componentWillReceiveProps(nextProps) {
+
+		let query = nextProps.query;
+		console.log('enforcing filtering action due to redirect from trend',Object.keys(query).length)
+
+		if(Object.keys(query).length!==0 && !_.isEqual(nextProps, this.props)){
+			this.setState({
+				instance: Object.assign({},query),
+			});
+			let filterUrl = queryUrl(this)
+			this.props.actions.getAllTransactions(filterUrl);
+		}
+	}
+
 	filter (event) {
 		event.preventDefault();
 		let filterUrl = queryUrl(this);		
-		this.props.actions.getAllTransactions(filterUrl)
+		this.props.actions.getAllTransactions(filterUrl);
+		console.log('start the progress',NProgress);
+		//NProgress.set(0.8);
 	}
 
 	getAll (event) {
 		event.preventDefault();
 		this.props.actions.getAllTransactions();
+		//NProgress.set(0.8);
 	}
 
 	render () {

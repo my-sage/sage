@@ -11,7 +11,6 @@ const dateAssign = (transaction) => {
 	transaction.year = transactionMoment.format('YYYY');
 	return transaction;
 };
-
 const orderByDay = (transactions) => R.sortBy(R.prop('date'), transactions);
 const mapDates = (transactions) => R.map(dateAssign, transactions);
 const groupByProp = (prop) => R.groupBy(transaction => transaction[prop]);
@@ -57,5 +56,21 @@ const makeAbsolute = (transaction) => {
 export const mapAbsolute = (transactionData) => {
 	const result = [];
 	_.forEach(transactionData, (transaction) => result.push(makeAbsolute(transaction)));
+	return result;
+};
+
+const createEventHandler = (dataPoint, index, eventHandlingFunction, groupingBy) => {
+	return {
+		target: 'data',
+		eventKey: index,
+		eventHandlers: {
+			onClick: (proxy, object, key) => eventHandlingFunction(object.datum, groupingBy)
+		}
+	}
+};
+
+export const createEventHandlers = (data, eventHandlingFunction, groupingBy) => {
+	const result = [];
+	_.forEach(data, (dataPoint, index) => result.push(createEventHandler(dataPoint, index, eventHandlingFunction, groupingBy)));
 	return result;
 };
