@@ -8,6 +8,8 @@ import * as TransactionActions from '../../actions/transactionActions';  //input
 import { updateInstanceState, updateStartDate, updateEndDate, queryUrl} from './shareFilterComponentUtils';
 import {formatForDropDown} from './formatForDropDown'
 
+//import NProgress from 'nprogress';
+
 class FilterContainer extends Component {
 	constructor (props) {
 		super(props);
@@ -22,12 +24,15 @@ class FilterContainer extends Component {
 	filter (event) {
 		event.preventDefault();
 		let filterUrl = queryUrl(this);		
-		this.props.actions.getAllTransactions(filterUrl)
+		this.props.actions.getAllTransactions(filterUrl);
+		console.log('start the progress',NProgress);
+		//NProgress.set(0.8);
 	}
 
 	getAll (event) {
 		event.preventDefault();
 		this.props.actions.getAllTransactions();
+		//NProgress.set(0.8);
 	}
 
 	render () {
