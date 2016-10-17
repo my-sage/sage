@@ -20,7 +20,7 @@ const styles = {
    	backgroundColor: 'transparent'
   },
   panel: {
-  	boxShadow: "5px 5px 7px grey",
+  	boxShadow: "3px 3px 5px grey",
   	textAlign: 'center'
   },
   image: {
@@ -88,9 +88,6 @@ class AddAccountPage extends Component {
 	render() {
 		return (
 			<div>
-				<div>
-					<h3>Add Account</h3>
-			    </div>
 			    <div>
 			    	<Grid style={styles.grid}>
 			    	<Row style={styles.tableTitle}>

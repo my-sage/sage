@@ -116,7 +116,7 @@ function mapStateToProps(state, ownProps) {
 	const CategoriesFormattedForDropdown = state.categories.data.map(category => {
 		return {
 			value: category.id,
-			text: category.name
+			text: category ? category.name : 'UNCATEGORIZED'
 		};
 	});
 

@@ -21,7 +21,9 @@ class IncomePage extends Component {
 		};
 		return (
 			<div>
-				<FilterContainer />
+				<div style={{paddingTop:'20px'}}>
+					<FilterContainer />
+				</div>
 				<GroupingDropdown onSelect={groupSetter.bind(this)}/>
 				<h3>Net Income By {this.state.displayName}</h3>
 				{shouldBePie(this.state.shouldBePie)}

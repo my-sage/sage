@@ -19,12 +19,14 @@ class IncomePage extends Component {
 		const chartSelector = (eventKey) => this.setState({shouldBePie: eventKey});
 		const shouldBePie = (boolean) => {
 			return boolean ?
-				<PieChart data={enhancedTransactions} groupBy={this.state.groupBy} eventHandlingFunction={this.props.eventHandlingFunction}/> :
-				<VerticalBarGraph data={enhancedTransactions} groupBy={this.state.groupBy} barColor='#2ecc71' eventHandlingFunction={this.props.eventHandlingFunction}/>;
+				<PieChart data={enhancedTransactions} groupBy={this.state.groupBy} eventHandlingFunction={this.props.eventHandlingFunction} defaultCategory='Income'/> :
+				<VerticalBarGraph data={enhancedTransactions} groupBy={this.state.groupBy} barColor='#2ecc71' eventHandlingFunction={this.props.eventHandlingFunction} defaultCategory='Income'/>;
 		};
 		return (
 			<div>
-				<FilterContainer />
+				<div style={{paddingTop:'20px'}}>
+					<FilterContainer />
+				</div>
 				<GroupingDropdown onSelect={groupSetter.bind(this)}/>
 				<ChartSelect onSelect={chartSelector.bind(this)}/>
 				<h3>Income By {this.state.displayName}</h3>

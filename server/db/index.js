@@ -9,6 +9,7 @@ const Transaction = require('./models/transaction');
 const Budget = require('./models/budget');
 const Merchant = require('./models/merchant');
 const Tag = require('./models/tag');
+const user = require('./models/user');
 
 Account.hasMany(Transaction);
 Transaction.belongsTo(Account);

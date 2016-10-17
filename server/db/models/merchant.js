@@ -7,18 +7,26 @@ const {
   assoc
 } = require('ramda');
 
-const categorize = require('../../banking/categorize');
+const {
+  categorize,
+  proactiveCategorize
+} = require('../../banking/categorize');
 
-const fields = {}
-const options = {}
+const fields = {};
+const options = {};
 
 fields.name = {
   type: Sequelize.STRING,
   unique: true,
   allowNull: false
-}
+};
+
+options.hooks = {};
 
 options.instanceMethods = {
+  proactiveCategorize: function() {
+    return proactiveCategorize(this);
+  },
   updateWithTransactions: function(updatedMerchant) {
     return this.update(updatedMerchant)
       .then(merchant => {
@@ -37,6 +45,6 @@ options.instanceMethods = {
   categorize: function() {
     return categorize(this);
   }
-}
+};
 
-module.exports = db.define('merchant', fields, options)
+module.exports = db.define('merchant', fields, options);

@@ -9,7 +9,7 @@ export const createTransaction =
 	(transaction) => {
 		NProgress.set(0.5);
 		return axios.post(`${BASE_URL}/api/transactions`).then(getData);
-	}
+	};
 
 export const getAllTransactions =
 	(filterUrl) => {

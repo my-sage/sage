@@ -4,7 +4,7 @@ import {DropdownButton} from "react-bootstrap"
 
 const CategoryDropDown = (category,index) => {
 	return (
-		<DropdownButton title={category.name} key={index} id={`dropdown-basic-${i}`}>
+		<DropdownButton title={category ? category.name : 'UNCATEGORIZED'} key={index} id={`dropdown-basic-${i}`}>
 		</DropdownButton>
 	)
 }; 

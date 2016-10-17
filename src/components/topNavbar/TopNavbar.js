@@ -15,7 +15,7 @@ const divStyle = {
 }
 
 const float = {
-	float: 'right'
+	float: 'right',
 }
 
 const white = {
@@ -31,7 +31,7 @@ export default React.createClass ({
 					<Hamburger slide/>
 				</Nav>
 			  <Nav style={float}>
-			    <NavItem eventKey={1} style={float}><Link to='/'>Logout</Link></NavItem>
+			    <NavItem eventKey={1} style={float}><Link style={{color:'#34495C'}} to='/'>Logout</Link></NavItem>
 			  </Nav>
 			</Navbar>
 		)

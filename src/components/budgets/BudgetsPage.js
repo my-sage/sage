@@ -5,13 +5,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import BudgetBlock from './BudgetBlock';
 import { pick } from 'ramda';
+import {Panel} from 'react-bootstrap'
 
 class BudgetPage extends Component {
    render(){
     return (
     	<div>
 	    	<h1>Budgets</h1>
+        <Panel>
 	      	<BudgetBlock budgets={this.props.budgets}/>
+        </Panel>
       	</div>
     )
   }
