@@ -19,6 +19,7 @@ const OverviewContent = ({transactions, budgets, accounts}) => {
 				<Col md={6}>
 					<Link to='/transactions'><Panel>
 						<Table>
+						<h6><i>Latest Transactions</i></h6>
 							<tbody>
 							{transactions.slice(0,5).map(TransactionSingle)}
 							</tbody>
@@ -28,6 +29,7 @@ const OverviewContent = ({transactions, budgets, accounts}) => {
 
 				<Col md={6}>
 					<Link to='/budgets'><Panel>
+					<h6><i>Budgets</i></h6>
 						<BudgetItem budget={budgets[0]}/>
 						<BudgetItem budget={budgets[1]}/>
 					</Panel></Link>
@@ -37,12 +39,14 @@ const OverviewContent = ({transactions, budgets, accounts}) => {
 			<Row className="show-grid">
 				<Col md={6}>
 					<Link to='/trends'><Panel>
+					<h6><i>Past Month Net Income</i></h6>
 						<NetIncomeGraph data={enhanceTransactions(transactions)} groupBy="fullDate"/>
 					</Panel></Link>
 				</Col>
 
 				<Col md={6}>
 					<Link to='/settings'><Panel>
+					<h6><i>Your Accounts</i></h6>
 						<Row className="show-grid">
 							<Panel style={bankPanels}>
 								<h6>Bank of America</h6>
