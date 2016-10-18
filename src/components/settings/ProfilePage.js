@@ -41,7 +41,7 @@ export default React.createClass({
 		return (
 			<div>
 				<br/>
-				<h6>Email: *EMAILPLACEHOLDER*</h6>
+				<h6>Email: brraposo@gmail.com</h6>
 				<br/>
 				<Panel>
 				<div>

@@ -19,7 +19,7 @@ const BudgetItem = ({budget}) => {
 				<li style={style.li}>
 					<div>
 						<p style={{float: 'left'}}><b>{category ? category.name : 'UNCATEGORIZED'}</b>: {name}</p>
-						<p style={{textAlign: 'right', marginRight: '130px'}}><b>${round(currentAmount, 0)} </b><i>
+						<p style={{textAlign: 'right', marginRight: '130px'}}><b>${Math.abs(round(currentAmount, 0))} </b><i>
 							of </i><b>${targetAmount}</b>
 						</p>
 					</div>

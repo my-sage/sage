@@ -24,7 +24,7 @@ const TransactionSingle = ({date, merchantId, categoryId, amount, id, category, 
 			<td style={styles.dataStyle}>{formattedDate}</td>
 			<td style={styles.dataStyle}>{merchant.name}</td>
 			<td style={styles.dataStyle}>{category ? category.name : 'UNCATEGORIZED'}</td>
-			<td style={styles.dataStyle}>${round(amount, 2).formatMoney(2)}</td>
+      <td style={styles.dataStyle}>{amount > 0 ? '' : '-'}${Math.abs(round(amount, 2)).formatMoney(2)}</td>
 			<td style={styles.dataStyle}>
 				<TransactionModal transaction={transaction}/>
 			</td>

@@ -58,7 +58,7 @@ const categorize = (newMerchant, threshold = 0.70) => {
   })
 }
 
-const proactiveCategorize = (updatedMerchant, threshold = 0.70) => {
+const proactiveCategorize = (updatedMerchant, threshold = 0.50) => {
   return Category.findOne({
     where: {
       name: 'UNCATEGORIZED'
