@@ -38,7 +38,7 @@ const styles = {
   	marginTop: '0px',
   	textAlign: 'center'
   }
-}
+};
 
 const AddAccountPage = (props) => {
 		return (
@@ -81,6 +81,6 @@ const AddAccountPage = (props) => {
 			    </div>
 			 </div>
 		)
-}
+};
 
 export default Radium(AddAccountPage);

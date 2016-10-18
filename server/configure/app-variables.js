@@ -5,8 +5,7 @@ const util = require('util');
 
 const rootPath = path.join(__dirname, '../../../sage');
 const indexPath = path.join(rootPath, './src/index.html');
-console.log(rootPath);
-console.log(indexPath);
+const faviconPath = path.join(rootPath, './favicon/favicon.ico');
 
 const logMiddleware = function (req, res, next) {
 	util.log(('---NEW REQUEST---'));
@@ -20,4 +19,5 @@ module.exports = function (app) {
 	app.setValue('projectRoot', rootPath);
 	app.setValue('indexHTMLPath', indexPath);
 	app.setValue('log', logMiddleware);
+	app.setValue('faviconPath', faviconPath);
 };

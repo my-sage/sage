@@ -14,7 +14,7 @@ const arrowIcon = {
 	 float: "right",
 	 marginTop: "5px",
 	 pointerEvents: "none"
-}
+};
 
 class TransactionTable extends Component {
 
@@ -30,7 +30,7 @@ class TransactionTable extends Component {
 				category: {direction: 'neutral',shape: defaultArrow}
 			}),
 			current: undefined
-		}
+		};
 		this.Sort = this.Sort.bind(this);
 		this.arrow = this.arrow.bind(this);
 		//this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);

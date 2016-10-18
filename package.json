@@ -8,9 +8,7 @@
     "start": "NODE_ENV=dev webpack-dashboard --  babel-node server/main.js",
     "postinstall": "npm run db-init",
     "db-init": "./db-init.sh",
-    "seed": "node ./seed.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "seed": "node ./seed.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +33,6 @@
     "crypto": "0.0.3",
     "express": "^4.14.0",
     "express-session": "^1.10.3",
-    "faker": "^3.1.0",
     "flat-ui": "^2.1.1",
     "istanbul": "^0.4.5",
     "jquery": "^3.1.1",
@@ -65,12 +62,12 @@
     "redux": "3.5.2",
     "redux-thunk": "2.0.1",
     "sequelize": "^3.24.3",
+    "serve-favicon": "^2.3.0",
     "string-similarity": "^1.1.0",
     "toastr": "2.1.2",
     "victory": "^0.12.1"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.21.0",
     "babel-cli": "6.8.0",
     "babel-core": "6.8.0",
     "babel-loader": "6.2.4",
