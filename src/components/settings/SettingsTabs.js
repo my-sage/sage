@@ -19,10 +19,10 @@ export default React.createClass({
 					        <Col sm={12}>
 					          <Tab.Content animation>
 					            <Tab.Pane eventKey="first">
-					              <Profile/>
+					              <Profile accounts={this.props.accounts}/>
 					            </Tab.Pane>
 					            <Tab.Pane eventKey="2">
-					              <AddAccount/>
+					              <AddAccount actions={this.props.actions}/>
 					            </Tab.Pane>
 					          </Tab.Content>
 					        </Col>

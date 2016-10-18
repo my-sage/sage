@@ -36,6 +36,15 @@ const styles = {
   }
 }
 
+const createAccountPanels = (accounts) => {
+  return accounts.map(account =>
+          (<Row id={account.id} style={styles.row} >
+            <Col xs={12} md={12}>
+              <Panel style={styles.panel}><h2>{account.name}</h2><p style={{float:'right', marginTop:'30px'}}>${account.balance}</p></Panel>
+            </Col>
+          </Row>))
+}
+
 export default React.createClass({
 	render(){
 		return (
@@ -47,23 +56,9 @@ export default React.createClass({
 				<div>
 					<h5>Your Bank Accounts</h5>
 						<div>
-							<Grid style={styles.grid}>
-							  <Row style={styles.row} >
-								  <Col xs={12} md={12}>
-								    <Panel style={styles.panel}><img style={styles.image} src={BoA}/><p style={{float:'right', marginTop:'30px'}}>$*PLACEHOLDER FOR CASH*</p></Panel>  
-								  </Col>
-							  </Row>
-							  <Row style={styles.row} >
-								  <Col xs={12} md={12}>
-								    <Panel style={styles.panel}><img style={styles.image} src={CITI}/><p style={{float:'right', marginTop:'30px'}}>$1,000,000.00</p></Panel>  
-								  </Col>
-							  </Row>
-							  <Row style={styles.row} >
-								  <Col xs={12} md={12}>
-								    <Panel style={styles.panel}><img style={styles.image} src={TD}/><p style={{float:'right', marginTop:'30px'}}>$4,201.00</p></Panel>  
-								  </Col>
-							  </Row>
-							</Grid>
+              <Grid style={styles.grid}>
+                {createAccountPanels(this.props.accounts)}
+              </Grid>
 						</div>
 				</div>
 				</Panel>

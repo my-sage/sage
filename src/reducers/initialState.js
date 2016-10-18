@@ -22,5 +22,10 @@ export default {
     data: [],
     isFetching: false,
     errorMessage: null
+  },
+  accounts: {
+    data: [],
+    isFetching: false,
+    errorMessage: null
   }
 }

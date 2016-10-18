@@ -6,7 +6,7 @@ export default ({account,errors, onChange}) => {
 	return (
 		<form style={{textAlign: "left"}}>
 			<TextInput
-				name="routeNum"
+				name="bankId"
 				label="Routing Number"
 				value={account.routeNum}
 				type="text"
@@ -14,7 +14,7 @@ export default ({account,errors, onChange}) => {
 				error={errors.title} />
 
 			<TextInput
-				name="accountNum"
+				name="accId"
 				label="Account Number"
 				type="text"
 				value={account.accountNum}
@@ -22,7 +22,7 @@ export default ({account,errors, onChange}) => {
 				error={errors.title} />
 
 				<TextInput
-				name="userName"
+				name="user"
 				label="User Name"
 				type="text"
 				value={account.userName}

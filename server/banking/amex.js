@@ -86,7 +86,7 @@ let getAmex = (user, accId, password, start, end, accountInstance) => {
   return amexInstance
     .getStatement({start, end})
     .then(res => {
-      // fs.writeFileSync('./amexData.js', JSON.stringify(res.body), 'utf8');
+      fs.writeFileSync('./amexData.js', JSON.stringify(res), 'utf8')
       return parseAndPostRes(start, end, accountInstance.id)(res)
      })
     .catch(console.log)

@@ -26,7 +26,7 @@ router.get('/syncAll', (req, res, next) => {
         if (bankHandler) {
         const decryptedAccount = account.decrypt(req.user.pass);
         const { user, accId, password } = decryptedAccount
-          , start = daysAgo(30)
+          , start = daysAgo(180)
           , end = now();
           return bankHandler(user, accId, password, start, end, decryptedAccount);
         } else return `${account.name} handler not found`;

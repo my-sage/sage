@@ -53,10 +53,10 @@ class AddAccountPage extends Component {
 			show: false,
 			account: Object.assign({},{
 				name: '',
-				routeNum:'', 
-				accountNum:'',
-				userName: '',
-				password: ''
+				bankId:'',
+				accId:'',
+				user: '',
+        password: ''
 			}),
 			errors: {}
 		}
@@ -64,16 +64,15 @@ class AddAccountPage extends Component {
 		this.updateAccountState = this.updateAccountState.bind(this);
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
+    this.submit = this.submit.bind(this);
 	}
 
 	updateAccountState(event) {
     const coerceToInt = (maybeInt) => isNaN(+maybeInt) ? maybeInt : +maybeInt;
 		let field = event.target.name;
-		 console.log('updating the account state with field',field);
-		 console.log('updating the account state with value',event.target.value);
 		let account = this.state.account;
 		account[field] = coerceToInt(event.target.value);
-		this.setState({account: account},console.log('the new account state',this.state));
+		this.setState({account: account});
 	}
 
 	close() {
@@ -83,6 +82,11 @@ class AddAccountPage extends Component {
   open(event) {
   	console.log('open.......',event.target.name)
     this.setState({show: true, account: {name: event.target.name}});
+  }
+
+  submit() {
+    this.props.actions.createAccount(this.state.account)
+    this.close()
   }
 
 	render() {
@@ -98,7 +102,7 @@ class AddAccountPage extends Component {
 			    	    <Panel style={styles.panel}><Button onClick={this.open} name="Bank of American" style={styles.button}><img style={styles.image} src={BoA}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
-			    	  	<Panel style={styles.panel}><Button onClick={this.open} name="American Express" style={styles.button}><img style={styles.image} src={AMEX}/></Button></Panel>  
+			    	  	<Panel style={styles.panel}><Button onClick={this.open} name="amex" style={styles.button}><img style={styles.image} src={AMEX}/></Button></Panel>  
 			    	  </Col>
 			    	  <Col xs={6} md={3}>
 			    	    <Panel style={styles.panel}><Button onClick={this.open} name="Wells Fargo"style={styles.button}><img style={styles.image} src={WELLS}/></Button></Panel>  
@@ -141,16 +145,11 @@ class AddAccountPage extends Component {
 
 			  			<Modal.Footer>
 			  				
-								<Button bsStyle="success">Add Bank Account</Button>  				
+								<Button onClick={this.submit} bsStyle="success">Add Bank Account</Button>  				
 			  			</Modal.Footer>
-
 			  		</Modal>
 			  	</div>			    	
 			    </div>
-
-
-
-
 			 </div>
 		)
 	}

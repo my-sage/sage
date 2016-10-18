@@ -39,7 +39,7 @@ TransactionPage.propTypes = {
 };
 
 const mapStateToProps = (state,ownProps) => {
-  return { 
+  return {
     transactions: state.transactions.data,
   };
 };

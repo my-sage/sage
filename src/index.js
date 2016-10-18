@@ -10,18 +10,16 @@ import { getCurrentBudgets, updateBudget, deleteBudget } from './actions/budgetA
 import { getAllTransactions, createTransaction} from './actions/transactionActions';
 import { getAllCategories } from './actions/categoryActions';
 import { getAllMerchants } from './actions/merchantActions';
+import { getAllAccounts } from './actions/accountActions';
 import '../node_modules/toastr/build/toastr.min.css'
 import R from 'ramda';
-
-// const data = R.pick(['merchants'], stateGen())
-// let state = {};
-// state = R.merge(data, state)
 
 const store = configureStore();
 store.dispatch(getCurrentBudgets());
 store.dispatch(getAllTransactions());
 store.dispatch(getAllCategories());
 store.dispatch(getAllMerchants());
+// store.dispatch(getAllAccounts());
 
 render(
   <Provider store={store}>

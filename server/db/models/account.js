@@ -18,7 +18,8 @@ fields.name = {
 
 fields.type = {
   type: Sequelize.STRING,
-  allowNull: false
+  allowNull: false,
+  defaultValue: 'CREDIT'
 }
 
 fields.balance = {
@@ -59,7 +60,7 @@ options.instanceMethods = {
     this.bankId = this.Model.encrypt(this.bankId, key);
     this.user = this.Model.encrypt(this.user, key);
     this.password = this.Model.encrypt(this.password, key);
-    this.accId = this.Model.encrypt(this.accId, key);
+    this.accId = this.Model.encrypt(this.accId.toString(), key);
     return this.save();
   }
 };
