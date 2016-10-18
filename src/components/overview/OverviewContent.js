@@ -19,8 +19,8 @@ const OverviewContent = ({transactions, budgets, accounts}) => {
 				<Col md={6}>
 					<Link to='/transactions'><Panel>
 						<Table>
+						<h6><i>Latest Transactions</i></h6>
 							<tbody>
-							<h6><i>Latest Transactions</i></h6>
 							{transactions.slice(0,5).map(TransactionSingle)}
 							</tbody>
 						</Table>
