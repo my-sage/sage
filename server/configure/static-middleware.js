@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path');
 const express = require('express');
-// const favicon = require('serve-favicon');
+const favicon = require('serve-favicon');
 
 module.exports = function (app) {
 
@@ -10,10 +10,12 @@ module.exports = function (app) {
 	const npmPath = path.join(root, './node_modules');
 	const publicPath = path.join(root, './public');
 	const browserPath = path.join(root, './browser');
+	const distPath = path.join(root, '/dist');
 
-	// app.use(favicon(app.getValue('faviconPath')));
+	app.use(favicon(app.getValue('faviconPath')));
 	app.use(express.static(npmPath));
 	app.use(express.static(publicPath));
 	app.use(express.static(browserPath));
+	app.use(express.static(distPath));
 
 };
