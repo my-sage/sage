@@ -45,17 +45,17 @@ const OverviewContent = ({transactions, budgets, accounts}) => {
 					<Link to='/settings'><Panel>
 						<Row className="show-grid">
 							<Panel style={bankPanels}>
-								<h6>Bank 1</h6>
+								<h6>Bank of America</h6>
 							</Panel>
 						</Row>
 						<Row className="show-grid">
 							<Panel style={bankPanels}>
-								<h6>Bank 2</h6>
+								<h6>American Express</h6>
 							</Panel>
 						</Row>
 						<Row className="show-grid">
 							<Panel style={bankPanels}>
-								<h6>Bank 3</h6>
+								<h6>Chase Bank</h6>
 							</Panel>
 						</Row>
 					</Panel></Link>
