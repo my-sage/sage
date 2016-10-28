@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "node"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database sage' -U postgres
+  - psql -c 'create database travis' -U postgres
